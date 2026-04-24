@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/700.css";
+@import "@fontsource/anton";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #211224;
+  --surface: #2c1f35;
+  --surface-2: #514662;
+
+  --primary: #9882BC;
+  --primary-soft: #C9B6F6;
+  --accent: #FFF6DC;
+
+  --text: #F4ECFF;
+  --muted: #D9CDEB;
+  --dark: #000000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at top right, #3a2644 0%, #211224 45%);
+  color: var(--text);
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: "Anton", sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.container-site {
+  @apply max-w-7xl mx-auto px-6 lg:px-10;
+}
+
+.btn-primary {
+  @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--primary-soft);
+  color: var(--bg);
+}
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-xl border transition-all duration-300;
+  border-color: rgba(255,255,255,0.15);
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,100% { opacity:.35; transform: scale(1); }
+  50% { opacity:.55; transform: scale(1.08); }
+}
+
+.animate-up {
+  animation: fadeUp .9s ease forwards;
+}
+
+.animate-left {
+  animation: fadeLeft .9s ease forwards;
+}
+
+.animate-right {
+  animation: fadeRight .9s ease forwards;
+}
+
+.delay-1 { animation-delay: .15s; opacity:0; }
+.delay-2 { animation-delay: .3s; opacity:0; }
+.delay-3 { animation-delay: .45s; opacity:0; }
+.delay-4 { animation-delay: .6s; opacity:0; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .9s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  animation: pulseGlow 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.nav-link {
+  position: relative;
+  color: rgba(255,255,255,.78);
+  transition: color .25s ease;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  transition: width .25s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(152,130,188,.28);
+}
+
+.reveal {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(30px);
+  transition: all .6s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.07);
+}

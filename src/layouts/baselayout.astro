@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "ARIA STEAMEX" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content="Equipo femenil FRC de Ciudad de México. Ingeniería, liderazgo e impacto STEM." />
+</head>
+
+<body>
+  <slot />
+</body>
+</html>
