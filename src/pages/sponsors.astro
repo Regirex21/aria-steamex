@@ -1,0 +1,265 @@
+---
+// src/pages/sponsors.astro
+
+import BaseLayout from "../layouts/baselayout.astro";
+import Navbar from "../components/navbar.astro";
+---
+
+<BaseLayout title="Sponsors | ARIA STEAMEX">
+
+  <Navbar />
+
+  <main class="overflow-hidden">
+
+    <!-- HERO -->
+    <section class="container-site pt-28 pb-24 text-center relative overflow-hidden">
+
+      <div class="glow-orb w-56 h-56 bg-purple-400/20 top-10 right-20"></div>
+      <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
+
+      <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
+        Sponsors & Partners
+      </p>
+
+      <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
+        Impulsamos talento con aliados reales
+      </h1>
+
+      <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-10 reveal show">
+        ARIA STEAMEX busca empresas, instituciones y personas que quieran invertir
+        en liderazgo femenil, educación STEM e impacto comunitario en México.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 reveal show">
+        <a href="/contacto" class="btn-primary">
+          Ser sponsor
+        </a>
+
+        <a href="#tiers" class="btn-secondary">
+          Ver oportunidades
+        </a>
+      </div>
+
+    </section>
+
+    <!-- WHY SUPPORT -->
+    <section class="container-site pb-28 reveal">
+
+  <div class="rounded-3xl overflow-hidden border border-white/10">
+
+    <!-- top statement -->
+    <div class="bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] p-10 md:p-14">
+
+      <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-5">
+        Por qué apoyar
+      </p>
+
+      <h2 class="text-5xl md:text-7xl leading-none mb-8 max-w-5xl">
+        Una alianza con impacto,
+        visibilidad y futuro.
+      </h2>
+
+      <p class="text-white/72 text-lg max-w-3xl leading-relaxed">
+        ARIA STEAMEX conecta a empresas con innovación, liderazgo femenil
+        y desarrollo de talento STEM en México.
+      </p>
+
+    </div>
+
+    <!-- bottom metrics -->
+    <div class="grid md:grid-cols-2 xl:grid-cols-4 bg-black/20">
+
+      <div class="p-8 border-t border-white/10 xl:border-r">
+        <p class="text-4xl mb-3">Branding</p>
+        <p class="text-white/60">
+          Presencia en robot, uniformes y contenido.
+        </p>
+      </div>
+
+      <div class="p-8 border-t border-white/10 xl:border-r">
+        <p class="text-4xl mb-3">Impacto</p>
+        <p class="text-white/60">
+          Outreach y oportunidades reales para jóvenes.
+        </p>
+      </div>
+
+      <div class="p-8 border-t border-white/10 xl:border-r">
+        <p class="text-4xl mb-3">STEM</p>
+        <p class="text-white/60">
+          Educación aplicada e ingeniería competitiva.
+        </p>
+      </div>
+
+      <div class="p-8 border-t border-white/10">
+        <p class="text-4xl mb-3">México</p>
+        <p class="text-white/60">
+          Talento nacional con proyección internacional.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- CURRENT / FUTURE SPONSORS -->
+    <section class="container-site pb-28 reveal">
+
+      <div class="mb-10">
+        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+          Aliados
+        </p>
+
+        <h2 class="text-5xl leading-none">
+          Empresas que creen en el futuro
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="glass rounded-3xl min-h-[180px] flex items-center justify-center p-6">
+          <div class="text-center">
+            <p class="text-white/45 text-sm mb-2">Placeholder</p>
+            <p class="text-2xl">Logo Sponsor</p>
+          </div>
+        </div>
+
+        <div class="glass rounded-3xl min-h-[180px] flex items-center justify-center p-6">
+          <div class="text-center">
+            <p class="text-white/45 text-sm mb-2">Placeholder</p>
+            <p class="text-2xl">Logo Sponsor</p>
+          </div>
+        </div>
+
+        <div class="glass rounded-3xl min-h-[180px] flex items-center justify-center p-6">
+          <div class="text-center">
+            <p class="text-white/45 text-sm mb-2">Placeholder</p>
+            <p class="text-2xl">Logo Sponsor</p>
+          </div>
+        </div>
+
+        <div class="glass rounded-3xl min-h-[180px] flex items-center justify-center p-6">
+          <div class="text-center">
+            <p class="text-white/45 text-sm mb-2">Placeholder</p>
+            <p class="text-2xl">Logo Sponsor</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TIERS -->
+    <section id="tiers" class="container-site pb-28">
+
+      <div class="mb-10 reveal">
+        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+          Oportunidades
+        </p>
+
+        <h2 class="text-5xl leading-none">
+          Formas de colaborar
+        </h2>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <div class="glass rounded-3xl p-8 reveal">
+          <p class="text-white/45 text-sm mb-3 uppercase tracking-[0.2em]">
+            Sponsor técnico
+          </p>
+
+          <h3 class="text-4xl mb-4">
+            Hardware
+          </h3>
+
+          <p class="text-white/65">
+            Materiales, herramientas, manufactura, software o mentoría técnica.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 reveal delay-1">
+          <p class="text-white/45 text-sm mb-3 uppercase tracking-[0.2em]">
+            Sponsor económico
+          </p>
+
+          <h3 class="text-4xl mb-4">
+            Funding
+          </h3>
+
+          <p class="text-white/65">
+            Registro, viajes, piezas, operación y crecimiento del programa.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 reveal delay-2">
+          <p class="text-white/45 text-sm mb-3 uppercase tracking-[0.2em]">
+            Sponsor estratégico
+          </p>
+
+          <h3 class="text-4xl mb-4">
+            Partnership
+          </h3>
+
+          <p class="text-white/65">
+            Colaboraciones educativas, eventos y posicionamiento conjunto.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="container-site pb-32 reveal">
+
+      <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
+
+        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
+          Próximo paso
+        </p>
+
+        <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
+          Construyamos impacto juntos
+        </h2>
+
+        <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
+          Si tu empresa valora innovación, liderazgo y futuro, hablemos.
+        </p>
+
+        <div class="flex flex-wrap gap-4 reveal delay-4">
+
+          <a href="/contacto" class="btn-primary">
+            Contactar
+          </a>
+
+          <a href="/nosotras" class="btn-secondary">
+            Conocer ARIA
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, { threshold: 0.15 });
+
+      items.forEach((item) => observer.observe(item));
+    });
+  </script>
+
+</BaseLayout>
