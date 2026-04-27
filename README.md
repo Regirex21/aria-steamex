@@ -2,10 +2,8 @@
   <img src="./public/assets/Aria_logo.svg" width="220" alt="ARIA STEAMEX Logo" />
 </p>
 
-<h1 align="center">ARIA STEAMEX</h1>
-
 <p align="center">
-  Official Website • FRC Team 11040 • Ciudad de México
+  Sitio oficial • FRC Team 11040 • Ciudad de México
 </p>
 
 <p align="center">
