@@ -1,43 +1,155 @@
-# Astro Starter Kit: Minimal
+<p align="center">
+  <img src="./public/assets/Aria_logo.svg" width="220" alt="ARIA STEAMEX Logo" />
+</p>
 
-```sh
-npm create astro@latest -- --template minimal
-```
+<h1 align="center">ARIA STEAMEX</h1>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+<p align="center">
+  Official Website • FRC Team 11040 • Ciudad de México
+</p>
 
-## 🚀 Project Structure
+<p align="center">
+  Equipo femenil, comunitario e independiente de FIRST Robotics Competition.
+</p>
 
-Inside of your Astro project, you'll see the following folders and files:
+---
+
+## Sobre ARIA STEAMEX
+
+ARIA STEAMEX es un equipo de **FIRST Robotics Competition (FRC)** fundado en **2025** en Ciudad de México, México.
+
+Nace con una misión clara: abrir oportunidades reales para mujeres jóvenes dentro de ingeniería, robótica competitiva, liderazgo y tecnología de alto nivel.
+
+Somos un equipo:
+
+- Femenil
+- Comunitario
+- Independiente
+- Gratuito
+- Competitivo
+- Impulsado por propósito
+
+---
+
+## Sobre este proyecto
+
+Este repositorio contiene el desarrollo oficial del sitio web institucional de ARIA STEAMEX.
+
+El objetivo del sitio es proyectar una imagen moderna, fuerte y profesional para:
+
+- Reclutamiento de nuevas integrantes
+- Atracción de sponsors
+- Comunicación institucional
+- Presencia digital sólida
+- Difusión de FIRST Robotics Competition
+- Crecimiento del ecosistema STEAM en México
+
+---
+
+## Filosofía de diseño
+
+Dirección visual construida bajo estos principios:
+
+- Luxury modern UI
+- Esports competitive energy
+- Premium branding
+- Motion elegante
+- Performance first
+- Mobile responsive
+- Clean architecture
+
+---
+
+## Stack Tecnológico
+
+- Astro
+- TailwindCSS
+- TypeScript
+- Vercel Ready
+
+---
+
+## Estructura del sitio
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/pages/
+├── index.astro        # Inicio
+├── nosotras.astro     # Historia, misión, visión
+├── first.astro        # Qué es FIRST / FRC
+├── unirse.astro       # Reclutamiento
+├── sponsors.astro     # Patrocinios
+├── contacto.astro     # Contacto oficial
+├── liderazgo.astro    # Coaches y mentores
+````
+
+---
+## Desarrollo local
+
+Instalar dependencias:
+
+```bash
+npm install
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Iniciar servidor local:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+Abrir:
 
-## 🧞 Commands
+```text
+https://aria-steamex.vercel.app
+```
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Build producción
 
-## 👀 Want to learn more?
+```bash
+npm run build
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Vista previa local:
+
+```bash
+npm run preview
+```
+
+---
+
+## Deploy recomendado
+
+Este proyecto está preparado para desplegarse en:
+
+* Vercel (recomendado)
+
+---
+
+## Organización interna
+
+Proyecto perteneciente a:
+
+**Project STEAMex**
+
+Instagram oficial:
+
+**@aria.steamex**
+
+---
+
+## Objetivo institucional
+
+No solo construir robots.
+
+Construir líderes.
+Construir oportunidades.
+Construir futuro.
+
+---
+
+## Licencia
+
+Uso institucional interno de ARIA STEAMEX.
+Todos los derechos reservados.
