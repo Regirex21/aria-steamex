@@ -1,11 +1,48 @@
 ---
-import { brand } from "../config/brand";
+const isEnglish = Astro.url.pathname.startsWith("/en");
+
+const navLinks = isEnglish
+  ? [
+      { href: "/en/about_us", label: "About Us" },
+      { href: "/en/first", label: "FIRST" },
+      { href: "/en/join", label: "Join" },
+      { href: "/en/sponsors", label: "Sponsors" },
+      { href: "/en/contact", label: "Contact" },
+    ]
+  : [
+      { href: "/nosotras", label: "Nosotras" },
+      { href: "/first", label: "FIRST" },
+      { href: "/unirse", label: "Unirse" },
+      { href: "/sponsors", label: "Sponsors" },
+      { href: "/contacto", label: "Contacto" },
+    ];
+
+const routePairs = [
+  ["/", "/en"],
+  ["/nosotras", "/en/about_us"],
+  ["/first", "/en/first"],
+  ["/unirse", "/en/join"],
+  ["/sponsors", "/en/sponsors"],
+  ["/contacto", "/en/contact"],
+  ["/liderazgo", "/en/leadership"],
+];
+
+const normalizePath = (path: string) =>
+  path.length > 1 ? path.replace(/\/$/, "") : path;
+
+const currentPath = normalizePath(Astro.url.pathname);
+const pair =
+  routePairs.find(([es, en]) => normalizePath(es) === currentPath || normalizePath(en) === currentPath) ??
+  routePairs[0];
+
+const spanishHref = pair[0];
+const englishHref = pair[1];
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/10 glass">
   <nav class="container-site h-20 flex items-center justify-between">
     
-<a href="/" class="flex items-center gap-3 group">
+<a href={isEnglish ? "/en" : "/"} class="flex items-center gap-3 group">
 
   <img
     src="/assets/Aria_logo.svg"
@@ -17,16 +54,44 @@ import { brand } from "../config/brand";
 
 <div class="hidden md:flex gap-8 text-sm font-medium">
 
-  <a href="/nosotras" class="nav-link">Nosotras</a>
-  <a href="/first" class="nav-link">FIRST</a>
-  <a href="/unirse" class="nav-link">Unirse</a>
-  <a href="/sponsors" class="nav-link">Sponsors</a>
-  <a href="/contacto" class="nav-link">Contacto</a>
+  {navLinks.map((link) => (
+    <a href={link.href} class="nav-link">{link.label}</a>
+  ))}
 
 </div>
 
-    <a href="/unirse" class="btn-primary text-sm">
-      Aplicar
+    <div class="flex items-center gap-4">
+
+  <div class="flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-medium">
+    <a
+      href={spanishHref}
+      class={`px-3 py-2 rounded-full transition ${!isEnglish ? "bg-white text-black" : "text-white/65 hover:text-white"}`}
+      aria-label="Ver sitio en español"
+    >
+      ES
     </a>
+    <a
+      href={englishHref}
+      class={`px-3 py-2 rounded-full transition ${isEnglish ? "bg-white text-black" : "text-white/65 hover:text-white"}`}
+      aria-label="View site in English"
+    >
+      EN
+    </a>
+  </div>
+
+  <a href={isEnglish ? "/en/join" : "/unirse"} class="btn-primary text-sm">
+    {isEnglish ? "Apply" : "Aplicar"}
+  </a>
+
+  <a
+    href="https://www.instagram.com/aria.steamex/"
+    target="_blank"
+    class="btn-primary text-sm"
+  >
+    Instagram
+  </a>
+
+</div>
+
   </nav>
 </header>

@@ -1,11 +1,11 @@
 ---
-// src/pages/unirse.astro
+// src/pages/en/join.astro
 
-import BaseLayout from "../layouts/baselayout.astro";
-import Navbar from "../components/navbar.astro";
+import BaseLayout from "../../layouts/baselayout.astro";
+import Navbar from "../../components/navbar.astro";
 ---
 
-<BaseLayout title="Unirse | ARIA STEAMEX">
+<BaseLayout title="Join | ARIA STEAMEX" lang="en">
 
   <Navbar />
 
@@ -18,15 +18,15 @@ import Navbar from "../components/navbar.astro";
       <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
 
       <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
-        Unirse
+        Join
       </p>
 
       <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
-        Elige tu camino
+        Choose your path
       </h1>
 
       <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed reveal show">
-        ARIA STEAMEX busca alumnas con ganas de crecer y mentoras dispuestas a impulsar una nueva generación.
+        ARIA STEAMEX is looking for students eager to grow and mentors ready to empower a new generation.
       </p>
 
     </section>
@@ -36,37 +36,36 @@ import Navbar from "../components/navbar.astro";
 
       <div class="grid lg:grid-cols-2 gap-8">
 
-        <!-- STUDENT -->
         <div class="glass rounded-3xl p-10 reveal">
 
           <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-            Alumna
+            Student
           </p>
 
           <h2 class="text-5xl mb-6 leading-none">
-            Únete al equipo
+            Join the team
           </h2>
 
           <p class="text-white/70 text-lg leading-relaxed mb-8">
-            Si eres estudiante y quieres aprender robótica, liderazgo,
-            tecnología y competir en FIRST, este espacio es para ti.
+            If you are a student and want to learn robotics, leadership,
+            technology, and compete in FIRST, this space is for you.
           </p>
 
           <div class="space-y-4 mb-10">
 
             <div class="flex gap-3">
               <div class="w-2 h-2 rounded-full bg-[var(--primary)] mt-3"></div>
-              <p class="text-white/65">No necesitas experiencia previa.</p>
+              <p class="text-white/65">No previous experience needed.</p>
             </div>
 
             <div class="flex gap-3">
               <div class="w-2 h-2 rounded-full bg-[var(--primary)] mt-3"></div>
-              <p class="text-white/65">Capacitación técnica y personal.</p>
+              <p class="text-white/65">Technical and personal training.</p>
             </div>
 
             <div class="flex gap-3">
               <div class="w-2 h-2 rounded-full bg-[var(--primary)] mt-3"></div>
-              <p class="text-white/65">Ambiente competitivo y comunitario.</p>
+              <p class="text-white/65">A competitive and community-driven environment.</p>
             </div>
 
           </div>
@@ -79,7 +78,7 @@ import Navbar from "../components/navbar.astro";
               rel="noopener noreferrer"
               class="btn-primary"
             >
-              Aplicar como alumna
+              Apply as a student
             </a>
 
             <a
@@ -88,44 +87,43 @@ import Navbar from "../components/navbar.astro";
               rel="noopener noreferrer"
               class="btn-secondary"
             >
-              Dudas directas
+              Direct questions
             </a>
 
           </div>
 
         </div>
 
-        <!-- MENTOR -->
         <div class="glass rounded-3xl p-10 reveal delay-2">
 
           <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-            Mentora / Mentor
+            Mentor
           </p>
 
           <h2 class="text-5xl mb-6 leading-none">
-            Impulsa talento real
+            Empower real talent
           </h2>
 
           <p class="text-white/70 text-lg leading-relaxed mb-8">
-            Buscamos personas con experiencia profesional, técnica o humana
-            que quieran apoyar el crecimiento de jóvenes en STEM.
+            We are looking for people with professional, technical, or human
+            experience who want to support young people in STEM.
           </p>
 
           <div class="space-y-4 mb-10">
 
             <div class="flex gap-3">
               <div class="w-2 h-2 rounded-full bg-[var(--primary)] mt-3"></div>
-              <p class="text-white/65">Ingeniería, negocios o liderazgo.</p>
+              <p class="text-white/65">Engineering, business, or leadership.</p>
             </div>
 
             <div class="flex gap-3">
               <div class="w-2 h-2 rounded-full bg-[var(--primary)] mt-3"></div>
-              <p class="text-white/65">Impacto directo en nuevas generaciones.</p>
+              <p class="text-white/65">Direct impact on new generations.</p>
             </div>
 
             <div class="flex gap-3">
               <div class="w-2 h-2 rounded-full bg-[var(--primary)] mt-3"></div>
-              <p class="text-white/65">Participación flexible y significativa.</p>
+              <p class="text-white/65">Flexible and meaningful participation.</p>
             </div>
 
           </div>
@@ -138,14 +136,14 @@ import Navbar from "../components/navbar.astro";
               rel="noopener noreferrer"
               class="btn-primary"
             >
-              Aplicar como mentor(a)
+              Apply as a mentor
             </a>
 
             <a
               href="mailto:contacto@ariasteamex.org"
               class="btn-secondary"
             >
-              Contactar
+              Contact
             </a>
 
           </div>
@@ -164,15 +162,15 @@ import Navbar from "../components/navbar.astro";
         <div class="bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] p-10 md:p-14">
 
           <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-5">
-            Áreas del equipo
+            Team areas
           </p>
 
           <h2 class="text-5xl md:text-6xl leading-none mb-8 max-w-5xl">
-            Hay espacio para distintos talentos
+            There is room for different talents
           </h2>
 
           <p class="text-white/72 text-lg max-w-3xl leading-relaxed">
-            No todo es construir robots. Un gran equipo necesita muchas fortalezas.
+            It is not all about building robots. A great team needs many strengths.
           </p>
 
         </div>
@@ -180,30 +178,30 @@ import Navbar from "../components/navbar.astro";
         <div class="grid md:grid-cols-2 xl:grid-cols-4 bg-black/20">
 
           <div class="p-8 border-t border-white/10 xl:border-r">
-            <p class="text-3xl mb-3">Técnica</p>
+            <p class="text-3xl mb-3">Technical</p>
             <p class="text-white/60">
-              Mecánica, code y electrónica.
+              Mechanics, code, and electronics.
             </p>
           </div>
 
           <div class="p-8 border-t border-white/10 xl:border-r">
-            <p class="text-3xl mb-3">Creativa</p>
+            <p class="text-3xl mb-3">Creative</p>
             <p class="text-white/60">
-              Branding, media y contenido.
+              Branding, media, and content.
             </p>
           </div>
 
           <div class="p-8 border-t border-white/10 xl:border-r">
-            <p class="text-3xl mb-3">Negocios</p>
+            <p class="text-3xl mb-3">Business</p>
             <p class="text-white/60">
-              Sponsors, organización y estrategia.
+              Sponsors, organization, and strategy.
             </p>
           </div>
 
           <div class="p-8 border-t border-white/10">
-            <p class="text-3xl mb-3">Humana</p>
+            <p class="text-3xl mb-3">Human</p>
             <p class="text-white/60">
-              Liderazgo, mentoría e impacto.
+              Leadership, mentorship, and impact.
             </p>
           </div>
 
@@ -219,15 +217,15 @@ import Navbar from "../components/navbar.astro";
       <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
 
         <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
-          Contacto directo
+          Direct contact
         </p>
 
         <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
-          ¿Tienes dudas?
+          Have questions?
         </h2>
 
         <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
-          Escríbenos y te orientamos personalmente.
+          Write to us and we will guide you personally.
         </p>
 
         <div class="flex flex-wrap gap-4 reveal delay-4">
@@ -245,7 +243,7 @@ import Navbar from "../components/navbar.astro";
             href="mailto:ariasteamex@gmail.com"
             class="btn-secondary"
           >
-            Correo
+            Email
           </a>
 
           <a

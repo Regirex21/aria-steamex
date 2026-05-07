@@ -1,0 +1,258 @@
+---
+// src/pages/en/about_us.astro
+
+import BaseLayout from "../../layouts/baselayout.astro";
+import Navbar from "../../components/navbar.astro";
+---
+
+<BaseLayout title="About Us | ARIA STEAMEX" lang="en">
+
+  <Navbar />
+
+  <main class="overflow-hidden">
+
+    <!-- HERO -->
+    <section class="container-site pt-28 pb-24 text-center relative overflow-hidden">
+
+  <div class="glow-orb w-56 h-56 bg-purple-400/20 top-10 right-20"></div>
+  <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
+
+  <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
+    About Us
+  </p>
+
+  <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
+    Where women talent competes at the highest level
+  </h1>
+
+  <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-10 reveal show">
+    ARIA STEAMEX develops leaders, engineers, and changemakers through competitive robotics, technical excellence, and social purpose.
+  </p>
+
+  <div class="flex flex-wrap justify-center gap-8 text-sm text-white/70 reveal show">
+
+    <div>
+      <strong class="block text-white text-xl">2025</strong>
+      Founded
+    </div>
+
+    <div>
+      <strong class="block text-white text-xl">CDMX</strong>
+      Community base
+    </div>
+
+    <div>
+      <strong class="block text-white text-xl">Women-led</strong>
+      STEM leadership
+    </div>
+
+  </div>
+
+</section>
+    <!-- STORY -->
+    <section class="container-site pb-28 reveal">
+
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+
+        <div>
+          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+            Our story
+          </p>
+
+          <h2 class="text-5xl md:text-6xl leading-none mb-6">
+            We were born to open paths
+          </h2>
+        </div>
+
+        <div>
+          <p class="text-white/72 text-lg leading-relaxed mb-6">
+            Founded in 2025, ARIA STEAMEX emerged as an independent, free,
+            community initiative focused on expanding women's access to real
+            opportunities in engineering, technology, and leadership.
+          </p>
+
+          <p class="text-white/60 leading-relaxed">
+            Our goal is not only to compete in FIRST Robotics Competition.
+            We aim to build a platform where young women can grow technically
+            and personally while representing Mexico with excellence.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MISSION VISION -->
+    <section class="container-site pb-28">
+
+      <div class="grid lg:grid-cols-2 gap-6">
+
+        <div class="glass rounded-3xl p-8 reveal">
+          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+            Mission
+          </p>
+
+          <h3 class="text-4xl mb-5">
+            Build real talent
+          </h3>
+
+          <p class="text-white/70 leading-relaxed">
+            To train and empower young women through participation in FIRST Robotics Competition, developing their technical skills, leadership, and values through a collaborative, disciplined, and innovative environment that promotes excellence and positive impact in society.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 reveal delay-2">
+          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+            Vision
+          </p>
+
+          <h3 class="text-4xl mb-5">
+            Become a national reference
+          </h3>
+
+          <p class="text-white/70 leading-relaxed">
+            To become a leading team nationally and internationally in FIRST Robotics Competition, recognized for technical excellence, strategic organization, and contribution to women leadership in STEM, inspiring new generations to follow the path of innovation and knowledge.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- VALUES -->
+    <section class="container-site pb-28">
+
+      <div class="mb-10 reveal">
+        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+          Values
+        </p>
+
+        <h2 class="text-5xl leading-none">
+          What defines us
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="glass rounded-3xl p-7 reveal">
+          <h3 class="text-3xl mb-4">Excellence</h3>
+          <p class="text-white/65">
+            Pursuing high performance on and off the field.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-7 reveal delay-1">
+          <h3 class="text-3xl mb-4">Community</h3>
+          <p class="text-white/65">
+            Growing together and opening opportunities for other young women.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-7 reveal delay-2">
+          <h3 class="text-3xl mb-4">Leadership</h3>
+          <p class="text-white/65">
+            Developing voice, judgment, and the ability to create impact.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-7 reveal delay-3">
+          <h3 class="text-3xl mb-4">Discipline</h3>
+          <p class="text-white/65">
+            Consistency, professionalism, and continuous improvement.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- COACHES -->
+    <section class="container-site pb-28 reveal">
+
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+        <div>
+          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
+            Leadership
+          </p>
+
+          <h2 class="text-5xl md:text-6xl leading-none mb-6">
+            Mentors and coaches
+          </h2>
+
+          <p class="text-white/70 text-lg leading-relaxed">
+            Our team is strengthened through technical, strategic, and human
+            guidance from mentors, coaches, and allies committed to the growth
+            of new generations.
+          </p>
+          <a href="/en/leadership" class="btn-secondary mt-8 inline-flex">
+            Meet leadership →
+          </a>
+        </div>
+
+        <div class="glass rounded-3xl min-h-[320px] overflow-hidden">
+          <img
+            src="/assets/IMG_7248.JPG"
+            alt="working on the robot"
+            class="w-full h-full min-h-[320px] object-cover object-center"
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="container-site pb-32 reveal">
+
+      <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
+
+        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
+          Next step
+        </p>
+
+        <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
+          Be part of the next generation
+        </h2>
+
+        <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
+          If you want to grow, learn, and build something big, ARIA STEAMEX
+          can be your next step.
+        </p>
+
+        <div class="flex flex-wrap gap-4 reveal delay-4">
+
+          <a href="/en/join" class="btn-primary">
+            Apply
+          </a>
+
+          <a href="/en/contact" class="btn-secondary">
+            Contact
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, { threshold: 0.15 });
+
+      items.forEach((item) => observer.observe(item));
+    });
+  </script>
+
+</BaseLayout>

@@ -1,15 +1,15 @@
 ---
-// src/pages/liderazgo.astro
+// src/pages/en/leadership.astro
 
-import BaseLayout from "../layouts/baselayout.astro";
-import Navbar from "../components/navbar.astro";
+import BaseLayout from "../../layouts/baselayout.astro";
+import Navbar from "../../components/navbar.astro";
 
  const coaches = [
   {
-    role: "Director Nacional · Project STEAMEX",
+    role: "National Director · Project STEAMEX",
     name: "Abraham Martínez",
     description:
-      "Dirige la visión institucional de Project STEAMEX y apoya el crecimiento estratégico de iniciativas STEM de alto impacto.",
+      "Leads the institutional vision of Project STEAMEX and supports the strategic growth of high-impact STEM initiatives.",
     image: "/assets/Mentoras/abraham.png",
   },
 
@@ -17,7 +17,7 @@ import Navbar from "../components/navbar.astro";
     role: "Head Coach",
     name: "Regina Servín",
     description:
-      "Lidera las áreas técnicas del equipo incluyendo mecánica, programación y documentación. Supervisa procesos de desarrollo, estrategia competitiva y formación técnica interna.",
+      "Leads the team's technical areas, including mechanics, programming, and documentation. Oversees development processes, competitive strategy, and internal technical training.",
     image: "/assets/Mentoras/rex.png",
   },
 
@@ -25,7 +25,7 @@ import Navbar from "../components/navbar.astro";
     role: "Coach",
     name: "Isis Reyes ",
     description:
-      "Encargada de patrocinio, impacto e imagen del equipo. Coordina alianzas, outreach, branding y estrategias de comunicación institucional.",
+      "Responsible for sponsorship, impact, and team image. Coordinates partnerships, outreach, branding, and institutional communication strategies.",
     image: "/assets/Mentoras/mei.jpeg",
   },
 ];
@@ -33,36 +33,36 @@ import Navbar from "../components/navbar.astro";
 const mentors = [
   {
     name: "Gemma Navarrete",
-    area: "Impacto",
-    description: "Outreach y comunidad.",
+    area: "Impact",
+    description: "Outreach and community.",
     image: "/assets/Mentoras/gemma.jpeg",
   },
 
   {
     name: "Paulina Peña",
-    area: "Impacto",
-    description: "Outreach y comunidad.",
+    area: "Impact",
+    description: "Outreach and community.",
     image: "/assets/Mentoras/pau.png",
   },
 
   {
     name: "Britany Valadez",
-    area: "Mecánica y Programación",
-    description: "Formación y desarrollo de contenidos técnicos.",
+    area: "Mechanics and Programming",
+    description: "Training and development of technical content.",
     image: "/assets/Mentoras/bri.jpeg",
   },
 
   {
     name: "Renata Servín",
-    area: "Mecánica",
-    description: "Diseño, ensamble y manufactura.",
+    area: "Mechanics",
+    description: "Design, assembly, and manufacturing.",
     image: "/assets/Mentoras/renata.jpeg",
   },
 
   {
     name: "Katheryn Azano",
-    area: "Programación",
-    description: "Desarrollo de software y automatización.",
+    area: "Programming",
+    description: "Software development and automation.",
     image: "/assets/Mentoras/katy.png",
   },
 ];
@@ -70,7 +70,7 @@ const mentors = [
 
 
 
-<BaseLayout title="Liderazgo | ARIA STEAMEX">
+<BaseLayout title="Leadership | ARIA STEAMEX" lang="en">
 
   <Navbar />
 
@@ -83,16 +83,16 @@ const mentors = [
       <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
 
       <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
-        Conoce al liderazgo
+        Meet the leadership
       </p>
 
       <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
-        Personas que construyen oportunidades
+        People who build opportunities
       </h1>
 
       <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed reveal show">
-        ARIA STEAMEX crece gracias a coaches, mentoras y aliados comprometidos
-        con formar una nueva generación de mujeres líderes en STEM.
+        ARIA STEAMEX grows thanks to coaches, mentors, and allies committed
+        to training a new generation of women leaders in STEM.
       </p>
 
     </section>
@@ -103,16 +103,16 @@ const mentors = [
       <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
 
         <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-5">
-          Nuestra filosofía
+          Our philosophy
         </p>
 
         <h2 class="text-5xl md:text-6xl leading-none mb-8 max-w-5xl">
-          Liderar es servir, enseñar y elevar estándares.
+          To lead is to serve, teach, and raise standards.
         </h2>
 
         <p class="text-white/72 text-lg max-w-3xl leading-relaxed">
-          No buscamos figuras decorativas. Buscamos liderazgo activo:
-          personas que enseñan, acompañan, exigen excelencia y abren camino.
+          We are not looking for decorative figures. We look for active leadership:
+          people who teach, guide, demand excellence, and open the way.
         </p>
 
       </div>
@@ -128,7 +128,7 @@ const mentors = [
     </p>
 
 <h2 class="text-5xl leading-none">
-  Dirección & liderazgo institucional
+  Direction & institutional leadership
 </h2>
   </div>
 
@@ -171,11 +171,11 @@ const mentors = [
 
   <div class="mb-10 reveal">
     <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-      Mentoras & Mentores
+      Mentors
     </p>
 
     <h2 class="text-5xl leading-none">
-      Personas que impulsan áreas clave
+      People who drive key areas
     </h2>
   </div>
 
@@ -224,25 +224,25 @@ const mentors = [
       <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
 
         <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
-          Próximo paso
+          Next step
         </p>
 
         <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
-          ¿Quieres apoyar esta misión?
+          Want to support this mission?
         </h2>
 
         <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
-          Buscamos nuevas mentoras, aliados y personas listas para construir futuro.
+          We are looking for new mentors, allies, and people ready to build the future.
         </p>
 
         <div class="flex flex-wrap gap-4 reveal delay-4">
 
-          <a href="/unirse" class="btn-primary">
-            Aplicar como mentor(a)
+          <a href="/en/join" class="btn-primary">
+            Apply as a mentor
           </a>
 
-          <a href="/contacto" class="btn-secondary">
-            Contactar
+          <a href="/en/contact" class="btn-secondary">
+            Contact
           </a>
 
         </div>
