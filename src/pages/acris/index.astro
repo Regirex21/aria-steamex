@@ -1,0 +1,165 @@
+---
+import AcrisLayout from "../../layouts/acrislayout.astro";
+import { acrisBrand } from "../../config/acris-brand";
+---
+
+<AcrisLayout title="ACRIS STEAMEX | FTC 35735">
+
+  <main class="overflow-hidden">
+
+    <!-- HERO -->
+    <section class="container-site pt-24 pb-28 relative overflow-hidden">
+
+      <div class="glow-orb w-64 h-64 top-8 right-10" style="background: rgba(178,19,24,.28)"></div>
+      <div class="glow-orb w-40 h-40 bottom-6 left-6" style="background: rgba(165,100,36,.18)"></div>
+
+      <div class="relative z-10 max-w-4xl">
+
+        <p class="text-sm uppercase tracking-[0.28em] text-white/60 mb-5 animate-up">
+          {acrisBrand.number} • {acrisBrand.city}
+        </p>
+
+        <h1 class="text-7xl md:text-9xl leading-none mb-6 animate-up">ACRIS</h1>
+
+        <p class="serif text-2xl md:text-3xl mb-8 animate-up delay-1"
+          style="color: var(--accent)">
+          {acrisBrand.tagline}
+        </p>
+
+        <p class="text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed mb-10 animate-up delay-2">
+          Equipo comunitario y mixto de FIRST Tech Challenge donde jóvenes de
+          {acrisBrand.ages} diseñan, construyen y programan robots para competir,
+          aprender y crecer.
+        </p>
+
+        <div class="flex flex-wrap gap-4 animate-up delay-3">
+          <a href={acrisBrand.instagramUrl} target="_blank" class="btn-primary">Únete</a>
+          <a href={"mailto:" + acrisBrand.email} class="btn-secondary">Contacto</a>
+        </div>
+
+        <div class="mt-12 flex flex-wrap gap-10 text-sm text-white/70 animate-up delay-4">
+          <div>
+            <strong class="block text-white text-lg">FTC</strong>
+            FIRST Tech Challenge
+          </div>
+          <div>
+            <strong class="block text-white text-lg">Mixto</strong>
+            {acrisBrand.ages}
+          </div>
+          <div>
+            <strong class="block text-white text-lg">100%</strong>
+            Gratuito
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUIÉNES SOMOS -->
+    <section id="quienes" class="container-site pb-28 reveal">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Quiénes somos</p>
+          <h2 class="serif text-4xl md:text-5xl leading-tight">
+            El talento no tiene género.
+          </h2>
+        </div>
+        <div>
+          <p class="text-white/75 text-lg leading-relaxed mb-6">
+            ACRIS es un equipo de FIRST Tech Challenge conformado por jóvenes
+            apasionados por la ciencia, la tecnología y la ingeniería. A través
+            de la robótica desarrollamos habilidades técnicas, liderazgo, trabajo
+            en equipo y resolución de problemas.
+          </p>
+          <p class="text-white/60 leading-relaxed">
+            Buscamos inspirar a más jóvenes a explorar las áreas STEM, construyendo
+            una comunidad donde la curiosidad se convierta en conocimiento y el
+            conocimiento en impacto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISTINCIÓN -->
+    <section id="ftc" class="container-site pb-28 reveal">
+      <div class="rounded-3xl p-10 md:p-16 border edge-bronze"
+        style="background: linear-gradient(120deg, #250505 0%, #3a0709 100%);">
+        <p class="text-sm uppercase tracking-[0.28em] mb-5" style="color: var(--accent)">
+          Nuestra distinción
+        </p>
+        <h2 class="serif text-4xl md:text-6xl leading-tight max-w-4xl">
+          {acrisBrand.distinction}.
+        </h2>
+      </div>
+    </section>
+
+    <!-- MISIÓN / VISIÓN -->
+    <section id="mision" class="container-site pb-28">
+      <div class="grid lg:grid-cols-2 gap-6">
+
+        <div class="glass rounded-3xl p-8 reveal">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Misión</p>
+          <h3 class="text-4xl mb-5">Formar futuro</h3>
+          <p class="text-white/75 leading-relaxed">
+            Construir una generación capaz de liderar, innovar y resolver problemas
+            complejos a través de la ingeniería, dejando un impacto que trascienda
+            más allá de la competencia.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 reveal delay-2">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Visión</p>
+          <h3 class="text-4xl mb-5">Dejar legado</h3>
+          <p class="text-white/75 leading-relaxed">
+            Inspirar a más jóvenes a liderar en ciencia, tecnología e ingeniería,
+            convirtiendo a ACRIS en un símbolo de excelencia, perseverancia e
+            innovación.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="unete" class="container-site pb-32 reveal">
+      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
+        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
+
+        <p class="text-sm uppercase tracking-[0.28em] mb-4" style="color: var(--accent)">
+          Próximo paso
+        </p>
+
+        <h2 class="serif text-4xl md:text-6xl mb-6 leading-tight">Súmate a ACRIS</h2>
+
+        <p class="text-white/75 max-w-2xl mb-8 text-lg leading-relaxed">
+          Si quieres construir robots, competir en FTC y formar parte de una
+          comunidad que crece, este es tu lugar.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href={acrisBrand.instagramUrl} target="_blank" class="btn-primary">
+            {acrisBrand.instagram}
+          </a>
+          <a href={"mailto:" + acrisBrand.email} class="btn-secondary">
+            {acrisBrand.email}
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("show");
+        });
+      }, { threshold: 0.15 });
+      items.forEach((item) => observer.observe(item));
+    });
+  </script>
+
+</AcrisLayout>

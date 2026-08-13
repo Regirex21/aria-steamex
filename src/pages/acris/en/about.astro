@@ -1,0 +1,109 @@
+---
+import AcrisLayout from "../../../layouts/acrislayout.astro";
+import { acrisBrand } from "../../../config/acris-brand";
+
+const values = [
+  { title: "Precision", desc: "Like the tip of a spear, every action is calculated." },
+  { title: "Speed", desc: "Aerodynamic design: agile solutions and quick decisions." },
+  { title: "Innovation", desc: "We take ideas from the past and transform them with technology." },
+  { title: "Community", desc: "We grow together and open opportunities for more youth." },
+];
+---
+
+<AcrisLayout title="About | ACRIS STEAMEX" lang="en">
+  <main class="overflow-hidden">
+
+    <section class="container-site pt-24 pb-20 relative overflow-hidden text-center">
+      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
+      <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">About</p>
+      <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show max-w-5xl mx-auto">
+        Precision, flow, impact
+      </h1>
+      <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed reveal show">
+        ACRIS brings competitive robotics to youth ages {acrisBrand.ages.replace("años", "").trim()} regardless of their background.
+      </p>
+    </section>
+
+    <section class="container-site pb-24 reveal">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Our story</p>
+          <h2 class="serif text-4xl md:text-5xl leading-tight">Born to open paths</h2>
+        </div>
+        <div>
+          <p class="text-white/75 text-lg leading-relaxed mb-6">
+            ACRIS is a community-based, independent, and free FIRST Tech Challenge team in
+            Mexico City. We bring together young people passionate about science, technology,
+            and engineering to build robots, compete, and grow together.
+          </p>
+          <p class="text-white/60 leading-relaxed">
+            We believe talent does not depend on educational background, but on opportunity.
+            That's why we open a space where curiosity becomes knowledge and knowledge
+            becomes impact.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container-site pb-24">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="glass rounded-3xl p-8 reveal">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Mission</p>
+          <h3 class="text-4xl mb-5">Shape the future</h3>
+          <p class="text-white/75 leading-relaxed">
+            To build a generation able to lead, innovate, and solve complex problems through
+            engineering, leaving an impact that reaches beyond the competition.
+          </p>
+        </div>
+        <div class="glass rounded-3xl p-8 reveal delay-2">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Vision</p>
+          <h3 class="text-4xl mb-5">Leave a legacy</h3>
+          <p class="text-white/75 leading-relaxed">
+            To inspire more youth to lead in science, technology, and engineering, making
+            ACRIS a symbol of excellence, perseverance, and innovation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container-site pb-24">
+      <div class="mb-10 reveal">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">What defines us</p>
+        <h2 class="serif text-4xl md:text-5xl">Our values</h2>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {values.map((v, i) => (
+          <div class={`glass rounded-3xl p-7 reveal delay-${i}`}>
+            <h3 class="text-3xl mb-4">{v.title}</h3>
+            <p class="text-white/65 leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="container-site pb-32 reveal">
+      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
+        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
+        <h2 class="serif text-4xl md:text-5xl mb-6 leading-tight">Be part of ACRIS</h2>
+        <p class="text-white/75 max-w-2xl mb-8 text-lg">
+          If you want to learn, build, and compete, this is your next step.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/acris/en/join" class="btn-primary">Apply</a>
+          <a href="/acris/en/contact" class="btn-secondary">Contact</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
+      }, { threshold: 0.15 });
+      items.forEach((i) => observer.observe(i));
+    });
+  </script>
+</AcrisLayout>

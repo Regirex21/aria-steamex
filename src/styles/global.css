@@ -3,6 +3,7 @@
 @import "@fontsource/poppins/500.css";
 @import "@fontsource/poppins/700.css";
 @import "@fontsource/anton";
+@import "@fontsource/merriweather";
 
 @tailwind base;
 @tailwind components;
@@ -191,3 +192,36 @@ h1,h2,h3,h4,h5 {
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,0.07);
 }
+
+/* ==========================================================
+   ACRIS STEAMEX — Tema alterno (romano / rojo)
+   Se activa con <html data-theme="acris"> en acrislayout.astro
+   ========================================================== */
+[data-theme="acris"] {
+  --bg: #190110;
+  --surface: #250505;
+  --surface-2: #5a1514;
+  --primary: #b21318;
+  --primary-soft: #d81f26;
+  --accent: #a56424;
+  --text: #f6ebea;
+  --muted: #caa9a9;
+}
+
+[data-theme="acris"] body {
+  background: radial-gradient(circle at top left, #3a0709 0%, #190110 48%);
+  color: var(--text);
+}
+
+[data-theme="acris"] .btn-primary:hover {
+  box-shadow: 0 10px 30px rgba(178, 19, 24, .35);
+}
+
+[data-theme="acris"] .nav-link { color: rgba(255,255,255,.80); }
+
+.serif {
+  font-family: "Merriweather", serif;
+  letter-spacing: 0;
+}
+
+.edge-bronze { border-color: rgba(165, 100, 36, .45) !important; }

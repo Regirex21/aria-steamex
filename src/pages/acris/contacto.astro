@@ -1,0 +1,62 @@
+---
+import AcrisLayout from "../../layouts/acrislayout.astro";
+import { acrisBrand } from "../../config/acris-brand";
+---
+
+<AcrisLayout title="Contacto | ACRIS STEAMEX">
+  <main class="overflow-hidden">
+
+    <section class="container-site pt-24 pb-20 relative overflow-hidden">
+      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
+      <div class="relative z-10 max-w-4xl">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">Contacto</p>
+        <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show">Hablemos</h1>
+        <p class="serif text-xl md:text-2xl text-white/75 max-w-2xl leading-relaxed reveal show">
+          ¿Quieres unirte, colaborar o apoyar a ACRIS? Estamos a un mensaje de distancia.
+        </p>
+      </div>
+    </section>
+
+    <section class="container-site pb-32">
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <a href={"mailto:" + acrisBrand.email} class="glass rounded-3xl p-8 reveal block hover:bg-white/10 transition">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Correo</p>
+          <h3 class="text-2xl mb-2 break-words">{acrisBrand.email}</h3>
+          <p class="text-white/60">Escríbenos para dudas, alianzas o prensa.</p>
+        </a>
+
+        <a href={acrisBrand.instagramUrl} target="_blank" rel="noopener noreferrer" class="glass rounded-3xl p-8 reveal delay-1 block hover:bg-white/10 transition">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Instagram</p>
+          <h3 class="text-2xl mb-2">{acrisBrand.instagram}</h3>
+          <p class="text-white/60">Síguenos para ver el día a día del equipo.</p>
+        </a>
+
+        <div class="glass rounded-3xl p-8 reveal delay-2">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Ubicación</p>
+          <h3 class="text-2xl mb-2">{acrisBrand.city}</h3>
+          <p class="text-white/60">{acrisBrand.country}</p>
+        </div>
+
+        <a href="/acris/unirse" class="rounded-3xl p-8 reveal delay-3 border edge-bronze block hover:opacity-90 transition"
+          style="background: linear-gradient(120deg, #250505 0%, #3a0709 100%);">
+          <p class="text-sm uppercase tracking-[0.28em] mb-4" style="color: var(--accent)">Reclutamiento</p>
+          <h3 class="text-2xl mb-2">Quiero unirme</h3>
+          <p class="text-white/60">Ve directo al formulario de aspirantes.</p>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
+      }, { threshold: 0.15 });
+      items.forEach((i) => observer.observe(i));
+    });
+  </script>
+</AcrisLayout>

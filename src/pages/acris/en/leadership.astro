@@ -1,0 +1,113 @@
+---
+import AcrisLayout from "../../../layouts/acrislayout.astro";
+
+const coaches = [
+  {
+    role: "Head Coach",
+    name: "Regina Servín",
+    description:
+      "Leads the team's technical areas including mechanics, programming, and documentation. Oversees development processes, competitive strategy, and internal technical training.",
+    image: "",
+  },
+  {
+    role: "Coach",
+    name: "Isis Reyes",
+    description:
+      "In charge of sponsorship, impact, and the team's image. Coordinates partnerships, outreach, branding, and institutional communication strategies.",
+    image: "",
+  },
+];
+
+const mentors = [
+  {
+    area: "To be defined",
+    name: "To be defined",
+    description: "Members to be confirmed.",
+    image: "",
+  },
+];
+
+const initial = (name) => (name?.trim()?.[0] ?? "?").toUpperCase();
+---
+
+<AcrisLayout title="Leadership | ACRIS STEAMEX" lang="en">
+  <main class="overflow-hidden">
+
+    <section class="container-site pt-24 pb-20 relative overflow-hidden text-center">
+      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
+      <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">Meet the leadership</p>
+      <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show max-w-5xl mx-auto">
+        The people who guide the team
+      </h1>
+      <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed reveal show">
+        Coaches and mentors committed to shaping a new generation in STEM.
+      </p>
+    </section>
+
+    <section class="container-site pb-24">
+      <div class="mb-10 reveal">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Coaches</p>
+        <h2 class="serif text-4xl md:text-5xl">Team direction</h2>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {coaches.map((c, i) => (
+          <div class={`glass rounded-3xl p-8 reveal delay-${i}`}>
+            <div class="w-full h-[320px] rounded-2xl border edge-bronze mb-6 overflow-hidden flex items-center justify-center"
+              style="background: #250505;">
+              {c.image
+                ? <img src={c.image} alt={c.name} class="w-full h-full object-cover" />
+                : <span class="text-6xl" style="color: var(--accent)">{initial(c.name)}</span>}
+            </div>
+            <p class="text-sm uppercase tracking-[0.2em] text-white/45 mb-3">{c.role}</p>
+            <h3 class="text-4xl mb-4">{c.name}</h3>
+            <p class="text-white/65 leading-relaxed">{c.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="container-site pb-24">
+      <div class="mb-10 reveal">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Mentors</p>
+        <h2 class="serif text-4xl md:text-5xl">Driving key areas</h2>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {mentors.map((m) => (
+          <div class="glass rounded-3xl p-6 reveal text-center">
+            <div class="w-full h-[260px] rounded-2xl border edge-bronze mb-6 overflow-hidden flex items-center justify-center"
+              style="background: #250505;">
+              {m.image
+                ? <img src={m.image} alt={m.name} class="w-full h-full object-cover" />
+                : <span class="text-5xl" style="color: var(--accent)">{initial(m.name)}</span>}
+            </div>
+            <p class="text-xs uppercase tracking-[0.22em] text-white/45 mb-3">{m.area}</p>
+            <h3 class="text-2xl mb-3 leading-none">{m.name}</h3>
+            <p class="text-white/65 text-sm leading-relaxed">{m.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="container-site pb-32 reveal">
+      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
+        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
+        <h2 class="serif text-4xl md:text-5xl mb-6 leading-tight">Want to support this mission?</h2>
+        <p class="text-white/75 max-w-2xl mb-8 text-lg">
+          We're looking for mentors and allies ready to build the future.
+        </p>
+        <a href="/acris/en/contact" class="btn-primary">Contact</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
+      }, { threshold: 0.15 });
+      items.forEach((i) => observer.observe(i));
+    });
+  </script>
+</AcrisLayout>

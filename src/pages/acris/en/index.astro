@@ -1,0 +1,120 @@
+---
+import AcrisLayout from "../../../layouts/acrislayout.astro";
+import { acrisBrand } from "../../../config/acris-brand";
+---
+
+<AcrisLayout title="ACRIS STEAMEX | FTC 35735" lang="en">
+  <main class="overflow-hidden">
+
+    <!-- HERO -->
+    <section class="container-site pt-24 pb-28 relative overflow-hidden">
+      <div class="glow-orb w-64 h-64 top-8 right-10" style="background: rgba(178,19,24,.28)"></div>
+      <div class="glow-orb w-40 h-40 bottom-6 left-6" style="background: rgba(165,100,36,.18)"></div>
+
+      <div class="relative z-10 max-w-4xl">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/60 mb-5 animate-up">
+          {acrisBrand.number} • {acrisBrand.city}
+        </p>
+        <h1 class="text-7xl md:text-9xl leading-none mb-6 animate-up">ACRIS</h1>
+        <p class="serif text-2xl md:text-3xl mb-8 animate-up delay-1" style="color: var(--accent)">
+          Create. Learn. Innovate.
+        </p>
+        <p class="text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed mb-10 animate-up delay-2">
+          A community-based, co-ed FIRST Tech Challenge team where youth ages 12 to 18
+          design, build, and program robots to compete, learn, and grow.
+        </p>
+        <div class="flex flex-wrap gap-4 animate-up delay-3">
+          <a href="/acris/en/join" class="btn-primary">Join</a>
+          <a href={"mailto:" + acrisBrand.email} class="btn-secondary">Contact</a>
+        </div>
+        <div class="mt-12 flex flex-wrap gap-10 text-sm text-white/70 animate-up delay-4">
+          <div><strong class="block text-white text-lg">FTC</strong>FIRST Tech Challenge</div>
+          <div><strong class="block text-white text-lg">Co-ed</strong>Ages 12–18</div>
+          <div><strong class="block text-white text-lg">100%</strong>Free</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO WE ARE -->
+    <section class="container-site pb-28 reveal">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Who we are</p>
+          <h2 class="serif text-4xl md:text-5xl leading-tight">Talent has no gender.</h2>
+        </div>
+        <div>
+          <p class="text-white/75 text-lg leading-relaxed mb-6">
+            ACRIS is a FIRST Tech Challenge team made up of young people passionate about
+            science, technology, and engineering. Through robotics we develop technical
+            skills, leadership, teamwork, and problem-solving.
+          </p>
+          <p class="text-white/60 leading-relaxed">
+            We aim to inspire more youth to explore STEM, building a community where
+            curiosity becomes knowledge and knowledge becomes impact.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISTINCTION -->
+    <section class="container-site pb-28 reveal">
+      <div class="rounded-3xl p-10 md:p-16 border edge-bronze"
+        style="background: linear-gradient(120deg, #250505 0%, #3a0709 100%);">
+        <p class="text-sm uppercase tracking-[0.28em] mb-5" style="color: var(--accent)">Our distinction</p>
+        <h2 class="serif text-4xl md:text-6xl leading-tight max-w-4xl">
+          The first and only free community-based FTC team in Mexico City.
+        </h2>
+      </div>
+    </section>
+
+    <!-- MISSION / VISION -->
+    <section class="container-site pb-28">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="glass rounded-3xl p-8 reveal">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Mission</p>
+          <h3 class="text-4xl mb-5">Shape the future</h3>
+          <p class="text-white/75 leading-relaxed">
+            To build a generation able to lead, innovate, and solve complex problems through
+            engineering, leaving an impact that reaches beyond the competition.
+          </p>
+        </div>
+        <div class="glass rounded-3xl p-8 reveal delay-2">
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Vision</p>
+          <h3 class="text-4xl mb-5">Leave a legacy</h3>
+          <p class="text-white/75 leading-relaxed">
+            To inspire more youth to lead in science, technology, and engineering, making
+            ACRIS a symbol of excellence, perseverance, and innovation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="container-site pb-32 reveal">
+      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
+        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
+        <p class="text-sm uppercase tracking-[0.28em] mb-4" style="color: var(--accent)">Next step</p>
+        <h2 class="serif text-4xl md:text-6xl mb-6 leading-tight">Join ACRIS</h2>
+        <p class="text-white/75 max-w-2xl mb-8 text-lg leading-relaxed">
+          If you want to build robots, compete in FTC, and be part of a growing community,
+          this is your place.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href={acrisBrand.instagramUrl} target="_blank" class="btn-primary">{acrisBrand.instagram}</a>
+          <a href={"mailto:" + acrisBrand.email} class="btn-secondary">{acrisBrand.email}</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
+      }, { threshold: 0.15 });
+      items.forEach((i) => observer.observe(i));
+    });
+  </script>
+</AcrisLayout>

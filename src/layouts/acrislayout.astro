@@ -1,0 +1,26 @@
+---
+import AcrisNavbar from "../components/acris-navbar.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  lang?: string;
+}
+
+const { title = "ACRIS STEAMEX", lang = "es" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang} data-theme="acris">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description"
+    content="Equipo comunitario y mixto de FIRST Tech Challenge en Ciudad de México. Robótica gratuita para jóvenes de 12 a 18 años." />
+</head>
+<body class="overflow-x-hidden">
+  <AcrisNavbar />
+  <slot />
+</body>
+</html>

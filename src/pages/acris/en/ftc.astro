@@ -1,0 +1,86 @@
+---
+import AcrisLayout from "../../../layouts/acrislayout.astro";
+import { acrisBrand } from "../../../config/acris-brand";
+
+const phases = [
+  { title: "Design", desc: "We analyze the season's challenge and design the robot in CAD." },
+  { title: "Build", desc: "We manufacture, assemble, and test each subsystem." },
+  { title: "Program", desc: "We develop the autonomous software and driver control." },
+  { title: "Compete", desc: "We take the robot to official FIRST Tech Challenge tournaments." },
+];
+---
+
+<AcrisLayout title="FTC | ACRIS STEAMEX" lang="en">
+  <main class="overflow-hidden">
+
+    <section class="container-site pt-24 pb-20 relative overflow-hidden">
+      <div class="glow-orb w-64 h-64 top-8 right-10" style="background: rgba(178,19,24,.25)"></div>
+      <div class="relative z-10 max-w-4xl">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">FIRST Tech Challenge</p>
+        <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show">What is FTC?</h1>
+        <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl leading-relaxed reveal show">
+          FIRST's robotics program where teams of young people design, build, and program
+          a robot to compete each season.
+        </p>
+      </div>
+    </section>
+
+    <section class="container-site pb-24 reveal">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">The program</p>
+          <h2 class="serif text-4xl md:text-5xl leading-tight">Real engineering, as a team</h2>
+        </div>
+        <div>
+          <p class="text-white/75 text-lg leading-relaxed mb-6">
+            FIRST Tech Challenge (FTC) challenges students ages 12 to 18 to solve a new
+            engineering problem every year. Teams build a robot, program it, and take it to
+            compete while developing technical skills, leadership, and teamwork.
+          </p>
+          <p class="text-white/60 leading-relaxed">
+            As team <strong>{acrisBrand.number}</strong>, ACRIS represents the Mexico City
+            community in this international program.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container-site pb-24">
+      <div class="mb-10 reveal">
+        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">How we work</p>
+        <h2 class="serif text-4xl md:text-5xl">From idea to tournament</h2>
+      </div>
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {phases.map((f, i) => (
+          <div class={`glass rounded-3xl p-7 reveal delay-${i}`}>
+            <p class="text-sm text-white/40 mb-6">0{i + 1}</p>
+            <h3 class="text-3xl mb-4">{f.title}</h3>
+            <p class="text-white/65 leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="container-site pb-32 reveal">
+      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
+        style="background: linear-gradient(120deg, #250505 0%, #3a0709 100%);">
+        <p class="text-sm uppercase tracking-[0.28em] mb-5" style="color: var(--accent)">Get in</p>
+        <h2 class="serif text-4xl md:text-6xl leading-tight max-w-4xl mb-8">
+          Live the FTC experience with us.
+        </h2>
+        <a href="/acris/en/join" class="btn-primary">I want to join</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
+      }, { threshold: 0.15 });
+      items.forEach((i) => observer.observe(i));
+    });
+  </script>
+</AcrisLayout>

@@ -1,0 +1,60 @@
+---
+import AcrisLayout from "../../layouts/acrislayout.astro";
+import { acrisBrand } from "../../config/acris-brand";
+
+const pasos = [
+  { title: "Llena el formulario", desc: "Cuéntanos sobre ti, tus intereses y tu experiencia." },
+  { title: "Te contactamos", desc: "Revisamos tu solicitud y nos comunicamos contigo." },
+  { title: "Conoce al equipo", desc: "Te integras a las actividades y áreas de ACRIS." },
+];
+---
+
+<AcrisLayout title="Unirse | ACRIS STEAMEX">
+  <main class="overflow-hidden">
+
+    <section class="container-site pt-24 pb-20 relative overflow-hidden text-center">
+      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
+      <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">Reclutamiento</p>
+      <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show max-w-5xl mx-auto">Únete a ACRIS</h1>
+      <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed reveal show">
+        Buscamos jóvenes de {acrisBrand.ages} con ganas de aprender, construir y competir.
+      </p>
+    </section>
+
+    <section class="container-site pb-24">
+      <div class="grid md:grid-cols-3 gap-6">
+        {pasos.map((p, i) => (
+          <div class={`glass rounded-3xl p-8 reveal delay-${i}`}>
+            <p class="text-sm text-white/40 mb-6">Paso 0{i + 1}</p>
+            <h3 class="text-2xl mb-4">{p.title}</h3>
+            <p class="text-white/65 leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="container-site pb-32 reveal">
+      <div class="rounded-3xl p-10 md:p-16 border edge-bronze text-center"
+        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
+        <h2 class="serif text-4xl md:text-6xl mb-6 leading-tight">Formulario de aspirantes</h2>
+        <p class="text-white/75 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
+          El proceso es sencillo y gratuito. Llena el formulario y nos pondremos en contacto contigo.
+        </p>
+        <a href={acrisBrand.formAlumnos} target="_blank" rel="noopener noreferrer" class="btn-primary text-lg">
+          Abrir formulario →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
+      }, { threshold: 0.15 });
+      items.forEach((i) => observer.observe(i));
+    });
+  </script>
+</AcrisLayout>

@@ -1,0 +1,93 @@
+---
+import { acrisBrand } from "../config/acris-brand";
+
+const isEnglish = Astro.url.pathname.startsWith("/acris/en");
+
+const navLinks = isEnglish
+  ? [
+      { href: "/acris/en/about", label: "About" },
+      { href: "/acris/en/ftc", label: "FTC" },
+      { href: "/acris/en/leadership", label: "Leadership" },
+      { href: "/acris/en/join", label: "Join" },
+      { href: "/sponsors", label: "Sponsors" },
+      { href: "/acris/en/contact", label: "Contact" },
+    ]
+  : [
+      { href: "/acris/nosotros", label: "Nosotros" },
+      { href: "/acris/ftc", label: "FTC" },
+      { href: "/acris/liderazgo", label: "Liderazgo" },
+      { href: "/acris/unirse", label: "Unirse" },
+      { href: "/sponsors", label: "Sponsors" },
+      { href: "/acris/contacto", label: "Contacto" },
+    ];
+
+// Mapea cada ruta ES de ACRIS con su equivalente EN
+const routePairs = [
+  ["/acris", "/acris/en"],
+  ["/acris/nosotros", "/acris/en/about"],
+  ["/acris/ftc", "/acris/en/ftc"],
+  ["/acris/liderazgo", "/acris/en/leadership"],
+  ["/acris/unirse", "/acris/en/join"],
+  ["/acris/contacto", "/acris/en/contact"],
+];
+
+const normalizePath = (path) =>
+  path.length > 1 ? path.replace(/\/$/, "") : path;
+
+const currentPath = normalizePath(Astro.url.pathname);
+const pair =
+  routePairs.find(
+    ([es, en]) => normalizePath(es) === currentPath || normalizePath(en) === currentPath
+  ) ?? routePairs[0];
+
+const spanishHref = pair[0];
+const englishHref = pair[1];
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 glass">
+  <nav class="container-site h-20 flex items-center justify-between">
+
+    <a href={isEnglish ? "/acris/en" : "/acris"} class="flex items-center gap-3 group">
+      <svg viewBox="0 0 48 72" fill="currentColor"
+        class="h-9 w-auto transition duration-300 group-hover:scale-105"
+        style="color: var(--primary)">
+        <path d="M24 2 C24 2 41 33 41 46 L26 38 L24 70 L22 38 L7 46 C7 33 24 2 24 2 Z" />
+      </svg>
+      <span class="text-2xl tracking-wide" style="font-family:'Anton',sans-serif;">ACRIS</span>
+    </a>
+
+    <div class="hidden md:flex gap-8 text-sm font-medium">
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-3">
+
+      <!-- Selector de idioma ES / EN -->
+      <div class="flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-medium">
+        <a
+          href={spanishHref}
+          class={`px-3 py-2 rounded-full transition ${!isEnglish ? "bg-white text-black" : "text-white/65 hover:text-white"}`}
+          aria-label="Ver sitio en español"
+        >ES</a>
+        <a
+          href={englishHref}
+          class={`px-3 py-2 rounded-full transition ${isEnglish ? "bg-white text-black" : "text-white/65 hover:text-white"}`}
+          aria-label="View site in English"
+        >EN</a>
+      </div>
+
+      <!-- Selector de equipo ARIA / ACRIS -->
+      <div class="hidden sm:flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-semibold">
+        <a href={isEnglish ? "/en" : "/"} class="px-3 py-2 rounded-full text-white/65 hover:text-white transition">ARIA</a>
+        <a href={isEnglish ? "/acris/en" : "/acris"} class="px-3 py-2 rounded-full bg-white text-black">ACRIS</a>
+      </div>
+
+      <a href={acrisBrand.instagramUrl} target="_blank" class="btn-primary text-sm">
+        Instagram
+      </a>
+
+    </div>
+  </nav>
+</header>
