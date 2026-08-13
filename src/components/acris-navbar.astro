@@ -48,12 +48,11 @@ const englishHref = pair[1];
   <nav class="container-site h-20 flex items-center justify-between">
 
     <a href={isEnglish ? "/acris/en" : "/acris"} class="flex items-center gap-3 group">
-      <svg viewBox="0 0 48 72" fill="currentColor"
-        class="h-9 w-auto transition duration-300 group-hover:scale-105"
-        style="color: var(--primary)">
-        <path d="M24 2 C24 2 41 33 41 46 L26 38 L24 70 L22 38 L7 46 C7 33 24 2 24 2 Z" />
-      </svg>
-      <span class="text-2xl tracking-wide" style="font-family:'Anton',sans-serif;">ACRIS</span>
+      <img
+        src="/assets/Acris_logo.png"
+        alt="ACRIS STEAMEX Logo"
+        class="h-16 w-auto transition duration-300 group-hover:scale-105"
+      />
     </a>
 
     <div class="hidden md:flex gap-8 text-sm font-medium">
@@ -83,6 +82,10 @@ const englishHref = pair[1];
         <a href={isEnglish ? "/en" : "/"} class="px-3 py-2 rounded-full text-white/65 hover:text-white transition">ARIA</a>
         <a href={isEnglish ? "/acris/en" : "/acris"} class="px-3 py-2 rounded-full bg-white text-black">ACRIS</a>
       </div>
+
+      <a href={acrisBrand.formAlumnos} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
+        {isEnglish ? "Apply" : "Aplicar"}
+      </a>
 
       <a href={acrisBrand.instagramUrl} target="_blank" class="btn-primary text-sm">
         Instagram
