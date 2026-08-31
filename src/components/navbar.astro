@@ -65,7 +65,7 @@ const englishHref = pair[1];
   <!-- Selector de equipo -->
   <div class="hidden sm:flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-semibold">
     <a href="/" class="px-3 py-2 rounded-full bg-white text-black">ARIA</a>
-    <a href="/acris" class="px-3 py-2 rounded-full text-white/65 hover:text-white transition">ACRIS</a>
+    <a href={isEnglish ? "/acris/en" : "/acris"} class="px-3 py-2 rounded-full text-white/65 hover:text-white transition">ACRIS</a>
   </div>
 
   <div class="flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-medium">

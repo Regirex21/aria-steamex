@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/assets/Aria_logo.svg" width="220" alt="ARIA STEAMEX Logo" />
+  <img src="./public/assets/Aria_logo_horizontal.png" width="220" alt="ARIA STEAMEX Logo" />
 </p>
 
 <p align="center">
@@ -69,15 +69,21 @@ Dirección visual construida bajo estos principios:
 
 ## Estructura del sitio
 
+Este repositorio aloja dos marcas hermanas bajo el mismo sitio: **ARIA STEAMEX** (FRC) y **ACRIS STEAMEX** (FTC), cada una con layout, navbar y tema de color propios (`acrislayout.astro` / `[data-theme="acris"]`). Ambas tienen versión en español e inglés (`/en/*` y `/acris/en/*`).
+
 ```text
 src/pages/
-├── index.astro        # Inicio
-├── nosotras.astro     # Historia, misión, visión
-├── first.astro        # Qué es FIRST / FRC
-├── unirse.astro       # Reclutamiento
-├── sponsors.astro     # Patrocinios
-├── contacto.astro     # Contacto oficial
-├── liderazgo.astro    # Coaches y mentores
+├── index.astro          # Inicio ARIA
+├── nosotras.astro       # Historia, misión, visión (ARIA)
+├── first.astro          # Qué es FIRST / FRC
+├── unirse.astro         # Reclutamiento (ARIA)
+├── sponsors.astro       # Patrocinios (compartido)
+├── contacto.astro       # Contacto oficial (ARIA)
+├── liderazgo.astro      # Coaches y mentores (ARIA)
+├── impacto/             # Documentación interna de equipo (procesos, branding, negocios, CADs)
+├── en/                  # Versión en inglés de ARIA
+├── acris/               # Sitio de ACRIS STEAMEX (ES)
+└── acris/en/            # Sitio de ACRIS STEAMEX (EN)
 ````
 
 ---
@@ -96,6 +102,12 @@ npm run dev
 ```
 
 Abrir:
+
+```text
+http://localhost:4321
+```
+
+El sitio en producción vive en:
 
 ```text
 https://aria-steamex.vercel.app

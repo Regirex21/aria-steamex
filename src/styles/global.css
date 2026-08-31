@@ -5,10 +5,6 @@
 @import "@fontsource/anton";
 @import "@fontsource/merriweather";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --bg: #211224;
   --surface: #2c1f35;
