@@ -1,11 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://aria-steamex.vercel.app',
+  site: 'https://www.aria-steamex.com',
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
   }

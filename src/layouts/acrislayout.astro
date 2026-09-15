@@ -1,25 +1,29 @@
 ---
 import AcrisNavbar from "../components/acris-navbar.astro";
+import SEO from "../components/seo.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
   lang?: string;
+  image?: string;
 }
 
-const { title = "ACRIS STEAMEX", lang = "es" } = Astro.props;
+const {
+  title = "ACRIS STEAMEX",
+  description = "Equipo comunitario y mixto de FIRST Tech Challenge (FTC 35735) en Ciudad de México. Robótica gratuita para jóvenes de 12 a 18 años.",
+  lang = "es",
+  image = "/assets/logos/acris.png",
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang={lang} data-theme="acris">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/favicon-acris.png" />
-  <title>{title}</title>
-  <meta name="description"
-    content="Equipo comunitario y mixto de FIRST Tech Challenge en Ciudad de México. Robótica gratuita para jóvenes de 12 a 18 años." />
+  <SEO title={title} description={description} lang={lang} image={image} team="acris" />
 </head>
+
 <body class="overflow-x-hidden">
   <AcrisNavbar />
   <slot />

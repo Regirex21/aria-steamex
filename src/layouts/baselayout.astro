@@ -1,35 +1,31 @@
 ---
 import Navbar from "../components/navbar.astro";
+import SEO from "../components/seo.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
   lang?: string;
+  image?: string;
 }
 
-const { title = "ARIA STEAMEX", lang = "es" } = Astro.props;
+const {
+  title = "ARIA STEAMEX",
+  description = "Equipo femenil de FIRST Robotics Competition (FRC 11040) en Ciudad de México. Ingeniería, liderazgo e impacto STEM para futuras ingenieras.",
+  lang = "es",
+  image = "/assets/logos/aria-horizontal.png",
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/favicon-aria.png" />
-
-  <title>{title}</title>
-
-  <meta
-    name="description"
-    content="Equipo femenil FRC de Ciudad de México. Ingeniería, liderazgo e impacto STEM."
-  />
+  <SEO title={title} description={description} lang={lang} image={image} team="aria" />
 </head>
 
 <body class="bg-[#140019] text-white overflow-x-hidden">
-
   <Navbar />
-
   <slot />
-
 </body>
 </html>
