@@ -41,13 +41,13 @@ const englishHref = pair[1];
 
 <header class="sticky top-0 z-50 border-b border-white/10 glass">
   <nav class="container-site h-20 flex items-center justify-between">
-    
-<a href={isEnglish ? "/en" : "/"} class="flex items-center gap-3 group">
+
+<a href={isEnglish ? "/en" : "/"} class="flex items-center gap-3 group flex-shrink-0">
 
   <img
     src="/assets/logos/aria-horizontal.png"
     alt="ARIA STEAMEX Logo"
-    class="h-10 w-auto transition duration-300 group-hover:scale-105"
+    class="h-10 w-auto flex-shrink-0 transition duration-300 group-hover:scale-105"
   />
 
 </a>
@@ -60,10 +60,10 @@ const englishHref = pair[1];
 
 </div>
 
-    <div class="flex items-center gap-4">
+    <div class="hidden md:flex items-center gap-4">
 
   <!-- Selector de equipo -->
-  <div class="hidden sm:flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-semibold">
+  <div class="flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-semibold">
     <a href="/" class="px-3 py-2 rounded-full bg-white text-black">ARIA</a>
     <a href={isEnglish ? "/acris/en" : "/acris"} class="px-3 py-2 rounded-full text-white/65 hover:text-white transition">ACRIS</a>
   </div>
@@ -99,5 +99,93 @@ const englishHref = pair[1];
 
 </div>
 
+    <!-- Botón de menú (solo móvil) -->
+    <button
+      id="menu-toggle"
+      type="button"
+      class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 flex-shrink-0"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
   </nav>
+
+  <!-- Panel de menú móvil -->
+  <div id="mobile-menu" class="md:hidden hidden border-t border-white/10 glass">
+    <div class="container-site py-6 flex flex-col gap-1">
+
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link py-3 text-base">{link.label}</a>
+      ))}
+
+      <div class="h-px bg-white/10 my-3"></div>
+
+      <div class="flex items-center gap-3 mb-4">
+        <a href="/" class="px-3 py-2 rounded-full text-xs font-semibold bg-white text-black">ARIA</a>
+        <a href={isEnglish ? "/acris/en" : "/acris"} class="px-3 py-2 rounded-full text-xs font-semibold border border-white/10 text-white/65">ACRIS</a>
+      </div>
+
+      <div class="flex items-center rounded-full border border-white/10 bg-white/5 p-1 text-xs font-medium w-fit mb-4">
+        <a
+          href={spanishHref}
+          class={`px-3 py-2 rounded-full transition ${!isEnglish ? "bg-white text-black" : "text-white/65 hover:text-white"}`}
+          aria-label="Ver sitio en español"
+        >ES</a>
+        <a
+          href={englishHref}
+          class={`px-3 py-2 rounded-full transition ${isEnglish ? "bg-white text-black" : "text-white/65 hover:text-white"}`}
+          aria-label="View site in English"
+        >EN</a>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <a href={isEnglish ? "/en/join" : "/unirse"} class="btn-primary text-sm">
+          {isEnglish ? "Apply" : "Aplicar"}
+        </a>
+        <a href="https://www.instagram.com/aria.steamex/" target="_blank" class="btn-primary text-sm">
+          Instagram
+        </a>
+      </div>
+
+    </div>
+  </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+    if (!toggle || !menu) return;
+
+    const closeMenu = () => {
+      menu.classList.add("hidden");
+      iconOpen.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      toggle.setAttribute("aria-expanded", "false");
+    };
+
+    toggle.addEventListener("click", () => {
+      const isOpen = !menu.classList.contains("hidden");
+      if (isOpen) {
+        closeMenu();
+      } else {
+        menu.classList.remove("hidden");
+        iconOpen.classList.add("hidden");
+        iconClose.classList.remove("hidden");
+        toggle.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+  })();
+</script>
