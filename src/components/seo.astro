@@ -1,6 +1,8 @@
 ---
 // src/components/seo.astro
 // Componente central de SEO. Lo usan baselayout y acrislayout.
+import { getLocalePair } from "../config/routes";
+
 interface Props {
   title: string;
   description: string;
@@ -23,6 +25,11 @@ const ogImage = new URL(image, Astro.site);
 const favicon = team === "acris" ? "/favicon-acris.png" : "/favicon-aria.png";
 const siteName = team === "acris" ? "ACRIS STEAMEX" : "ARIA STEAMEX";
 const ogLocale = lang === "en" ? "en_US" : "es_MX";
+
+// hreflang: buscar el par ES/EN de la página actual
+const localePair = getLocalePair(Astro.url.pathname);
+const esURL = localePair ? new URL(localePair.es, Astro.site) : null;
+const enURL = localePair ? new URL(localePair.en, Astro.site) : null;
 ---
 
 <!-- Básicos -->
@@ -32,6 +39,15 @@ const ogLocale = lang === "en" ? "en_US" : "es_MX";
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+
+<!-- hreflang: versiones por idioma (solo si la página existe en ambos) -->
+{esURL && enURL && (
+  <>
+    <link rel="alternate" hreflang="es" href={esURL} />
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="x-default" href={esURL} />
+  </>
+)}
 
 <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
 <meta property="og:type" content="website" />
