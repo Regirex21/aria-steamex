@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../../layouts/baselayout.astro";
+
+const whatsapp = "https://wa.me/523319751792";
+const instagram = "https://www.instagram.com/aria.steamex/";
+
+const aportar = [
+  {
+    title: "Equipos FIRST",
+    desc: "Cuéntanos sobre tu equipo, tu temporada, tu robot y tus proyectos.",
+  },
+  {
+    title: "Proyectos técnicos",
+    desc: "Comparte diseños, código, subsistemas o soluciones de ingeniería.",
+  },
+  {
+    title: "Experiencias",
+    desc: "Historias de personas dentro de la comunidad STEM y de robótica.",
+  },
+];
+---
+
+<BaseLayout
+  title="Revista | ARIA STEAMEX"
+  description="Revista mensual de la comunidad FIRST en México. Equipos y personas comparten sus proyectos y experiencias. ¿Quieres aparecer? Contáctanos.">
+
+  <main class="min-h-screen bg-[#140019] text-white">
+
+    <!-- HERO -->
+    <section class="relative border-b border-white/10 overflow-hidden">
+
+      <div class="absolute inset-0 bg-gradient-to-b from-[#2A0836] to-transparent opacity-60"></div>
+
+      <div class="container-site py-24 relative z-10">
+
+        <p class="text-sm tracking-[0.3em] uppercase text-white/40 mb-6">
+          Impacto / Revista
+        </p>
+
+        <h1 class="text-5xl md:text-7xl font-black mb-8">
+          Revista STEAMEX
+        </h1>
+
+        <p class="max-w-3xl text-lg text-white/70 leading-relaxed">
+          Un proyecto en desarrollo: una revista mensual donde los equipos de la
+          comunidad FIRST en México comparten quiénes son, sus proyectos y sus
+          experiencias. Estamos preparando la primera edición.
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- QUÉ ES -->
+    <section class="container-site py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-4">
+            El proyecto
+          </p>
+          <h2 class="text-4xl md:text-5xl font-black leading-tight">
+            Hecha por la comunidad, para la comunidad
+          </h2>
+        </div>
+        <div>
+          <p class="text-white/72 text-lg leading-relaxed mb-6">
+            La revista reúne el trabajo de equipos FRC y FTC, difunde proyectos,
+            da espacio a patrocinadores y comparte las historias de las personas
+            que hacen crecer la robótica en México.
+          </p>
+          <p class="text-white/60 leading-relaxed">
+            Cada mes preparamos una nueva edición con el contenido que nos
+            comparten los equipos y colaboradores. Si quieres ser parte, nos
+            encantaría incluirte.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUÉ PUEDES APORTAR -->
+    <section class="container-site pb-20">
+      <div class="mb-12">
+        <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-4">
+          Qué compartimos
+        </p>
+        <h2 class="text-4xl md:text-5xl font-black">Lo que puedes aportar</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {
+          aportar.map((item) => (
+            <div class="border border-white/10 bg-white/5 rounded-[28px] p-8">
+              <h3 class="text-2xl font-black mb-4">{item.title}</h3>
+              <p class="text-white/60 leading-relaxed">{item.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CTA ¿QUIERES APARECER? -->
+    <section class="container-site pb-28">
+      <div
+        class="rounded-[32px] p-10 md:p-16 border border-white/10 text-center bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a]"
+      >
+        <p class="text-sm uppercase tracking-[0.3em] text-white/45 mb-5">
+          Participa
+        </p>
+        <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+          ¿Quieres aparecer?
+        </h2>
+        <p class="text-white/70 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
+          Si tu equipo o tú quieren compartir un proyecto o una experiencia en la
+          revista, escríbenos y con gusto los incluimos en una próxima edición.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href={whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Escríbenos por WhatsApp
+          </a>
+          <a
+            href={instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary"
+          >
+            Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</BaseLayout>

@@ -73,71 +73,94 @@ const categories = [
           aprendizaje y desarrollo dentro del equipo.
         </p>
 
-        <div class="mt-16 flex flex-wrap gap-12">
-
-          <div>
-            <p class="text-4xl font-bold">50+</p>
-            <p class="text-white/50 mt-2">Páginas documentadas</p>
-          </div>
-
-          <div>
-            <p class="text-4xl font-bold">5</p>
-            <p class="text-white/50 mt-2">Áreas organizadas</p>
-          </div>
-
-          <div>
-            <p class="text-4xl font-bold">2026</p>
-            <p class="text-white/50 mt-2">Temporada activa</p>
-          </div>
-
-        </div>
-
       </div>
 
     </section>
 
-    <!-- DOCUMENTO DESTACADO -->
+    <!-- DESTACADOS -->
     <section class="container-site py-24">
 
-      <div
-        class="grid lg:grid-cols-2 gap-12 items-center border border-white/10 rounded-[32px] bg-white/5 backdrop-blur-md overflow-hidden"
+      <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-8">
+        Destacados
+      </p>
+
+      <!-- REVISTA (destacado principal) -->
+      <a
+        href="/impacto/revista"
+        class="group grid lg:grid-cols-2 gap-12 items-center border border-white/10 rounded-[32px] bg-white/5 backdrop-blur-md overflow-hidden hover:border-white/25 transition duration-300"
       >
 
         <div class="p-10 md:p-14">
 
           <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-4">
-            Documento destacado
+            Proyecto destacado
           </p>
 
           <h2 class="text-4xl md:text-5xl font-black mb-6">
-            Manual de primeros auxilios
+            Revista STEAMEX
           </h2>
 
           <p class="text-white/70 leading-relaxed mb-10">
-            Un recurso esencial para la seguridad del equipo, con protocolos
-            claros para emergencias médicas durante talleres, eventos y
-            actividades de campo.
+            Una revista mensual hecha por y para la comunidad FIRST en México.
+            Equipos y personas comparten sus proyectos y experiencias.
+            Estamos preparando la primera edición: ¿quieres aparecer?
           </p>
 
-          <a
-            href="/impacto/ingenieria"
-            class="inline-flex items-center gap-3 border border-white/20 px-6 py-4 rounded-full hover:bg-white hover:text-black transition duration-300"
+          <span
+            class="inline-flex items-center gap-3 border border-white/20 px-6 py-4 rounded-full group-hover:bg-white group-hover:text-black transition duration-300"
           >
-            Explorar documentación
-            <span>→</span>
-          </a>
+            Conocer la revista
+            <span class="group-hover:translate-x-1 transition">→</span>
+          </span>
 
         </div>
 
-       <div class="w-full aspect-[3/2] bg-[#2A0836] overflow-hidden">
+        <div class="w-full aspect-[3/2] bg-gradient-to-br from-[#3d2b4a] to-[#2A0836] flex items-center justify-center p-10 text-center">
+          <div>
+            <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-4">
+              Comunidad FIRST · México
+            </p>
+            <p class="text-5xl md:text-6xl font-black leading-none">
+              Revista<br />STEAMEX
+            </p>
+            <p class="mt-6 text-white/60 text-sm uppercase tracking-[0.3em]">
+              Edición 01 · Próximamente
+            </p>
+          </div>
+        </div>
 
-  <img
-    src="/assets/impacto/primeros-auxilios.png"
-    alt="Manual de primeros auxilios"
-    class="w-full h-full object-cover"
-  />
+      </a>
 
-</div>
+      <!-- PRIMEROS AUXILIOS (destacado secundario) -->
+      <div
+        class="mt-8 grid md:grid-cols-3 gap-8 items-center border border-white/10 rounded-[28px] bg-white/5 overflow-hidden opacity-90"
+      >
+
+        <div class="md:col-span-2 p-8 md:p-10">
+
+          <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-3">
+            Documento destacado
+          </p>
+
+          <h3 class="text-3xl md:text-4xl font-black mb-4">
+            Manual de primeros auxilios
+          </h3>
+
+          <p class="text-white/65 leading-relaxed">
+            Un recurso esencial para la seguridad del equipo, con protocolos
+            claros para emergencias médicas durante talleres, eventos y
+            actividades de campo. Próximamente disponible.
+          </p>
+
+        </div>
+
+        <div class="h-full min-h-[220px] bg-[#2A0836] overflow-hidden">
+          <img
+            src="/assets/impacto/primeros-auxilios.png"
+            alt="Manual de primeros auxilios"
+            class="w-full h-full object-cover"
+          />
+        </div>
 
       </div>
 
