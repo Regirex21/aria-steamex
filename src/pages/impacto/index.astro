@@ -51,7 +51,7 @@ const categories = [
 
     <!-- HERO -->
     <section class="relative overflow-hidden border-b border-white/10">
-      
+
       <div class="absolute inset-0 bg-gradient-to-b from-[#2A0836] to-transparent opacity-70"></div>
 
       <div class="container-site py-28 relative z-10">
@@ -60,15 +60,11 @@ const categories = [
           ARIA STEAMEX
         </p>
 
-        <h1
-          class="text-6xl md:text-8xl font-black uppercase leading-none mb-8"
-        >
+        <h1 class="text-6xl md:text-8xl font-black uppercase leading-none mb-8">
           Impacto
         </h1>
 
-        <p
-          class="max-w-2xl text-lg md:text-xl leading-relaxed text-white/70"
-        >
+        <p class="max-w-2xl text-lg md:text-xl leading-relaxed text-white/70">
           Un espacio donde documentamos ingeniería, procesos,
           aprendizaje y desarrollo dentro del equipo.
         </p>
@@ -80,63 +76,57 @@ const categories = [
     <!-- DESTACADOS -->
     <section class="container-site py-24">
 
-      <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-8">
+      <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-10">
         Destacados
       </p>
 
-      <!-- REVISTA (destacado principal) -->
+      <!-- OLYMPUS (destacado principal) -->
       <a
         href="/impacto/revista"
-        class="group grid lg:grid-cols-2 gap-12 items-center border border-white/10 rounded-[32px] bg-white/5 backdrop-blur-md overflow-hidden hover:border-white/25 transition duration-300"
+        class="group grid lg:grid-cols-2 rounded-[32px] border border-white/10 bg-white/5 overflow-hidden hover:border-white/25 transition duration-300"
       >
 
-        <div class="p-10 md:p-14">
+        <div class="order-2 lg:order-1 p-10 md:p-14 flex flex-col justify-center">
 
           <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-4">
-            Proyecto destacado
+            Revista · Comunidad FIRST
           </p>
 
-          <h2 class="text-4xl md:text-5xl font-black mb-6">
-            Revista STEAMEX
+          <h2 class="text-5xl md:text-6xl font-black mb-6 leading-none">
+            Olympus
           </h2>
 
-          <p class="text-white/70 leading-relaxed mb-10">
+          <p class="text-white/70 leading-relaxed mb-10 max-w-md">
             Una revista mensual hecha por y para la comunidad FIRST en México.
             Equipos y personas comparten sus proyectos y experiencias.
             Estamos preparando la primera edición: ¿quieres aparecer?
           </p>
 
-          <span
-            class="inline-flex items-center gap-3 border border-white/20 px-6 py-4 rounded-full group-hover:bg-white group-hover:text-black transition duration-300"
-          >
-            Conocer la revista
+          <span class="inline-flex items-center gap-3 self-start border border-white/20 px-6 py-4 rounded-full group-hover:bg-white group-hover:text-black transition duration-300">
+            Conocer Olympus
             <span class="group-hover:translate-x-1 transition">→</span>
           </span>
 
         </div>
 
-        <div class="w-full aspect-[3/2] bg-gradient-to-br from-[#3d2b4a] to-[#2A0836] flex items-center justify-center p-10 text-center">
-          <div>
-            <p class="text-xs uppercase tracking-[0.4em] text-white/50 mb-4">
-              Comunidad FIRST · México
-            </p>
-            <p class="text-5xl md:text-6xl font-black leading-none">
-              Revista<br />STEAMEX
-            </p>
-            <p class="mt-6 text-white/60 text-sm uppercase tracking-[0.3em]">
-              Edición 01 · Próximamente
-            </p>
-          </div>
+        <div class="order-1 lg:order-2 relative min-h-[280px] lg:min-h-[460px] bg-[#2A0836] overflow-hidden">
+          <img
+            src="/assets/equipo/img-7434.jpg"
+            alt="Olympus · Revista STEAMEX"
+            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <span class="absolute bottom-6 left-6 text-xs uppercase tracking-[0.3em] text-white/70">
+            Edición 01 · Próximamente
+          </span>
         </div>
 
       </a>
 
       <!-- PRIMEROS AUXILIOS (destacado secundario) -->
-      <div
-        class="mt-8 grid md:grid-cols-3 gap-8 items-center border border-white/10 rounded-[28px] bg-white/5 overflow-hidden opacity-90"
-      >
+      <div class="mt-6 grid md:grid-cols-3 rounded-[28px] border border-white/10 bg-white/5 overflow-hidden">
 
-        <div class="md:col-span-2 p-8 md:p-10">
+        <div class="md:col-span-2 p-8 md:p-10 flex flex-col justify-center">
 
           <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-3">
             Documento destacado
@@ -154,11 +144,11 @@ const categories = [
 
         </div>
 
-        <div class="h-full min-h-[220px] bg-[#2A0836] overflow-hidden">
+        <div class="relative min-h-[200px] bg-[#2A0836] overflow-hidden">
           <img
             src="/assets/impacto/primeros-auxilios.png"
             alt="Manual de primeros auxilios"
-            class="w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover"
           />
         </div>
 
@@ -211,9 +201,7 @@ const categories = [
                   Explorar
                 </span>
 
-                <span
-                  class="text-2xl group-hover:translate-x-2 transition duration-300"
-                >
+                <span class="text-2xl group-hover:translate-x-2 transition duration-300">
                   →
                 </span>
 
