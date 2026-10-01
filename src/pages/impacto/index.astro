@@ -124,7 +124,12 @@ const categories = [
       </a>
 
       <!-- PRIMEROS AUXILIOS (destacado secundario) -->
-      <div class="mt-6 grid md:grid-cols-3 rounded-[28px] border border-white/10 bg-white/5 overflow-hidden">
+      <a
+        href="/docs/Manual-Primeros-Auxilios.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group mt-6 grid md:grid-cols-3 rounded-[28px] border border-white/10 bg-white/5 overflow-hidden hover:border-white/25 transition duration-300"
+      >
 
         <div class="md:col-span-2 p-8 md:p-10 flex flex-col justify-center">
 
@@ -136,11 +141,16 @@ const categories = [
             Manual de primeros auxilios
           </h3>
 
-          <p class="text-white/65 leading-relaxed">
+          <p class="text-white/65 leading-relaxed mb-6">
             Un recurso esencial para la seguridad del equipo, con protocolos
             claros para emergencias médicas durante talleres, eventos y
-            actividades de campo. Próximamente disponible.
+            actividades de campo.
           </p>
+
+          <span class="inline-flex items-center gap-3 self-start text-white/60 group-hover:text-white transition">
+            Ver documento
+            <span class="group-hover:translate-x-1 transition">→</span>
+          </span>
 
         </div>
 
@@ -148,11 +158,11 @@ const categories = [
           <img
             src="/assets/impacto/primeros-auxilios.png"
             alt="Manual de primeros auxilios"
-            class="absolute inset-0 w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500"
           />
         </div>
 
-      </div>
+      </a>
 
     </section>
 
