@@ -10,6 +10,13 @@ export const localePairs: [string, string][] = [
   ["/sponsors", "/en/sponsors"],
   ["/contacto", "/en/contact"],
   ["/liderazgo", "/en/leadership"],
+  ["/impacto", "/en/impact"],
+  ["/impacto/procesos", "/en/impact/processes"],
+  ["/impacto/ingenieria", "/en/impact/engineering"],
+  ["/impacto/negocios", "/en/impact/business"],
+  ["/impacto/cads", "/en/impact/cads"],
+  ["/impacto/branding", "/en/impact/visual-identity"],
+  ["/impacto/revista", "/en/impact/magazine"],
   // ACRIS
   ["/acris", "/acris/en"],
   ["/acris/nosotros", "/acris/en/about"],
