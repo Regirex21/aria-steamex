@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../../layouts/baselayout.astro";
+
+const docs = [
+  {
+    title: "Kickoff and Game Analysis",
+    description:
+      "Game analysis process, idea generation, and initial season planning.",
+    image: "/assets/impacto/manual-taller.png",
+    pdf: "/docs/EN-MDP-Kickoff-and-Game-Analysis.pdf",
+  },
+
+  {
+    title: "Modeling and CAD",
+    description:
+      "Modeling workflow, CAD design, and development of digital prototypes.",
+    image: "/assets/impacto/buildseason.png",
+    pdf: "/docs/EN-MDP-Modeling-and-CAD.pdf",
+  },
+
+  {
+    title: "Fabrication and Assembly",
+    description:
+      "Manufacturing processes, assembly techniques, and shop organization.",
+    image: "/assets/impacto/documentacion.png",
+    pdf: "/docs/EN-MDP-Fabrication-and-Assembly.pdf",
+  },
+
+  {
+    title: "Programming and Electronics",
+    description:
+      "Software development, systems integration, and testing processes.",
+    image: "/assets/impacto/scouting.png",
+    pdf: "/docs/EN-MDP-Programming-and-Electronics.pdf",
+  },
+];
+---
+
+<BaseLayout title="Impact | ARIA STEAMEX" lang="en">
+
+  <main class="min-h-screen bg-[#140019] text-white">
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden border-b border-white/10">
+
+      <div class="absolute inset-0 bg-gradient-to-b from-[#2A0836] to-transparent opacity-70"></div>
+
+      <div class="container-site py-28 relative z-10">
+
+        <p class="text-sm tracking-[0.3em] uppercase text-white/50 mb-6">
+          ARIA STEAMEX
+        </p>
+
+        <h1 class="text-6xl md:text-8xl font-black uppercase leading-none mb-8">
+          Impact
+        </h1>
+
+        <p class="max-w-2xl text-lg md:text-xl leading-relaxed text-white/70">
+          A space where we document the engineering, processes, learning,
+          and development behind the team.
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- ENGINEERING PROCESS MANUALS -->
+    <section class="container-site py-20">
+
+      <div class="mb-12">
+        <p class="text-sm uppercase tracking-[0.3em] text-white/40 mb-4">
+          Documentation
+        </p>
+        <h2 class="text-4xl md:text-5xl font-black">
+          Engineering Process Manuals
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+        {
+          docs.map((doc) => (
+            <a
+              href={doc.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group border border-white/10 rounded-[28px] overflow-hidden bg-white/5 hover:bg-white/10 hover:border-white/20 transition duration-300"
+            >
+
+              <div class="aspect-[4/3] overflow-hidden bg-[#2A0836]">
+                <img
+                  src={doc.image}
+                  alt={doc.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                />
+              </div>
+
+              <div class="p-8 flex flex-col justify-between min-h-[240px]">
+                <div>
+                  <h3 class="text-3xl font-black mb-4">{doc.title}</h3>
+                  <p class="text-white/60 leading-relaxed">{doc.description}</p>
+                </div>
+                <div class="flex items-center justify-between mt-10">
+                  <span class="text-white/50 group-hover:text-white transition">
+                    View document
+                  </span>
+                  <span class="text-2xl group-hover:translate-x-2 transition duration-300">
+                    →
+                  </span>
+                </div>
+              </div>
+
+            </a>
+          ))
+        }
+
+      </div>
+
+    </section>
+
+  </main>
+
+</BaseLayout>
