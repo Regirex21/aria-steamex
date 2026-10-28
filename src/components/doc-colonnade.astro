@@ -1,0 +1,36 @@
+---
+// Columnas jonicas que se dibujan con stroke-dashoffset al cargar (decorativas).
+interface Props { n?: number; sub?: boolean; }
+const { n = 6, sub = false } = Astro.props;
+const W = n * 160;
+const cols = Array.from({ length: n }, (_, i) => 80 + i * 160);
+---
+
+<div class="doc-cols-wrap" aria-hidden="true">
+  <div class={sub ? "doc-wrap" : "doc-wrap"}>
+    <svg class:list={["doc-cols", { "doc-cols--sub": sub }]} viewBox={`0 0 ${W} 168`} focusable="false">
+      {
+        cols.map((cx, i) => (
+          <g style={`--c:${i}`}>
+            {/* abaco y capitel */}
+            <path class="d cap" pathLength="1" style="--k:0" d={`M${cx - 42} 12 H${cx + 42} V21 H${cx - 42} Z`} />
+            <circle class="d cap" pathLength="1" style="--k:1" cx={cx - 29} cy="35" r="11" />
+            <circle class="d cap" pathLength="1" style="--k:2" cx={cx + 29} cy="35" r="11" />
+            <circle class="d cap" pathLength="1" style="--k:3" cx={cx - 29} cy="35" r="4.5" />
+            <circle class="d cap" pathLength="1" style="--k:3" cx={cx + 29} cy="35" r="4.5" />
+            <path class="d cap" pathLength="1" style="--k:4" d={`M${cx - 18} 25 Q${cx} 33 ${cx + 18} 25`} />
+            {/* fuste */}
+            <path class="d" pathLength="1" style="--k:5" d={`M${cx - 25} 48 L${cx - 28} 140`} />
+            <path class="d" pathLength="1" style="--k:5" d={`M${cx + 25} 48 L${cx + 28} 140`} />
+            {[-14, -7, 0, 7, 14].map((dx, j) => (
+              <path class="d fl" pathLength="1" style={`--k:${6 + j}`} d={`M${cx + dx} 50 V140`} />
+            ))}
+            {/* base */}
+            <path class="d" pathLength="1" style="--k:11" d={`M${cx - 33} 140 H${cx + 33} V149 H${cx - 33} Z`} />
+            <path class="d" pathLength="1" style="--k:12" d={`M${cx - 40} 149 H${cx + 40} V163 H${cx - 40} Z`} />
+          </g>
+        ))
+      }
+    </svg>
+  </div>
+</div>

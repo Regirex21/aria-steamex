@@ -1,0 +1,84 @@
+---
+import { acrisBrand } from "../config/acris-brand";
+
+const isEnglish = Astro.url.pathname.startsWith("/acris/en");
+
+const t = isEnglish
+  ? {
+      home: "/acris/en",
+      note: "Free, community and mixed FIRST Tech Challenge team in Mexico City, for young people aged 12 to 18.",
+      team: "Team",
+      team_links: [
+        { href: "/acris/en/about", label: "About" },
+        { href: "/acris/en/leadership", label: "Leadership" },
+        { href: "/acris/en/join", label: "Join" },
+      ],
+      res: "Resources",
+      res_links: [
+        { href: "/acris/en/ftc", label: "FTC" },
+        { href: "/sponsors", label: "Sponsors" },
+      ],
+      contact: "Contact",
+      contact_page: "Contact page",
+      other: "Our sister team ARIA STEAMEX",
+      otherHref: "/en",
+      contactHref: "/acris/en/contact",
+      rights: "All rights reserved.",
+    }
+  : {
+      home: "/acris",
+      note: "Equipo comunitario, gratuito y mixto de FIRST Tech Challenge en Ciudad de México, para jóvenes de 12 a 18 años.",
+      team: "Equipo",
+      team_links: [
+        { href: "/acris/nosotros", label: "Nosotros" },
+        { href: "/acris/liderazgo", label: "Liderazgo" },
+        { href: "/acris/unirse", label: "Unirse" },
+      ],
+      res: "Recursos",
+      res_links: [
+        { href: "/acris/ftc", label: "FTC" },
+        { href: "/sponsors", label: "Sponsors" },
+      ],
+      contact: "Contacto",
+      contact_page: "Página de contacto",
+      other: "Nuestro equipo hermano ARIA STEAMEX",
+      otherHref: "/",
+      contactHref: "/acris/contacto",
+      rights: "Todos los derechos reservados.",
+    };
+---
+
+<footer class="footer">
+  <div class="container-site footer-inner">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-logo" href={t.home} aria-label="ACRIS STEAMEX">
+          <span class="mark mark-acris-lanza iso" aria-hidden="true"></span>
+          <span class="mark mark-acris-wm wm" aria-hidden="true"></span>
+        </a>
+        <p class="foot-note">{t.note}</p>
+      </div>
+      <div>
+        <h3>{t.team}</h3>
+        <ul>{t.team_links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>{t.res}</h3>
+        <ul>{t.res_links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>{t.contact}</h3>
+        <ul>
+          <li><a href={t.contactHref}>{t.contact_page}</a></li>
+          <li><a href={`mailto:${acrisBrand.email}`}>{acrisBrand.email}</a></li>
+          <li><a href={acrisBrand.instagramUrl} target="_blank" rel="noopener noreferrer">{acrisBrand.instagram}</a></li>
+          <li><a href={t.otherHref}>{t.other}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>{acrisBrand.name} · {acrisBrand.number}</span>
+      <span>© {new Date().getFullYear()} ACRIS STEAMEX. {t.rights}</span>
+    </div>
+  </div>
+</footer>

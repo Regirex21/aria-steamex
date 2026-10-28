@@ -1,0 +1,48 @@
+﻿---
+/**
+ * Inscripcion.astro  (motivo romano)
+ * Texto en capitales romanas (Cinzel) con tracking, listo para numerales romanos.
+ * Hereda el color del padre; sin degradados.
+ *
+ * Props:
+ *  - as:        "p" | "h2" | "h3" | "span" | "div"   (etiqueta; default "p")
+ *  - size:      "xs" | "sm" | "md" | "lg" | "xl"     (default "md"; xl llega a 3.5rem max)
+ *  - align:     "left" | "center" | "right"          (default "left")
+ *  - numeral:   string   (numeral romano opcional que se antepone, p. ej. "II")
+ *  - engraved:  boolean  (efecto de relieve grabado con sombra fina; default false)
+ *  - weight:    400 | 600 | 700   (default 600)
+ *  - id:        string   (id para aria-labelledby)
+ *  - class:     string
+ * Slot: el texto.
+ */
+import "@fontsource/cinzel/400.css";
+import "@fontsource/cinzel/600.css";
+import "@fontsource/cinzel/700.css";
+interface Props {
+  as?: "p" | "h2" | "h3" | "span" | "div";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  align?: "left" | "center" | "right";
+  numeral?: string;
+  engraved?: boolean;
+  weight?: 400 | 600 | 700;
+  id?: string;
+  class?: string;
+}
+const { as: Tag = "p", size = "md", align = "left", numeral, engraved = false, weight = 600, id, class: cls = "" } = Astro.props;
+---
+
+<Tag id={id} class={`insc insc--${size} ${engraved ? "insc--grabada" : ""} ${cls}`} style={`text-align:${align};font-weight:${weight}`}>
+  {numeral && <span class="insc-num">{numeral}</span>}<slot />
+</Tag>
+
+<style>
+  .insc { font-family: "Cinzel", "Trajan Pro", Georgia, serif; text-transform: uppercase; margin: 0; line-height: 1.25; }
+  .insc--xs { font-size: .72rem; letter-spacing: .26em; }
+  .insc--sm { font-size: .85rem; letter-spacing: .22em; }
+  .insc--md { font-size: 1.1rem; letter-spacing: .14em; }
+  .insc--lg { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem); letter-spacing: .08em; }
+  .insc--xl { font-size: clamp(1.6rem, 1.1rem + 1.7vw, 2.8rem); letter-spacing: .06em; line-height: 1.18; }
+  .insc-num { display: inline-block; margin-right: .7em; padding-right: .7em; border-right: 1px solid currentColor; opacity: .85; }
+  .insc--grabada { text-shadow: 0 -1px 0 rgba(0, 0, 0, .65), 0 1px 0 rgba(255, 230, 190, .16); }
+</style>
+

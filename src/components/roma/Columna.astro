@@ -1,0 +1,46 @@
+---
+/**
+ * Columna.astro  (motivo romano)
+ * Columna toscana (dorica romana) con entasis, base y capitel simples. Linea fina con relleno tenue.
+ * Usa currentColor.
+ *
+ * Props:
+ *  - height: number | string   (alto; numero = px; default 360)
+ *  - fill:   number            (opacidad del relleno 0 a 1; default .08)
+ *  - class:  string            (clase extra)
+ * El ancho sale solo de la proporcion (80 x 380).
+ */
+interface Props {
+  height?: number | string;
+  fill?: number;
+  class?: string;
+}
+const { height = 360, fill = 0.08, class: cls = "" } = Astro.props;
+const h = typeof height === "number" ? `${height}px` : height;
+---
+
+<svg class={`columna ${cls}`} viewBox="0 20 80 380" style={`height:${h};width:auto;aspect-ratio:80/380`} fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <g fill="currentColor" fill-opacity={fill}>
+    <rect x="8" y="24" width="64" height="16" />
+    <path d="M24 62 C22 50 12 48 12 40 L68 40 C68 48 58 50 56 62 Z" />
+    <rect x="24" y="62" width="32" height="8" />
+    <path d="M23 70 C21 150 17 270 18 368 L62 368 C63 270 59 150 57 70 Z" />
+    <rect x="14" y="368" width="52" height="12" rx="5" />
+    <rect x="8" y="380" width="64" height="18" />
+  </g>
+  <rect x="8" y="24" width="64" height="16" />
+  <path d="M24 62 C22 50 12 48 12 40 L68 40 C68 48 58 50 56 62" />
+  <rect x="24" y="62" width="32" height="8" />
+  <line x1="21" y1="70" x2="59" y2="70" />
+  <path d="M23 70 C21 150 17 270 18 368" />
+  <path d="M57 70 C59 150 63 270 62 368" />
+  <path d="M40 74 V364" stroke-opacity=".28" />
+  <path d="M31 74 C30 160 28 280 28 364 M49 74 C50 160 52 280 52 364" stroke-opacity=".2" />
+  <rect x="14" y="368" width="52" height="12" rx="5" />
+  <rect x="8" y="380" width="64" height="18" />
+</svg>
+
+<style>
+  .columna { display: block; flex-shrink: 0; }
+  .columna :global(*) { vector-effect: non-scaling-stroke; }
+</style>

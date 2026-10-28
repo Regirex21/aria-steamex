@@ -13,7 +13,7 @@ export const acrisBrand = {
   instagramUrl: "https://www.instagram.com/acris.steamex/",
   email: "acris.steamex@gmail.com",
   distinction: "Primer y único equipo comunitario gratuito de FTC en la Ciudad de México",
-  tagline: "Crea. Aprende. Innova.",
+  tagline: "Piercing the Limits",
   // Formulario público de alumnos
   formAlumnos: "https://docs.google.com/forms/d/e/1FAIpQLSfSEKvSIU6rPG1F68rVFQUQI6DJiQcTlDYCh86ej_T2PQ1IDQ/viewform?usp=sharing",
   // ACRIS comparte los sponsors de ARIA (no tiene página propia)

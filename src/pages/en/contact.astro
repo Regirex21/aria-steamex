@@ -1,246 +1,213 @@
 ---
 // src/pages/en/contact.astro
-
 import BaseLayout from "../../layouts/baselayout.astro";
-import Navbar from "../../components/navbar.astro";
+
+const email = "ariasteamex@gmail.com";
+const [user, host] = email.split("@");
 ---
 
 <BaseLayout title="Contact | ARIA STEAMEX" lang="en">
+  <main>
 
-
-
-  <main class="overflow-hidden">
-
-    <!-- HERO -->
-    <section class="container-site pt-28 pb-24 text-center relative overflow-hidden">
-
-      <div class="glow-orb w-56 h-56 bg-purple-400/20 top-10 right-20"></div>
-      <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
-
-      <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
-        Contact
-      </p>
-
-      <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
-        Let's talk
-      </h1>
-
-      <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed reveal show">
-        If you want to join, collaborate, sponsor, or learn more about ARIA STEAMEX,
-        this is the best place to start.
-      </p>
-
-    </section>
-
-    <!-- CONTACT OPTIONS -->
-    <section class="container-site pb-28">
-
-      <div class="grid lg:grid-cols-3 gap-6">
-
-        <div class="glass rounded-3xl p-8 reveal">
-
-  <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-    Email
-  </p>
-
-  <h2 class="text-4xl mb-5">
-    Official email
-  </h2>
-
-  <p class="text-white/65 mb-6 leading-relaxed">
-    For partnerships, general questions, press, or formal proposals.
-  </p>
-
-  <div class="flex flex-wrap gap-3">
-
-    <a
-      href="mailto:ariasteamex@gmail.com"
-      class="btn-primary"
-    >
-      Send email
-    </a>
-
-    <button
-      class="btn-secondary copy-email"
-      data-email="ariasteamex@gmail.com"
-    >
-      Copy email
-    </button>
-
-  </div>
-
-</div>
-
-        <div class="glass rounded-3xl p-8 reveal delay-1">
-
-          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-            WhatsApp
-          </p>
-
-          <h2 class="text-4xl mb-5">
-            Head coach
-          </h2>
-
-          <p class="text-white/65 mb-6 leading-relaxed">
-            A quick channel for information, sponsors, or direct questions.
-          </p>
-
-          <a
-  href="https://wa.me/525564876703"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="btn-primary inline-flex"
->
-  Open WhatsApp
-</a>
-
-        </div>
-
-        <div class="glass rounded-3xl p-8 reveal delay-2">
-
-          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-            Social
-          </p>
-
-          <h2 class="text-4xl mb-5">
-            Instagram
-          </h2>
-
-          <p class="text-white/65 mb-6 leading-relaxed">
-            Follow progress, calls for applicants, and team life.
-          </p>
-
-          <a
-            href="https://instagram.com/aria.steamex"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-primary inline-flex"
-          >
-            @aria.steamex
-          </a>
-
-        </div>
-
+    <section class="wrap c-hero">
+      <div class="c-left">
+        <p class="wide">Contact</p>
+        <h1>Let's talk</h1>
+        <p class="lede">If you want to join, collaborate, sponsor, or learn more about ARIA STEAMEX, this is the best place to start.</p>
+        <span class="greca" aria-hidden="true"></span>
       </div>
 
+      <div class="c-right">
+        <p class="wide">Official email</p>
+        <a class="mail" href={"mailto:" + email}>
+          <span>{user}</span>
+          <span class="at">@{host}<svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        </a>
+        <p class="mail-note">For partnerships, general questions, press, or formal proposals.</p>
+        <button type="button" class="btn btn--line copy" data-copy={email} data-done="Email copied">Copy email</button>
+
+        <ul class="rows">
+          <li>
+            <a class="row" href="https://wa.me/525564876703" target="_blank" rel="noopener noreferrer">
+              <span class="wide">WhatsApp</span>
+              <span class="row-t"><strong>Head coach</strong><span>A quick channel for information, sponsors, or direct questions.</span></span>
+              <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="row" href="https://instagram.com/aria.steamex" target="_blank" rel="noopener noreferrer">
+              <span class="wide">Instagram</span>
+              <span class="row-t"><strong>@aria.steamex</strong><span>Progress, calls for applicants, and team life.</span></span>
+              <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <!-- WHAT TO CONTACT FOR -->
-    <section class="container-site pb-28 reveal">
-
-      <div class="rounded-3xl overflow-hidden border border-white/10">
-
-        <div class="bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] p-10 md:p-14">
-
-          <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-5">
-            We can help with
-          </p>
-
-          <h2 class="text-5xl md:text-6xl leading-none mb-8 max-w-5xl">
-            More than questions.
-            <br />
-            Real opportunities.
-          </h2>
-
-          <p class="text-white/72 text-lg max-w-3xl leading-relaxed">
-            We are open to new members, sponsors, media, educational
-            institutions, and strategic partnerships.
-          </p>
-
+    <section class="help on-stone">
+      <div class="wrap help-grid">
+        <div>
+          <p class="wide help-eyebrow">We can help with</p>
+          <h2>More than questions. Real opportunities.</h2>
+          <p class="help-p">We are open to new members, sponsors, media, educational institutions, and strategic partnerships.</p>
         </div>
-
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 bg-black/20">
-
-          <div class="p-8 border-t border-white/10 xl:border-r">
-            <p class="text-3xl mb-3">Join</p>
-            <p class="text-white/60">
-              Admissions process and calls for applicants.
-            </p>
-          </div>
-
-          <div class="p-8 border-t border-white/10 xl:border-r">
-            <p class="text-3xl mb-3">Sponsors</p>
-            <p class="text-white/60">
-              Sponsorships and business collaboration.
-            </p>
-          </div>
-
-          <div class="p-8 border-t border-white/10 xl:border-r">
-            <p class="text-3xl mb-3">Schools</p>
-            <p class="text-white/60">
-              Activations and educational projects.
-            </p>
-          </div>
-
-          <div class="p-8 border-t border-white/10">
-            <p class="text-3xl mb-3">Media</p>
-            <p class="text-white/60">
-              Interviews, press, and outreach.
-            </p>
-          </div>
-
-        </div>
-
+        <ul class="hl">
+          <li>
+            <a class="hl-row" href="/en/join">
+              <span class="hl-n">01</span>
+              <span class="hl-t"><strong>Join</strong><span>Admissions process and calls for applicants.</span></span>
+              <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="hl-row" href="/en/sponsors">
+              <span class="hl-n">02</span>
+              <span class="hl-t"><strong>Sponsors</strong><span>Sponsorships and business collaboration.</span></span>
+              <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="hl-row" href="mailto:ariasteamex@gmail.com?subject=Schools">
+              <span class="hl-n">03</span>
+              <span class="hl-t"><strong>Schools</strong><span>Activations and educational projects.</span></span>
+              <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="hl-row" href="mailto:ariasteamex@gmail.com?subject=Media">
+              <span class="hl-n">04</span>
+              <span class="hl-t"><strong>Media</strong><span>Interviews, press, and outreach.</span></span>
+              <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </li>
+        </ul>
       </div>
-
     </section>
 
-    <!-- FINAL CTA -->
-    <section class="container-site pb-32 reveal">
-
-      <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
-
-        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
-          Next step
-        </p>
-
-        <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
-          Let's start a conversation
-        </h2>
-
-        <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
-          Big opportunities begin with a message.
-        </p>
-
-        <div class="flex flex-wrap gap-4 reveal delay-4">
-
-  <a href="mailto:ariasteamex@gmail.com" class="btn-primary">
-    Send email
-  </a>
-
-  <button
-    class="btn-secondary copy-email"
-    data-email="ariasteamex@gmail.com"
-  >
-    Copy email
-  </button>
-
-  <a href="/en/sponsors" class="btn-secondary">
-    See sponsors
-  </a>
-
-</div>
-
+    <div class="mq" aria-hidden="true">
+      <div class="mq-track">
+        <div class="mq-g"><span>Let's talk</span><i></i><span>Let's talk</span><i></i><span>Let's talk</span><i></i><span>Let's talk</span><i></i><span>Let's talk</span><i></i></div>
+        <div class="mq-g"><span>Let's talk</span><i></i><span>Let's talk</span><i></i><span>Let's talk</span><i></i><span>Let's talk</span><i></i><span>Let's talk</span><i></i></div>
       </div>
+    </div>
 
+    <section class="cta">
+      <div class="wrap cta-in">
+        <div>
+          <h2>Let's start a conversation</h2>
+          <p>Big opportunities begin with a message.</p>
+        </div>
+        <div class="cta-actions">
+          <a href={"mailto:" + email} class="btn">Send email<svg class="arw arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+          <a href="/en/sponsors" class="btn btn--line">See sponsors</a>
+        </div>
+      </div>
     </section>
 
   </main>
 
   <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          }
-        });
-      }, { threshold: 0.15 });
-
-      items.forEach((item) => observer.observe(item));
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var original = b.textContent;
+        var done = function () {
+          b.textContent = b.getAttribute("data-done");
+          setTimeout(function () { b.textContent = original; }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(b.getAttribute("data-copy")).then(done, done);
+        } else { done(); }
+      });
     });
   </script>
-
 </BaseLayout>
+
+<style>
+  .arw { width: 1em; height: 1em; flex: none; transition: transform var(--dur) var(--ease); }
+
+  .c-hero { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s-8); padding-block: var(--s-8) var(--s-9); align-items: start; }
+  .c-left { position: sticky; top: 112px; }
+  .c-left h1 { font-size: clamp(3.4rem, 8vw, 7rem); margin: var(--s-4) 0 var(--s-5); color: var(--cream); }
+  .lede { color: var(--ink-2); font-size: var(--t-lg); max-width: 32ch; }
+  .c-left .greca { margin-top: var(--s-7); height: 24px; max-width: 320px; }
+
+  .mail {
+    position: relative; display: block; margin-top: var(--s-4); padding-bottom: var(--s-4);
+    font-family: var(--font-title); font-size: clamp(2.6rem, 11.5vw, 5.6rem); line-height: 1.02;
+    color: var(--ink); text-decoration: none; overflow-wrap: anywhere;
+  }
+  .mail span { display: block; }
+  .mail .at { color: var(--accent-ink); }
+  .mail .arw { display: inline-block; width: .5em; height: .5em; margin-left: .2em; vertical-align: .05em; transform: rotate(-45deg); }
+  .mail::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent);
+    transform: scaleX(.16); transform-origin: left; transition: transform var(--dur-slow) var(--ease);
+  }
+  .mail:hover::after, .mail:focus-visible::after { transform: scaleX(1); }
+  .mail:hover .arw { transform: rotate(-45deg) translateX(8px); }
+  .mail-note { margin: var(--s-4) 0 var(--s-5); color: var(--ink-2); max-width: 44ch; }
+
+  .rows { list-style: none; margin: var(--s-8) 0 0; padding: 0; border-bottom: 1px solid var(--line-strong); }
+  .row {
+    position: relative; display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) auto; align-items: baseline; gap: var(--s-4);
+    padding: var(--s-5) 0; border-top: 1px solid var(--line-strong); color: var(--ink); text-decoration: none;
+  }
+  .row::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left; transition: transform var(--dur-slow) var(--ease);
+  }
+  .row:hover::before, .row:focus-visible::before { transform: scaleX(1); }
+  .row .wide { color: var(--ink-2); }
+  .row-t { display: grid; gap: var(--s-1); transition: transform var(--dur) var(--ease); }
+  .row-t strong { font: 400 clamp(1.5rem, 3vw, 2.4rem)/1.1 var(--font-title); }
+  .row-t span { color: var(--ink-2); font-size: var(--t-sm); }
+  .row .arw { width: 1.6rem; height: 1.6rem; align-self: center; }
+  .row:hover .row-t { transform: translateX(8px); }
+  .row:hover .arw { transform: translateX(8px); }
+
+  .help { padding-block: var(--s-9); }
+  .help-grid { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s-8); }
+  .help h2 { font-size: var(--t-2xl); margin: var(--s-4) 0 var(--s-5); max-width: 11ch; }
+  .help-p { color: var(--stone-ink-2); max-width: 36ch; font-size: var(--t-lg); }
+  .hl { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid rgba(48, 31, 58, .25); }
+  .hl-row {
+    position: relative; display: grid; grid-template-columns: 3.4rem minmax(0, 1fr) auto; align-items: center; gap: var(--s-4);
+    padding: var(--s-5) 0; border-top: 1px solid rgba(48, 31, 58, .25); color: var(--stone-ink); text-decoration: none;
+  }
+  .hl-row::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--stone-ink);
+    transform: scaleX(0); transform-origin: left; transition: transform var(--dur-slow) var(--ease);
+  }
+  .hl-row:hover::before, .hl-row:focus-visible::before { transform: scaleX(1); }
+  .hl-n { font-family: var(--font-title); font-size: 1.6rem; color: var(--stone-accent); }
+  .hl-t { display: grid; gap: var(--s-1); transition: transform var(--dur) var(--ease); }
+  .hl-t strong { font: 400 clamp(1.9rem, 4vw, 3rem)/1.05 var(--font-title); }
+  .hl-t span { color: var(--stone-ink-2); }
+  .hl-row .arw { width: 1.6rem; height: 1.6rem; }
+  .hl-row:hover .hl-t, .hl-row:hover .arw { transform: translateX(8px); }
+  .help :global(.wide) { color: var(--stone-ink-2); }
+
+  .mq { background: var(--accent); color: var(--on-accent); overflow: hidden; padding-block: var(--s-4); }
+  .mq-track { display: flex; width: max-content; animation: marquee 50s linear infinite; }
+  .mq-g { display: flex; align-items: center; gap: var(--s-6); padding-right: var(--s-6); flex: none; }
+  .mq-g span { font-family: var(--font-title); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1; white-space: nowrap; }
+  .mq-g i { width: 11px; height: 11px; background: currentColor; transform: rotate(45deg); flex: none; }
+
+  .cta { background: var(--brand); padding-block: var(--s-9); }
+  .cta-in { display: grid; grid-template-columns: 1fr auto; gap: var(--s-7); align-items: end; }
+  .cta h2 { font-size: var(--t-2xl); max-width: 14ch; }
+  .cta p { color: var(--ink-2); margin-top: var(--s-4); font-size: var(--t-lg); }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+  @media (max-width: 860px) {
+    .c-hero, .help-grid, .cta-in { grid-template-columns: 1fr; gap: var(--s-6); }
+    .c-left { position: static; }
+    .c-hero { padding-block: var(--s-6) var(--s-8); }
+    .rows { margin-top: var(--s-7); }
+    .row { grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-2) var(--s-4); }
+    .row .wide { grid-column: 1 / -1; }
+    .row .arw { grid-row: 2; grid-column: 2; }
+    .help, .cta { padding-block: var(--s-8); }
+  }
+</style>

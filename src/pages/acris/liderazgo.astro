@@ -1,122 +1,164 @@
 ---
+// src/pages/acris/liderazgo.astro
 import AcrisLayout from "../../layouts/acrislayout.astro";
+import Laurel from "../../components/roma/Laurel.astro";
+import Columna from "../../components/roma/Columna.astro";
+import Mosaico from "../../components/roma/Mosaico.astro";
+import Inscripcion from "../../components/roma/Inscripcion.astro";
 
-const coaches = [
-  {
-    role: "Director Nacional · Project STEAMEX",
-    name: "Abraham Martínez",
-    description:
-      "Dirige la visión institucional de Project STEAMEX y apoya el crecimiento estratégico de iniciativas STEM de alto impacto.",
-    image: "/assets/mentoras/abraham.png",
+const t = {
+  kicker: "Conoce al liderazgo",
+  h1: "Quienes guían el equipo",
+  lede: "Entrenamiento y mentoría comprometidos con formar una nueva generación en STEM.",
+  director: {
+    n: "I", role: "Director Nacional · Project STEAMEX", name: "Abraham Martínez",
+    img: "/assets/mentoras/abraham.png",
+    bio: "Dirige la visión institucional de Project STEAMEX y apoya el crecimiento estratégico de iniciativas STEM de alto impacto.",
   },
-  {
-    role: "Head Coach",
-    name: "Regina Servín",
-    description:
-      "Lidera las áreas técnicas del equipo incluyendo mecánica, programación y documentación. Supervisa procesos de desarrollo, estrategia competitiva y formación técnica interna.",
-    image: "/assets/mentoras/rex.png",
-  },
-  {
-    role: "Coach",
-    name: "Isis Reyes",
-    description:
-      "Encargada de patrocinio, impacto e imagen del equipo. Coordina alianzas, outreach, branding y estrategias de comunicación institucional.",
-    image: "/assets/mentoras/mei.jpeg",
-  },
-];
-
-const mentors = [
-  {
-    area: "Por definir",
-    name: "Por definir",
-    description: "Integrantes por confirmar.",
-    image: "",
-  },
-];
-
-const inicial = (nombre) => (nombre?.trim()?.[0] ?? "?").toUpperCase();
+  coaches: [
+    { n: "II", role: "Coach principal", name: "Regina Servín", img: "/assets/mentoras/rex.png",
+      bio: "Lidera las áreas técnicas del equipo, incluyendo mecánica, programación y documentación. Supervisa los procesos de desarrollo, la estrategia competitiva y la formación técnica interna." },
+    { n: "III", role: "Coach", name: "Isis Reyes", img: "/assets/mentoras/mei.jpeg",
+      bio: "Encargada de patrocinio, impacto e imagen del equipo. Coordina alianzas, difusión comunitaria, imagen de marca y estrategias de comunicación institucional." },
+  ],
+  mentors: { k: "Mentores", h: "Impulsan áreas clave", area: "Área por confirmar", name: "Por confirmar", p: "Integrantes por confirmar." },
+  cta: { h: "¿Quieres apoyar esta misión?", p: "Buscamos mentores y personas aliadas con ganas de construir futuro.", b: "Contactar", href: "/acris/contacto" },
+};
 ---
 
 <AcrisLayout title="Liderazgo | ACRIS STEAMEX">
-  <main class="overflow-hidden">
+  <main>
 
-    <section class="container-site pt-24 pb-20 relative overflow-hidden text-center">
-      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
-      <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">Conoce al liderazgo</p>
-      <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show max-w-5xl mx-auto">
-        Quienes guían el equipo
-      </h1>
-      <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed reveal show">
-        Coaches y mentores comprometidos con formar una nueva generación en STEM.
-      </p>
+    <section class="hero" aria-labelledby="l-title">
+      <div class="wrap hero-in">
+        <div class="hero-laurel" aria-hidden="true"><Laurel variant="corona" size={84} /></div>
+        <Inscripcion size="xs" align="center" class="kick">{t.kicker}</Inscripcion>
+        <h1 id="l-title">{t.h1}</h1>
+        <p class="serif lede">{t.lede}</p>
+      </div>
     </section>
 
-    <!-- COACHES -->
-    <section class="container-site pb-24">
-      <div class="mb-10 reveal">
-        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Coaches</p>
-        <h2 class="serif text-4xl md:text-5xl">Dirección del equipo</h2>
+    <section class="dir marble" aria-label={t.director.name}>
+      <div class="wrap dir-in">
+        <div class="arco-wrap">
+          <div class="arco"><img src={t.director.img} alt={t.director.name} loading="eager" decoding="async" /></div>
+        </div>
+        <div class="who">
+          <Inscripcion size="xs" numeral={t.director.n} class="who-k">{t.director.role}</Inscripcion>
+          <h2>{t.director.name}</h2>
+          <p>{t.director.bio}</p>
+        </div>
       </div>
-      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {coaches.map((c, i) => (
-          <div class={`glass rounded-3xl p-8 reveal delay-${i}`}>
-            <div class="w-full h-[320px] rounded-2xl border edge-bronze mb-6 overflow-hidden flex items-center justify-center"
-              style="background: #250505;">
-              {c.image
-                ? <img src={c.image} alt={c.name} class="w-full h-full object-cover" />
-                : <span class="text-6xl" style="color: var(--accent)">{inicial(c.name)}</span>}
-            </div>
-            <p class="text-sm uppercase tracking-[0.2em] text-white/45 mb-3">{c.role}</p>
-            <h3 class="text-4xl mb-4">{c.name}</h3>
-            <p class="text-white/65 leading-relaxed">{c.description}</p>
-          </div>
+    </section>
+
+    <section class="coaches" aria-label="Coaches">
+      <div class="wrap coaches-in">
+        {t.coaches.map((c, i) => (
+          <>
+            {i === 1 && <div class="col" aria-hidden="true"><Columna height={320} /></div>}
+            <article class="coach">
+              <div class="arco-wrap arco-wrap--s">
+                <div class="arco"><img src={c.img} alt={c.name} loading="eager" decoding="async" /></div>
+              </div>
+              <Inscripcion size="xs" numeral={c.n} class="kick">{c.role}</Inscripcion>
+              <h3>{c.name}</h3>
+              <p>{c.bio}</p>
+            </article>
+          </>
         ))}
       </div>
     </section>
 
-    <!-- MENTORES -->
-    <section class="container-site pb-24">
-      <div class="mb-10 reveal">
-        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Mentores</p>
-        <h2 class="serif text-4xl md:text-5xl">Impulsan áreas clave</h2>
-      </div>
-      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {mentors.map((m) => (
-          <div class="glass rounded-3xl p-6 reveal text-center">
-            <div class="w-full h-[260px] rounded-2xl border edge-bronze mb-6 overflow-hidden flex items-center justify-center"
-              style="background: #250505;">
-              {m.image
-                ? <img src={m.image} alt={m.name} class="w-full h-full object-cover" />
-                : <span class="text-5xl" style="color: var(--accent)">{inicial(m.name)}</span>}
-            </div>
-            <p class="text-xs uppercase tracking-[0.22em] text-white/45 mb-3">{m.area}</p>
-            <h3 class="text-2xl mb-3 leading-none">{m.name}</h3>
-            <p class="text-white/65 text-sm leading-relaxed">{m.description}</p>
-          </div>
-        ))}
+    <section class="mentors" aria-labelledby="m-title">
+      <div class="wrap mentors-in">
+        <div>
+          <Inscripcion size="xs" class="kick">{t.mentors.k}</Inscripcion>
+          <h2 id="m-title">{t.mentors.h}</h2>
+        </div>
+        <div class="nicho">
+          <Inscripcion size="xs" align="center" class="nicho-k">{t.mentors.area}</Inscripcion>
+          <p class="nicho-n">{t.mentors.name}</p>
+          <p class="nicho-p">{t.mentors.p}</p>
+        </div>
       </div>
     </section>
 
-    <section class="container-site pb-32 reveal">
-      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
-        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
-        <h2 class="serif text-4xl md:text-5xl mb-6 leading-tight">¿Quieres apoyar esta misión?</h2>
-        <p class="text-white/75 max-w-2xl mb-8 text-lg">
-          Buscamos mentores y aliados listos para construir futuro.
-        </p>
-        <a href="/acris/contacto" class="btn-primary">Contactar</a>
+    <section class="cta">
+      <div class="wrap cta-in">
+        <h2>{t.cta.h}</h2>
+        <div>
+          <p>{t.cta.p}</p>
+          <a href={t.cta.href} class="btn">{t.cta.b}<svg class="arw arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg></a>
+        </div>
       </div>
+      <div class="cta-band" aria-hidden="true"><Mosaico variant="meandro" size={26} /></div>
     </section>
 
   </main>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
-      }, { threshold: 0.15 });
-      items.forEach((i) => observer.observe(i));
-    });
-  </script>
 </AcrisLayout>
+
+<style>
+  :global(.kick) { color: var(--accent-ink); }
+  .arw { width: 1em; height: 1em; flex: none; transition: transform var(--dur) var(--ease); }
+
+  .hero { background: var(--bg); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .hero-in { display: grid; justify-items: center; text-align: center; }
+  .hero-laurel { color: var(--decor); margin-bottom: var(--s-5); }
+  .hero h1 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); font-size: clamp(2.4rem, 1.6rem + 2.8vw, 3.75rem); line-height: 1.02; margin: var(--s-4) 0 var(--s-5); max-width: 18ch; }
+  .lede { font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); color: var(--ink-2); max-width: 42ch; line-height: 1.45; }
+
+  .marble {
+    background-color: #F5F1EC;
+    background-image:
+      linear-gradient(118deg, transparent 0 22%, rgba(90, 21, 20, .045) 22.1%, transparent 22.5% 71%, rgba(165, 100, 36, .06) 71.1%, transparent 71.6%),
+      radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, .9), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(220, 205, 190, .5), transparent 60%);
+  }
+
+  .arco-wrap { position: relative; width: min(100%, 300px); }
+  .arco-wrap--s { width: min(100%, 240px); margin-bottom: var(--s-5); }
+  .arco { aspect-ratio: 4 / 5; border-radius: 999px 999px 4px 4px; overflow: hidden; background: var(--bg-2); outline: 1px solid var(--decor); outline-offset: 9px; }
+  .arco img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+
+  .dir { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .dir-in { display: grid; grid-template-columns: auto minmax(0, 34rem); gap: var(--s-9); align-items: center; justify-content: center; }
+  .who h2 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.5rem); line-height: 1.02; margin: var(--s-4) 0; color: var(--stone-ink); }
+  .who p { color: var(--stone-ink-2); font-size: var(--t-lg); max-width: 44ch; }
+  :global(.who-k) { color: var(--stone-accent); }
+
+  .coaches { background: var(--black-red); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .coaches-in { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: var(--s-8); align-items: start; }
+  .col { color: var(--decor); align-self: center; opacity: .6; }
+  .coach { display: flex; flex-direction: column; align-items: flex-start; }
+  .coach h3 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); font-size: clamp(1.8rem, 1.3rem + 1.5vw, 2.6rem); line-height: 1.05; margin: var(--s-3) 0 var(--s-3); }
+  .coach p { color: var(--ink-2); max-width: 40ch; }
+
+  .mentors { background: var(--bg); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .mentors-in { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s-8); align-items: center; }
+  .mentors h2 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.5rem); line-height: 1.02; margin-top: var(--s-4); max-width: 14ch; }
+  .nicho { width: min(100%, 22rem); justify-self: center; padding: calc(var(--s-9) - .5rem) var(--s-6) var(--s-7); border: 1px dashed rgba(165, 100, 36, .85); border-radius: 999px 999px 4px 4px; text-align: center; background: var(--bg-2); }
+  :global(.nicho-k) { color: var(--ink-2); }
+  .nicho-n { font-family: var(--font-title); text-transform: var(--title-transform); font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.1rem); line-height: 1.1; margin: var(--s-3) 0 var(--s-2); color: var(--accent-ink); }
+  .nicho-p { color: var(--ink-2); margin: 0; }
+
+  .cta { background: var(--brand); color: #fff; padding-top: clamp(4.5rem, 9vw, 8rem); }
+  .cta-in { display: grid; grid-template-columns: 7fr 5fr; gap: var(--s-7); align-items: center; padding-bottom: clamp(4.5rem, 9vw, 8rem); }
+  .cta h2 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.5rem); line-height: 1.02; max-width: 16ch; }
+  .cta p { font-size: var(--t-lg); margin-bottom: var(--s-5); max-width: 34ch; }
+  .cta .btn { --btn-bg: #0A0102; --btn-ink: #fff; --btn-fill: var(--gold); --btn-fill-ink: #0A0102; }
+  .cta-band { background: var(--bg); color: var(--decor); padding-block: 9px; border-top: 1px solid rgba(165, 100, 36, .5); }
+
+  @media (max-width: 960px) {
+    .coaches-in { grid-template-columns: 1fr; gap: var(--s-8); }
+    .col { display: none; }
+  }
+  @media (max-width: 860px) {
+    .hero { padding-block: var(--s-8) var(--s-7); }
+    .dir, .coaches, .mentors { padding-block: var(--s-8); }
+    .dir-in, .mentors-in, .cta-in { grid-template-columns: 1fr; gap: var(--s-7); }
+    .dir-in { justify-items: center; }
+    .who { justify-self: start; }
+    .cta { padding-top: var(--s-8); }
+    .cta-in { padding-bottom: var(--s-8); }
+  }
+</style>

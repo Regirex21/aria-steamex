@@ -1,60 +1,122 @@
 ---
+// src/pages/acris/en/join.astro
 import AcrisLayout from "../../../layouts/acrislayout.astro";
+import Laurel from "../../../components/roma/Laurel.astro";
+import Mosaico from "../../../components/roma/Mosaico.astro";
+import Inscripcion from "../../../components/roma/Inscripcion.astro";
 import { acrisBrand } from "../../../config/acris-brand";
-
-const steps = [
-  { title: "Fill out the form", desc: "Tell us about yourself, your interests, and your experience." },
-  { title: "We contact you", desc: "We review your application and reach out to you." },
-  { title: "Meet the team", desc: "You join ACRIS activities and areas." },
-];
 ---
 
 <AcrisLayout title="Join | ACRIS STEAMEX" lang="en">
-  <main class="overflow-hidden">
+  <main>
 
-    <section class="container-site pt-24 pb-20 relative overflow-hidden text-center">
-      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
-      <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">Recruitment</p>
-      <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show max-w-5xl mx-auto">Join ACRIS</h1>
-      <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed reveal show">
-        We're looking for youth ages 12 to 18 eager to learn, build, and compete.
-      </p>
-    </section>
-
-    <section class="container-site pb-24">
-      <div class="grid md:grid-cols-3 gap-6">
-        {steps.map((p, i) => (
-          <div class={`glass rounded-3xl p-8 reveal delay-${i}`}>
-            <p class="text-sm text-white/40 mb-6">Step 0{i + 1}</p>
-            <h3 class="text-2xl mb-4">{p.title}</h3>
-            <p class="text-white/65 leading-relaxed">{p.desc}</p>
-          </div>
-        ))}
+    <section class="uh">
+      <div class="wrap uh-in">
+        <div>
+          <Inscripcion size="xs" class="k-gold">Recruitment</Inscripcion>
+          <h1 class="pg-h1">Join ACRIS</h1>
+          <p class="pg-lede">We're looking for youth ages 12 to 18 eager to learn, build, and compete.</p>
+          <Inscripcion as="p" size="md" class="uh-age">Ages 12 to 18 · free</Inscripcion>
+        </div>
+        <div class="uh-seal" aria-hidden="true"><Inscripcion size="xs" align="center" class="uh-sk">FTC</Inscripcion><Inscripcion size="xl" align="center" class="uh-sn">35735</Inscripcion></div>
       </div>
     </section>
 
-    <section class="container-site pb-32 reveal">
-      <div class="rounded-3xl p-10 md:p-16 border edge-bronze text-center"
-        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
-        <h2 class="serif text-4xl md:text-6xl mb-6 leading-tight">Applicant form</h2>
-        <p class="text-white/75 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
-          The process is simple and free. Fill out the form and we'll get in touch with you.
-        </p>
-        <a href={acrisBrand.formAlumnos} target="_blank" rel="noopener noreferrer" class="btn-primary text-lg">
-          Open form →
-        </a>
+    <section class="uc" aria-labelledby="steps-title">
+      <div class="wrap uc-in">
+        <div class="uc-head">
+          <Inscripcion size="xs" class="uc-k">How it works</Inscripcion>
+          <h2 id="steps-title" class="pg-title">Three steps</h2>
+          <p>The process is simple and free.</p>
+        </div>
+        <div class="uc-body">
+          <div class="uc-rail" aria-hidden="true"><Mosaico variant="rombos" direction="v" size={20} /></div>
+          <ol class="uc-list">
+            <li>
+              <Inscripcion as="span" size="xl" class="uc-n">I</Inscripcion>
+              <div><h3>Fill out the form</h3><p>Tell us about yourself, your interests, and your experience.</p></div>
+            </li>
+            <li>
+              <Inscripcion as="span" size="xl" class="uc-n">II</Inscripcion>
+              <div><h3>We contact you</h3><p>We review your application and reach out to you.</p></div>
+            </li>
+            <li>
+              <Inscripcion as="span" size="xl" class="uc-n">III</Inscripcion>
+              <div><h3>Meet the team</h3><p>You join ACRIS activities and areas.</p></div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="uf" aria-labelledby="form-title">
+      <div class="wrap">
+        <div class="uf-slab on-stone marble">
+          <div class="uf-in">
+            <span class="uf-laurel" aria-hidden="true"><Laurel variant="corona" size={64} /></span>
+            <Inscripcion as="h2" id="form-title" size="lg" align="center" class="uf-title">Applicant form</Inscripcion>
+            <p>Fill out the form and we will get in touch with you.</p>
+            <a href={acrisBrand.formAlumnos} target="_blank" rel="noopener noreferrer" class="btn">Open form<svg class="arw arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg></a>
+            <p class="uf-mail">Questions? Write to us at <a href={"mailto:" + acrisBrand.email}>{acrisBrand.email}</a></p>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
-      }, { threshold: 0.15 });
-      items.forEach((i) => observer.observe(i));
-    });
-  </script>
 </AcrisLayout>
+
+<style>
+  .arw { width: 1em; height: 1em; flex: none; }
+  :global(.k-gold) { color: var(--accent-ink); }
+  :global(.k-stone) { color: var(--stone-ink-2); }
+  .pg-h1 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.02; font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem); margin: var(--s-4) 0 var(--s-5); }
+  .pg-title { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.04; font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.5rem); margin: var(--s-4) 0 var(--s-5); }
+  .pg-lede { font-family: var(--font-serif); font-size: clamp(1.15rem, 1.02rem + .55vw, 1.4rem); line-height: 1.5; color: var(--ink-2); max-width: 40ch; }
+  .band { background: var(--bg); color: var(--decor); padding-block: 9px; border-block: 1px solid rgba(165, 100, 36, .5); }
+  .band--gold { background: var(--black-red); color: var(--accent-ink); --mos-ink: var(--black-red); }
+  .marble {
+    background-color: #F5F1EC;
+    background-image:
+      linear-gradient(118deg, transparent 0 22%, rgba(90, 21, 20, .045) 22.1%, transparent 22.5% 71%, rgba(165, 100, 36, .06) 71.1%, transparent 71.6%),
+      radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, .9), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(220, 205, 190, .5), transparent 60%);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+  .uh { background: var(--bg); padding-block: clamp(4rem, 8vw, 7rem); }
+  .uh-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8); align-items: center; }
+  :global(.uh-age) { color: var(--accent-ink); margin-top: var(--s-6); display: inline-block; padding-block: var(--s-3); border-block: 1px solid rgba(165, 100, 36, .6); }
+  .uh-seal { display: grid; justify-items: center; gap: var(--s-2); padding: var(--s-6) var(--s-8); border-block: 1px solid rgba(165, 100, 36, .6); margin-right: clamp(0rem, 5vw, 5rem); }
+  :global(.uh-sk) { color: var(--accent-ink); }
+  :global(.uh-sn) { color: var(--ink); }
+
+  .uc { background: var(--red-dark); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .uc-in { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--s-9); align-items: start; }
+  :global(.uc-k) { color: #fff; }
+  .uc-head p { color: var(--ink-2); max-width: 30ch; }
+  .uc-body { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: var(--s-6); }
+  .uc-rail { color: var(--decor); opacity: .6; --mos-ink: var(--red-dark); align-self: stretch; min-height: 100%; }
+  .uc-list { list-style: none; margin: 0; padding: 0; }
+  .uc-list li { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: var(--s-5); align-items: baseline; padding-block: var(--s-6); border-top: 1px solid rgba(224, 178, 90, .35); }
+  .uc-list li:first-child { border-top: 0; padding-top: 0; }
+  :global(.uc-n) { color: var(--accent-ink); }
+  .uc-list h3 { font-size: clamp(1.4rem, 1.15rem + .7vw, 1.8rem); text-transform: uppercase; margin: 0 0 var(--s-2); }
+  .uc-list p { color: var(--ink-2); max-width: 44ch; }
+
+  .uf { background: var(--black-red); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .uf-slab { max-width: 44rem; margin-inline: auto; color: var(--stone-ink); box-shadow: inset 0 0 0 9px #F5F1EC, inset 0 0 0 10px rgba(138, 90, 44, .6), 0 30px 60px -30px rgba(0, 0, 0, .8); padding: 9px; }
+  .uf-in { display: grid; justify-items: center; text-align: center; gap: var(--s-4); padding: var(--s-6) clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 3.5rem); }
+  .uf-laurel { color: #8a5a2c; opacity: .75; }
+  :global(.uf-title) { color: var(--stone-ink); }
+  .uf-in p { color: var(--stone-ink-2); max-width: 36ch; margin: 0 0 var(--s-2); }
+  .uf-in .uf-mail { font-size: var(--t-sm); margin: var(--s-3) 0 0; overflow-wrap: anywhere; }
+  .uf-mail a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 860px) {
+    .uh-in, .uc-in { grid-template-columns: 1fr; gap: var(--s-7); }
+    .uh-seal { justify-self: start; margin-right: 0; }
+    .uc-body { grid-template-columns: 14px minmax(0, 1fr); gap: var(--s-4); }
+    .uc-list li { grid-template-columns: 3rem minmax(0, 1fr); gap: var(--s-3); }
+  }
+</style>

@@ -1,0 +1,770 @@
+---
+/**
+ * Heroe ARIA STEAMEX: buho de cristal en una escena 3D real (perspective + preserve-3d)
+ * con un aro de greca y tres tarjetas que lo rodean: por detras el buho las tapa y por
+ * delante pasan por debajo de su silueta, sin cruzarla.
+ *
+ * Props:
+ *   lang       "es" | "en"
+ *   joinHref   destino del CTA principal (por defecto "#unirse")
+ *   moreHref   destino del CTA secundario (por defecto "#artemis")
+ *
+ * Montaje: <AriaHero lang={lang} />  (en la portada de ARIA, justo bajo la navbar)
+ */
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+interface Props {
+  lang?: "es" | "en";
+  joinHref?: string;
+  moreHref?: string;
+}
+const { lang = "es", joinHref = "#unirse", moreHref = "#artemis" } = Astro.props;
+
+const copy = {
+  es: {
+    aria: "ARIA STEAMEX, equipo FRC 11040",
+    title: "La robótica como oportunidad, no como privilegio.",
+    lead: "Somos ARIA STEAMEX, el equipo 11040 de FIRST Robotics Competition y el primer equipo comunitario de México formado solo por mujeres. Nacimos en 2025 y debutamos en 2026 con ARTEMIS, nuestro robot para la temporada REBUILT.",
+    join: "Únete a ARIA",
+    more: "Conoce a ARTEMIS",
+    metaProgram: "Programa",
+    metaProgramV: "FIRST Robotics Competition",
+    metaTeam: "Equipo",
+    metaTeamV: "FRC 11040",
+    metaCity: "Ciudad",
+    metaCityV: "Ciudad de México",
+    cards: [
+      { k: "FRC", v: "Equipo #11040" },
+      { k: "Robot 2026", v: "ARTEMIS, REBUILT" },
+      { k: "Olympus", v: "Revista mensual" },
+    ],
+  },
+  en: {
+    aria: "ARIA STEAMEX, FRC team 11040",
+    title: "Robotics as an opportunity, not a privilege.",
+    lead: "We are ARIA STEAMEX, FIRST Robotics Competition team 11040 and the first community team in Mexico made up entirely of women. We were founded in 2025 and made our debut in 2026 with ARTEMIS, our robot for the REBUILT season.",
+    join: "Join ARIA",
+    more: "Meet ARTEMIS",
+    metaProgram: "Program",
+    metaProgramV: "FIRST Robotics Competition",
+    metaTeam: "Team",
+    metaTeamV: "FRC 11040",
+    metaCity: "City",
+    metaCityV: "Mexico City",
+    cards: [
+      { k: "FRC", v: "Team #11040" },
+      { k: "2026 robot", v: "ARTEMIS, REBUILT" },
+      { k: "Olympus", v: "Monthly magazine" },
+    ],
+  },
+}[lang === "en" ? "en" : "es"];
+
+// Silueta del isotipo oficial (un solo path), leida al construir.
+let owlD = "";
+try {
+  const svg = readFileSync(join(process.cwd(), "public/assets/brand/aria-isotipo.svg"), "utf8");
+  owlD = /<path[^>]*\sd="([^"]+)"/.exec(svg)?.[1] ?? "";
+} catch {
+  owlD = "";
+}
+
+// Greca clasica con gancho (unidad de 10 x 16) repetida en anillo, como en el mockup aprobado.
+const N = 48;
+const rMid = 90;
+const sc = (2 * Math.PI * rMid) / N / 10;
+const meander = Array.from(
+  { length: N },
+  (_, i) =>
+    `<use href="#ariaHero-unit" transform="rotate(${((i * 360) / N).toFixed(3)}) translate(0 ${(-(rMid + 8 * sc)).toFixed(3)}) scale(${sc.toFixed(4)})"/>`,
+).join("");
+
+// Cada tarjeta: fase (fraccion de vuelta) y angulo fijo para movimiento reducido.
+const slots = [
+  { p: 0, s: -64 },
+  { p: 1 / 3, s: 0 },
+  { p: 2 / 3, s: 64 },
+];
+const extrusion = [-6, -12, -18];
+---
+
+<section class="ariaHero" data-ariahero aria-labelledby="ariaHero-title" lang={lang}>
+  <!-- Definiciones compartidas: silueta, degradados, filtro de cristal y greca -->
+  <svg class="ariaHero-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="ariaHero-owl" d={owlD} fill-rule="evenodd"></path>
+
+      <linearGradient id="ariaHero-fill" x1="0.1" y1="0" x2="0.9" y2="1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0.34"></stop>
+        <stop offset="0.28" stop-color="#f4ecff" stop-opacity="0.2"></stop>
+        <stop offset="0.6" stop-color="#c9b6f6" stop-opacity="0.15"></stop>
+        <stop offset="1" stop-color="#6f5a96" stop-opacity="0.34"></stop>
+      </linearGradient>
+      <linearGradient id="ariaHero-deep" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#b9a4ec" stop-opacity="0.2"></stop>
+        <stop offset="1" stop-color="#4a3a68" stop-opacity="0.3"></stop>
+      </linearGradient>
+      <linearGradient id="ariaHero-caustic" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#c9b6f6"></stop>
+        <stop offset="0.55" stop-color="#ff9ec7"></stop>
+        <stop offset="1" stop-color="#ffe2a8"></stop>
+      </linearGradient>
+
+      <!-- Bisel de vidrio: alfa difuminada como mapa de alturas + luz desde arriba a la izquierda.
+           Es un filtro estatico (no se anima): solo se mueven las capas que lo contienen. -->
+      <filter id="ariaHero-glass" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="h"></feGaussianBlur>
+        <feSpecularLighting in="h" surfaceScale="13" specularConstant="1.25" specularExponent="26" lighting-color="#ffffff" result="spec">
+          <feDistantLight azimuth="225" elevation="38"></feDistantLight>
+        </feSpecularLighting>
+        <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"></feComposite>
+        <feDiffuseLighting in="h" surfaceScale="13" diffuseConstant="1.1" lighting-color="#d8c8ff" result="diff">
+          <feDistantLight azimuth="225" elevation="52"></feDistantLight>
+        </feDiffuseLighting>
+        <feComposite in="diff" in2="SourceAlpha" operator="in" result="diffIn"></feComposite>
+        <feComponentTransfer in="diffIn" result="diffT">
+          <feFuncA type="linear" slope="0.4"></feFuncA>
+        </feComponentTransfer>
+
+        <!-- borde interior claro (arriba-izquierda) y sombra interior (abajo-derecha) -->
+        <feOffset in="SourceAlpha" dx="11" dy="13" result="o1"></feOffset>
+        <feComposite in="SourceAlpha" in2="o1" operator="out" result="rimL"></feComposite>
+        <feGaussianBlur in="rimL" stdDeviation="2.4" result="rimLb"></feGaussianBlur>
+        <feFlood flood-color="#fff6dc" flood-opacity="0.95"></feFlood>
+        <feComposite in2="rimLb" operator="in" result="rimLight"></feComposite>
+
+        <feOffset in="SourceAlpha" dx="-10" dy="-12" result="o2"></feOffset>
+        <feComposite in="SourceAlpha" in2="o2" operator="out" result="rimD"></feComposite>
+        <feGaussianBlur in="rimD" stdDeviation="3.2" result="rimDb"></feGaussianBlur>
+        <feFlood flood-color="#4a3a68" flood-opacity="0.6"></feFlood>
+        <feComposite in2="rimDb" operator="in" result="rimDark"></feComposite>
+
+        <!-- dispersion cromatica leve en los bordes -->
+        <feOffset in="rimLb" dx="7" dy="5" result="dispA"></feOffset>
+        <feFlood flood-color="#ff8fc0" flood-opacity="0.5"></feFlood>
+        <feComposite in2="dispA" operator="in" result="pinkA"></feComposite>
+        <feComposite in="pinkA" in2="SourceAlpha" operator="in" result="pink"></feComposite>
+        <feOffset in="rimDb" dx="-7" dy="-5" result="dispB"></feOffset>
+        <feFlood flood-color="#8cc8ff" flood-opacity="0.5"></feFlood>
+        <feComposite in2="dispB" operator="in" result="cyanA"></feComposite>
+        <feComposite in="cyanA" in2="SourceAlpha" operator="in" result="cyan"></feComposite>
+
+        <feMerge>
+          <feMergeNode in="diffT"></feMergeNode>
+          <feMergeNode in="rimDark"></feMergeNode>
+          <feMergeNode in="cyan"></feMergeNode>
+          <feMergeNode in="pink"></feMergeNode>
+          <feMergeNode in="rimLight"></feMergeNode>
+          <feMergeNode in="specIn"></feMergeNode>
+        </feMerge>
+      </filter>
+
+      <!-- Aro de greca -->
+      <path id="ariaHero-unit" d="M-5 13H5M-4 13V3.4H3.6V10.6H-1.2V6H1.4" fill="none" vector-effect="non-scaling-stroke"></path>
+      <path id="ariaHero-annulus" fill-rule="evenodd" d="M-100 0a100 100 0 1 0 200 0a100 100 0 1 0 -200 0Z M-80 0a80 80 0 1 0 160 0a80 80 0 1 0 -160 0Z"></path>
+      <radialGradient id="ariaHero-aroG" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0.8" stop-color="#c9b6f6" stop-opacity="0.04"></stop>
+        <stop offset="0.9" stop-color="#f4ecff" stop-opacity="0.2"></stop>
+        <stop offset="1" stop-color="#9882bc" stop-opacity="0.3"></stop>
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <div class="ariaHero-head" aria-hidden="true">
+    <div class="ariaHero-side ariaHero-side--l"><i class="ariaHero-dia"></i><i class="ariaHero-rule"></i><svg class="ariaHero-greca " viewBox="0 3 60 11" aria-hidden="true">{[0,1,2,3,4,5].map((i) => <use href="#ariaHero-unit" transform={`translate(${5 + i * 10} 0)`}></use>)}</svg></div>
+    <p class="ariaHero-word">ARIA</p>
+    <div class="ariaHero-side ariaHero-side--r"><i class="ariaHero-dia"></i><i class="ariaHero-rule"></i><svg class="ariaHero-greca " viewBox="0 3 60 11" aria-hidden="true">{[0,1,2,3,4,5].map((i) => <use href="#ariaHero-unit" transform={`translate(${5 + i * 10} 0)`}></use>)}</svg></div>
+    <p class="ariaHero-tag">STEAMEX · FRC 11040</p>
+  </div>
+
+  <div class="ariaHero-stage">
+    <div class="ariaHero-halo" aria-hidden="true"></div>
+    <div class="ariaHero-backlight" aria-hidden="true"></div>
+
+    <!-- Escena 3D: buho + aro + tarjetas comparten el mismo contexto de perspectiva -->
+    <div class="ariaHero-world" role="img" aria-label={copy.aria}>
+      <div class="ariaHero-rig">
+        <div class="ariaHero-owlPos">
+          <div class="ariaHero-owl">
+            <!-- sombra de color proyectada sobre el fondo (caustica) -->
+            <div class="ariaHero-ol ariaHero-caustic" style="--z:-70px">
+              <svg viewBox="0 0 1914 1524" preserveAspectRatio="xMidYMid meet"><use href="#ariaHero-owl" fill="url(#ariaHero-caustic)"></use></svg>
+            </div>
+            <!-- refraccion: la palabra del fondo vista a traves del cristal, ampliada y desplazada -->
+            <div class="ariaHero-ol ariaHero-refr" style="--z:-14px"><span></span></div>
+            <!-- grosor: tres capas de extrusion muy sutiles -->
+            {extrusion.map((z) => (
+              <div class="ariaHero-ol ariaHero-ext" style={`--z:${z}px`}>
+                <svg viewBox="0 0 1914 1524" preserveAspectRatio="xMidYMid meet"><use href="#ariaHero-owl" fill="url(#ariaHero-deep)"></use></svg>
+              </div>
+            ))}
+            <!-- cuerpo de cristal: relleno traslucido + bisel iluminado -->
+            <div class="ariaHero-ol" style="--z:0px">
+              <svg viewBox="0 0 1914 1524" preserveAspectRatio="xMidYMid meet">
+                <use href="#ariaHero-owl" fill="url(#ariaHero-fill)"></use>
+                <use href="#ariaHero-owl" fill="#000" filter="url(#ariaHero-glass)"></use>
+              </svg>
+            </div>
+            <!-- reflejos que se desplazan despacio -->
+            <div class="ariaHero-ol ariaHero-refl" style="--z:2px"><i></i><i></i></div>
+          </div>
+        </div>
+
+        <!-- Aro y tarjetas, en un anillo inclinado -->
+        <div class="ariaHero-ring" aria-hidden="true">
+          <div class="ariaHero-aroPlane">
+            <div class="ariaHero-aroSpin">
+              <svg class="ariaHero-aroL ariaHero-aroSlab" style="--z:-7px" viewBox="-102 -102 204 204"><use href="#ariaHero-annulus" fill="rgba(48,31,58,0.7)"></use></svg>
+              <svg class="ariaHero-aroL ariaHero-aroSlab" style="--z:-3.5px" viewBox="-102 -102 204 204"><use href="#ariaHero-annulus" fill="rgba(110,92,150,0.5)" stroke="rgba(232,207,160,0.4)" stroke-width="0.5"></use></svg>
+              <svg class="ariaHero-aroL ariaHero-aroFace" style="--z:0px" viewBox="-102 -102 204 204">
+                <use href="#ariaHero-annulus" fill="url(#ariaHero-aroG)"></use>
+                <circle r="99.6" fill="none" stroke="rgba(232,207,160,0.8)" stroke-width="1.6" vector-effect="non-scaling-stroke"></circle>
+                <circle r="80.4" fill="none" stroke="rgba(201,182,246,0.7)" stroke-width="1.4" vector-effect="non-scaling-stroke"></circle>
+                <g class="ariaHero-meander" set:html={meander}></g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="ariaHero-spin">
+            {copy.cards.map((c, n) => (
+              <div class="ariaHero-anchor" style={`--p:${slots[n].p.toFixed(4)};--as:${slots[n].s}deg`}>
+                <div class="ariaHero-counter">
+                  <span class="ariaHero-card" style={`--tz:${[-3, 2, -2][n]}deg`}><b>{c.k}</b>{c.v}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ariaHero-wrap ariaHero-copy">
+    <div>
+      <h1 id="ariaHero-title" class="ariaHero-title">{copy.title}</h1>
+      <p class="ariaHero-lead">{copy.lead}</p>
+      <div class="ariaHero-actions">
+        <a class="ariaHero-btn" href={joinHref}>{copy.join}<span aria-hidden="true">&rarr;</span></a>
+        <a class="ariaHero-btn ariaHero-btn--line" href={moreHref}>{copy.more}</a>
+      </div>
+    </div>
+    <dl class="ariaHero-meta">
+      <dt>{copy.metaProgram}</dt><dd>{copy.metaProgramV}</dd>
+      <dt>{copy.metaTeam}</dt><dd>{copy.metaTeamV}</dd>
+      <dt>{copy.metaCity}</dt><dd>{copy.metaCityV}</dd>
+    </dl>
+  </div>
+</section>
+
+<script>
+  // Parallax suave de toda la escena con el mouse (solo desktop, sin haz de luz)
+  // y pausa de las animaciones cuando el heroe sale de pantalla.
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+  document.querySelectorAll<HTMLElement>("[data-ariahero]").forEach((root) => {
+    const stage = root.querySelector<HTMLElement>(".ariaHero-stage");
+    if (!stage) return;
+    stage.addEventListener("pointermove", (e) => {
+      if (mq.matches || !fine.matches) return;
+      const r = stage.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      root.style.setProperty("--mx", x.toFixed(3));
+      root.style.setProperty("--my", y.toFixed(3));
+    });
+    stage.addEventListener("pointerleave", () => {
+      root.style.setProperty("--mx", "0");
+      root.style.setProperty("--my", "0");
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([en]) => {
+        if (en.isIntersecting) root.removeAttribute("data-paused");
+        else root.setAttribute("data-paused", "");
+      }).observe(stage);
+    }
+  });
+</script>
+
+<style is:global>
+  .ariaHero {
+    --ariaHero-bg: #301f3a;
+    --ariaHero-ink: #f4ecff;
+    --ariaHero-ink2: #d9cdeb;
+    --ariaHero-lav: #c9b6f6;
+    --ariaHero-lav2: #9882bc;
+    --ariaHero-cream: #fff6dc;
+    --ariaHero-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --wfs: clamp(3.75rem, 15vw, 13.5rem);
+    --headH: calc(var(--wfs) * 0.86 + 34px);
+    --ariaHero-mask: url("/assets/brand/aria-isotipo.svg");
+
+    /* Geometria (todo en funcion de W, el ancho del buho) */
+    --ch: 92px; /* media anchura de una tarjeta */
+    --cv: 28px; /* media altura de una tarjeta */
+    --W: min(clamp(170px, 31vw, 460px), calc((50vw - 10px - var(--ch) * 2.1) / 0.6), calc((100svh - var(--hero-top, 96px) - var(--headH) - 24px) / 1.5));
+    --TH: 32deg; /* inclinacion del anillo */
+    --sinT: 0.53;
+    --kR: 0.56;
+    --kC: 1.1;
+    --R: calc(var(--W) * var(--kR) + var(--ch) * var(--kC) + 8px); /* radio del anillo */
+    --dy: calc(var(--W) * 0.1 + 10px); /* el anillo se desplaza hacia abajo: atras tapa el buho, adelante pasa por debajo */
+    --oy: calc(var(--W) * 0.4 + 44px); /* centro del buho desde el borde superior del escenario */
+    --pd: calc(var(--W) * 3.6); /* perspectiva */
+    --T: 40s;
+
+    --mx: 0;
+    --my: 0;
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--hero-top, 96px);
+    color: var(--ariaHero-ink);
+    background: radial-gradient(120% 70% at 50% 30%, #3e2a4c 0%, var(--ariaHero-bg) 62%);
+    font-family: var(--font-body, "Poppins", system-ui, sans-serif);
+  }
+  .ariaHero *,
+  .ariaHero *::before,
+  .ariaHero *::after { box-sizing: border-box; }
+  .ariaHero-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  .ariaHero-stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    height: calc(var(--oy) + (var(--dy) + var(--R) * 1.12 * var(--sinT)) * 1.34 + var(--cv) * 1.4 + 34px);
+    min-height: max(320px, calc(100svh - var(--hero-top, 96px) - var(--headH) - 0.5rem));
+    margin-top: 0.5rem;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 56px);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 56px);
+  }
+  .ariaHero-head {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(0.75rem, 2vw, 2rem);
+  }
+  .ariaHero-side {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+    color: rgba(232, 207, 160, 0.8);
+  }
+  .ariaHero-side--l { flex-direction: row-reverse; }
+  .ariaHero-rule {
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+    animation: ariaHero-draw 1.4s var(--ariaHero-ease) 0.2s both;
+  }
+  .ariaHero-side--l .ariaHero-rule { transform-origin: 100% 50%; background: linear-gradient(to left, currentColor, rgba(232, 207, 160, 0)); }
+  .ariaHero-side--r .ariaHero-rule { transform-origin: 0 50%; background: linear-gradient(to right, currentColor, rgba(232, 207, 160, 0)); }
+  .ariaHero-dia {
+    order: 3;
+    flex: none;
+    width: 7px;
+    height: 7px;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
+  .ariaHero-side--r .ariaHero-dia { order: 3; }
+  .ariaHero-greca {
+    flex: none;
+    width: clamp(48px, 6vw, 84px);
+    height: auto;
+    overflow: visible;
+  }
+  .ariaHero-greca use { fill: none; stroke: currentColor; stroke-width: 1.2px; stroke-linejoin: miter; }
+  .ariaHero-side--r .ariaHero-greca { transform: scaleX(-1); }
+  .ariaHero-tag {
+    grid-column: 1 / -1;
+    margin: 0.35rem 0 0;
+    padding-left: 0.4em;
+    text-align: center;
+    font-family: var(--font-wide, "Syncopate", "Arial Black", sans-serif);
+    font-size: clamp(0.55rem, 0.9vw, 0.72rem);
+    letter-spacing: 0.4em;
+    color: var(--ariaHero-ink2);
+    opacity: 0.85;
+  }
+  @keyframes ariaHero-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (max-width: 560px) {
+    .ariaHero-greca, .ariaHero-dia { display: none; }
+    .ariaHero-head { column-gap: 0.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ariaHero-rule { animation: none; } }
+  .ariaHero-word {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0 0 0 0.18em;
+    text-align: center;
+    font-family: var(--font-hero, "Forum", "Times New Roman", serif);
+    font-size: var(--wfs);
+    line-height: 0.86;
+    letter-spacing: 0.18em;
+    color: var(--ariaHero-cream);
+    opacity: 0.95;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+  /* fuente de luz propia del escenario: la refraccion del cristal ya no depende del titular */
+  .ariaHero-backlight {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: var(--oy);
+    width: calc(var(--W) * 2.4);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    pointer-events: none;
+    background:
+      radial-gradient(closest-side at 50% 50%, transparent 52%, rgba(255, 246, 220, 0.34) 57%, rgba(201, 182, 246, 0.2) 62%, transparent 70%),
+      radial-gradient(circle at 36% 40%, rgba(255, 246, 220, 0.55), transparent 9%),
+      radial-gradient(circle at 63% 34%, rgba(201, 182, 246, 0.5), transparent 11%),
+      radial-gradient(circle at 54% 64%, rgba(255, 246, 220, 0.45), transparent 8%),
+      radial-gradient(circle at 44% 58%, rgba(201, 182, 246, 0.4), transparent 10%);
+  }
+  .ariaHero-halo {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: var(--oy);
+    width: calc(var(--W) * 1.9);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(201, 182, 246, 0.26), rgba(152, 130, 188, 0.09) 55%, transparent 72%);
+    pointer-events: none;
+  }
+
+  /* ---------- Escena 3D ---------- */
+  .ariaHero-world {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    perspective: var(--pd);
+    perspective-origin: 50% var(--oy);
+  }
+  .ariaHero-rig {
+    position: absolute;
+    left: 50%;
+    top: var(--oy);
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--mx) * 9deg)) rotateX(calc(var(--my) * -5deg));
+    transition: transform 0.6s var(--ariaHero-ease);
+  }
+
+  /* ---------- Buho de cristal ---------- */
+  .ariaHero-owlPos {
+    position: absolute;
+    left: calc(var(--W) * -0.5);
+    top: calc(var(--W) * -0.398);
+    width: var(--W);
+    height: calc(var(--W) * 0.796);
+    transform-style: preserve-3d;
+    animation: ariaHero-float 9s ease-in-out infinite;
+  }
+  .ariaHero-owl {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: ariaHero-swing 16s ease-in-out infinite alternate;
+  }
+  .ariaHero-ol {
+    position: absolute;
+    inset: 0;
+    transform: translateZ(var(--z, 0px));
+  }
+  .ariaHero-ol svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .ariaHero-ext { opacity: 0.85; }
+  .ariaHero-caustic svg {
+    filter: blur(calc(var(--W) * 0.03));
+    translate: calc(var(--W) * 0.05) calc(var(--W) * 0.1);
+    scale: 1.04;
+    opacity: 0.3;
+  }
+  .ariaHero-refr {
+    -webkit-mask: var(--ariaHero-mask) center / contain no-repeat;
+    mask: var(--ariaHero-mask) center / contain no-repeat;
+    overflow: hidden;
+  }
+  .ariaHero-refr span {
+    position: absolute;
+    inset: -12%;
+    transform: translate(calc(var(--W) * 0.03), calc(var(--W) * 0.035)) scale(1.18);
+    filter: blur(0.6px);
+    opacity: 0.85;
+    background:
+      radial-gradient(closest-side at 50% 50%, transparent 52%, rgba(255, 246, 220, 0.8) 57%, rgba(201, 182, 246, 0.55) 62%, transparent 70%),
+      radial-gradient(circle at 36% 40%, rgba(255, 246, 220, 0.95), transparent 9%),
+      radial-gradient(circle at 63% 34%, rgba(201, 182, 246, 0.85), transparent 11%),
+      radial-gradient(circle at 54% 64%, rgba(255, 246, 220, 0.8), transparent 8%),
+      radial-gradient(circle at 44% 58%, rgba(201, 182, 246, 0.7), transparent 10%),
+      linear-gradient(115deg, transparent 30%, rgba(255, 246, 220, 0.35) 48%, transparent 62%);
+  }
+  .ariaHero-refl {
+    -webkit-mask: var(--ariaHero-mask) center / contain no-repeat;
+    mask: var(--ariaHero-mask) center / contain no-repeat;
+    overflow: hidden;
+  }
+  .ariaHero-refl i {
+    position: absolute;
+    top: -25%;
+    bottom: -25%;
+    left: 0;
+    width: 26%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translateX(-120%) skewX(-14deg);
+    animation: ariaHero-refl 12s ease-in-out infinite;
+  }
+  .ariaHero-refl i + i {
+    width: 12%;
+    background: linear-gradient(100deg, transparent, rgba(255, 226, 168, 0.5), transparent);
+    animation-duration: 17s;
+    animation-delay: -6s;
+  }
+
+  /* ---------- Anillo inclinado: aro de greca + tarjetas ---------- */
+  .ariaHero-ring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    transform: translateY(var(--dy)) rotateX(calc(var(--TH) * -1));
+    pointer-events: none;
+  }
+  .ariaHero-aroPlane {
+    position: absolute;
+    --ar: calc(var(--R) * 1.12);
+    left: calc(var(--ar) * -1);
+    top: calc(var(--ar) * -1);
+    width: calc(var(--ar) * 2);
+    height: calc(var(--ar) * 2);
+    transform-style: preserve-3d;
+    transform: rotateX(90deg);
+  }
+  .ariaHero-aroSpin {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: ariaHero-aro 140s linear infinite;
+  }
+  .ariaHero-aroL {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform: translateZ(var(--z, 0px));
+  }
+  .ariaHero-meander use {
+    fill: none;
+    stroke: rgba(244, 236, 255, 0.82);
+    stroke-width: 1.3px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+  }
+  .ariaHero-spin {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    animation: ariaHero-spin var(--T) linear infinite;
+  }
+  .ariaHero-anchor {
+    --a: calc(var(--p) * 360deg);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    /* la tarjeta se apoya sobre el aro */
+    transform: rotateY(var(--a)) translateZ(var(--R)) translateY(calc(var(--cv) * -1 - 5px));
+  }
+  .ariaHero-counter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(var(--ch) * 2);
+    translate: -50% -50%;
+    transform-origin: 50% 50%;
+    animation: ariaHero-counter var(--T) linear infinite;
+  }
+  .ariaHero-card {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border-radius: 16px;
+    transform: rotate(var(--tz));
+    color: var(--ariaHero-ink);
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    background:
+      linear-gradient(150deg, rgba(244, 236, 255, 0.3), rgba(152, 130, 188, 0.14) 50%, rgba(48, 31, 58, 0.6)), rgba(48, 31, 58, 0.7);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 0 0 1px rgba(244, 236, 255, 0.28), 0 14px 30px -12px rgba(0, 0, 0, 0.6);
+    /* profundidad: mas tenue al pasar por detras */
+    animation: ariaHero-depth var(--T) linear calc(var(--T) * var(--p) * -1) infinite;
+  }
+  .ariaHero-card b {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-family: var(--font-wide, "Syncopate", "Arial Black", sans-serif);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--ariaHero-lav);
+  }
+
+  @keyframes ariaHero-spin {
+    to { transform: rotateY(360deg); }
+  }
+  /* contra-rotacion: la tarjeta siempre mira al frente (la inclinacion del anillo tambien se anula) */
+  @keyframes ariaHero-counter {
+    from { transform: rotateY(calc(var(--a) * -1)) rotateX(var(--TH)); }
+    to { transform: rotateY(calc(var(--a) * -1 - 360deg)) rotateX(var(--TH)); }
+  }
+  @keyframes ariaHero-depth {
+    0%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.8; }
+    50% { opacity: 0.55; }
+  }
+  @keyframes ariaHero-aro {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes ariaHero-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes ariaHero-swing {
+    from { transform: rotateY(-20deg) rotateX(4deg); }
+    to { transform: rotateY(20deg) rotateX(-3deg); }
+  }
+  @keyframes ariaHero-refl {
+    0% { transform: translateX(-120%) skewX(-14deg); }
+    55%, 100% { transform: translateX(520%) skewX(-14deg); }
+  }
+
+  .ariaHero[data-paused] *,
+  .ariaHero[data-paused] *::before { animation-play-state: paused !important; }
+
+  /* ---------- Contenido ---------- */
+  .ariaHero-wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  .ariaHero-copy {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: end;
+    padding-block: 3rem 5rem;
+  }
+  .ariaHero-title {
+    margin: 0;
+    max-width: 30ch;
+    font-family: var(--font-title, "Forum", "Times New Roman", serif);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 3.6vw, 3.25rem);
+    line-height: 1.02;
+    color: var(--ariaHero-ink);
+    text-wrap: balance;
+  }
+  .ariaHero-lead {
+    margin: 1rem 0 0;
+    max-width: 58ch;
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--ariaHero-ink2);
+  }
+  .ariaHero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+  .ariaHero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--ariaHero-lav);
+    background: var(--ariaHero-lav);
+    color: var(--ariaHero-bg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.24s var(--ariaHero-ease);
+  }
+  .ariaHero-btn--line { background: transparent; color: var(--ariaHero-ink); border-color: rgba(244, 236, 255, 0.45); }
+  .ariaHero-btn:hover { transform: translateY(-2px); }
+  .ariaHero-btn:focus-visible { outline: 3px solid var(--ariaHero-cream); outline-offset: 3px; }
+  .ariaHero-meta {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    border-top: 1px solid rgba(244, 236, 255, 0.3);
+  }
+  .ariaHero-meta dt,
+  .ariaHero-meta dd { margin: 0; padding: 0.75rem 0; border-bottom: 1px solid rgba(244, 236, 255, 0.14); }
+  .ariaHero-meta dt {
+    padding-right: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--ariaHero-ink2);
+    font-family: var(--font-wide, "Syncopate", "Arial Black", sans-serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .ariaHero-meta dd { text-align: right; font-weight: 500; }
+
+  @media (max-width: 860px) {
+    .ariaHero-copy { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3.5rem; }
+    .ariaHero { --ch: 72px; }
+  }
+  @media (max-width: 560px) {
+    .ariaHero {
+      --ch: 50px;
+      --cv: 24px;
+      --kR: 0.5;
+      --kC: 0.95;
+      --oy: calc(var(--W) * 0.4 + 120px);
+      --W: min(182px, 47vw, calc((100svh - var(--hero-top, 96px) - var(--headH) - 24px) / 1.5));
+    }
+    .ariaHero-card { padding: 0.4rem 0.5rem; font-size: 0.58rem; border-radius: 12px; white-space: nowrap; }
+    .ariaHero-card b { font-size: 0.5rem; letter-spacing: 0.1em; }
+    .ariaHero-title { font-size: 2rem; }
+  }
+
+  /* ---------- Sin movimiento: composicion estatica y legible ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .ariaHero-owlPos,
+    .ariaHero-owl,
+    .ariaHero-spin,
+    .ariaHero-aroSpin,
+    .ariaHero-counter,
+    .ariaHero-card,
+    .ariaHero-refl i { animation: none !important; }
+    .ariaHero-owl { transform: rotateY(-12deg) rotateX(2deg); }
+    .ariaHero-refl i { transform: translateX(150%) skewX(-14deg); }
+    .ariaHero-rig { transition: none; transform: none; }
+    .ariaHero-anchor { transform: rotateY(var(--as)) translateZ(var(--R)) translateY(calc(var(--cv) * -1 - 5px)); }
+    .ariaHero-counter { transform: rotateY(calc(var(--as) * -1)) rotateX(var(--TH)); }
+  }
+</style>

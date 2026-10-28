@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../layouts/baselayout.astro";
+import DocStyles from "./doc-styles.astro";
+import DocColonnade from "./doc-colonnade.astro";
+import { cats, numerals, ui, base, pathFor, type Lang } from "./doc-data";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const u = ui[lang];
+const whatsapp = "https://wa.me/523319751792";
+const instagram = "https://www.instagram.com/aria.steamex/";
+const pdf = "/docs/Olympus-Edicion-01-Octubre-2026.pdf";
+
+const T = {
+  es: {
+    title: "Olympus | Revista ARIA STEAMEX",
+    desc: "Olympus, la revista mensual de la comunidad FIRST en México. Lee la primera edición (octubre 2026) y comparte tu proyecto o experiencia en la siguiente.",
+    lead: "La revista mensual de la comunidad FIRST en México, donde los equipos cuentan quiénes son, qué construyen y qué han vivido. Ya puedes leer la primera edición.",
+    read: "Leer la edición de octubre 2026",
+    want: "¿Quieres aparecer?",
+    issues: "Ediciones",
+    issueDetail: "Primera edición, 54 páginas",
+    readPdf: "Leer PDF",
+    projectLabel: "El proyecto",
+    projectTitle: "Hecha por la comunidad, para la comunidad",
+    p1: "Olympus reúne el trabajo de equipos FRC y FTC, difunde proyectos, da espacio a patrocinadores y comparte las historias de las personas que hacen crecer la robótica en México.",
+    p2: "Cada mes preparamos una nueva edición con el contenido que nos comparten los equipos y colaboradores. Si quieres ser parte, nos encantaría incluirte.",
+    shareLabel: "Qué compartimos",
+    shareTitle: "Lo que puedes aportar",
+    share: [
+      ["Equipos FIRST", "Cuéntanos sobre tu equipo, tu temporada, tu robot y tus proyectos."],
+      ["Proyectos técnicos", "Comparte diseños, código, subsistemas o soluciones de ingeniería."],
+      ["Experiencias", "Historias de personas dentro de la comunidad STEM y de robótica."],
+    ],
+    joinTitle: "¿Quieres aparecer?",
+    joinText: "Si tu equipo o tú quieren compartir un proyecto o una experiencia en Olympus, escríbenos y con gusto los incluimos en una próxima edición.",
+    wa: "Escríbenos por WhatsApp",
+    ig: "Instagram",
+    edition: "Edición 01",
+    tag: "Revista de la comunidad FIRST en México",
+    date: "Octubre 2026",
+  },
+  en: {
+    title: "Olympus | ARIA STEAMEX Magazine",
+    desc: "Olympus, the monthly magazine of the FIRST community in Mexico. Read the first edition (October 2026) and share your project or experience in the next one.",
+    lead: "The monthly magazine of the FIRST community in Mexico, where teams tell who they are, what they build and what they have lived. The first issue is out now (in Spanish).",
+    read: "Read the October 2026 issue",
+    want: "Want to be featured?",
+    issues: "Issues",
+    issueDetail: "First edition, 54 pages, in Spanish",
+    readPdf: "Read PDF",
+    projectLabel: "The project",
+    projectTitle: "Made by the community, for the community",
+    p1: "Olympus brings together the work of FRC and FTC teams, spreads their projects, gives space to sponsors, and shares the stories of the people growing robotics in Mexico.",
+    p2: "Every month we prepare a new edition with the content teams and collaborators share with us. If you want to be part of it, we would love to include you.",
+    shareLabel: "What we share",
+    shareTitle: "What you can contribute",
+    share: [
+      ["FIRST teams", "Tell us about your team, your season, your robot, and your projects."],
+      ["Technical projects", "Share designs, code, subsystems, or engineering solutions."],
+      ["Experiences", "Stories from people in the STEM and robotics community."],
+    ],
+    joinTitle: "Want to be featured?",
+    joinText: "If your team or you want to share a project or an experience in Olympus, write to us and we will gladly include you in an upcoming edition.",
+    wa: "Message us on WhatsApp",
+    ig: "Instagram",
+    edition: "Issue 01",
+    tag: "Magazine of the FIRST community in Mexico",
+    date: "October 2026",
+  },
+}[lang];
+---
+
+<BaseLayout title={T.title} description={T.desc} lang={lang}>
+  <DocStyles />
+  <main>
+    <header class="doc-hero">
+      <div class="doc-wrap">
+        <nav class="doc-crumb" aria-label={u.crumbLabel}>
+          <a href={base[lang]}>{u.crumbRoot}</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{cats.revista.tab[lang]}</span>
+        </nav>
+        <div class="doc-sub-grid">
+          <p class="doc-sub-num" aria-hidden="true">{numerals.revista}</p>
+          <h1 class="doc-sub-h1">Olympus</h1>
+          <p class="doc-sub-intro">{T.lead}</p>
+        </div>
+        <div class="doc-hero-row" style="margin-top: var(--s-6); margin-bottom: 0">
+          <div class="doc-join" style="padding: 0; background: none">
+            <div class="acts">
+              <a class="btn" href={pdf} target="_blank" rel="noopener noreferrer">{T.read}<span class="arrow" aria-hidden="true">→</span><span class="doc-sr">{u.newTab}</span></a>
+              <a class="btn btn--line" href="#participa">{T.want}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <DocColonnade n={3} sub />
+    </header>
+
+    <section class="doc-paper">
+      <div class="doc-wrap">
+        <div class="doc-mag">
+          <div class="doc-stage" data-tilt>
+            <div class="doc-tilt">
+              <div class="doc-book doc-book--lg">
+                <span class="b-ed">{T.edition}</span>
+                <span class="b-title">Olympus</span>
+                <span>
+                  <span class="greca" style="display:block"></span>
+                  <span class="b-foot" style="display:block">{T.tag}<br />{T.date}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="doc-label">{T.issues}</p>
+            <ul class="doc-rows" style="border-top: 2px solid var(--stone-ink)">
+              <li class="doc-row is-on">
+                <a class="doc-rowin" href={pdf} target="_blank" rel="noopener noreferrer">
+                  <span class="doc-n" aria-hidden="true">01</span>
+                  <span class="doc-t">
+                    <span class="doc-title">{lang === "es" ? "Octubre 2026" : "October 2026"}</span>
+                    <span class="doc-d">{T.issueDetail}</span>
+                  </span>
+                  <span class="doc-side">
+                    <span class="doc-meta">PDF · ES</span>
+                    <span class="doc-go">{T.readPdf}<span class="doc-arrow" aria-hidden="true">→</span><span class="doc-sr">{u.newTab}</span></span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="doc-block" style="margin-top: var(--s-8)">
+              <p class="doc-label">{T.projectLabel}</p>
+              <h2 style="margin-bottom: var(--s-5)">{T.projectTitle}</h2>
+              <p>{T.p1}</p>
+              <p style="color: var(--stone-ink-2)">{T.p2}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-block">
+          <div class="doc-block-head">
+            <p class="doc-label">{T.shareLabel}</p>
+            <h2>{T.shareTitle}</h2>
+          </div>
+          <ol class="doc-ord">
+            {T.share.map(([h, p]) => <li><div><strong>{h}</strong><span>{p}</span></div></li>)}
+          </ol>
+        </div>
+
+        <a class="doc-glink doc-back" href={base[lang]}><span class="doc-arrow" aria-hidden="true" style="transform: scaleX(-1)">→</span>{u.back}</a>
+      </div>
+    </section>
+
+    <section class="doc-join" id="participa" style="scroll-margin-top: 110px">
+      <div class="doc-wrap">
+        <span class="greca" aria-hidden="true"></span>
+        <h2>{T.joinTitle}</h2>
+        <p>{T.joinText}</p>
+        <div class="acts">
+          <a class="btn" href={whatsapp} target="_blank" rel="noopener noreferrer">{T.wa}<span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--line" href={instagram} target="_blank" rel="noopener noreferrer">{T.ig}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var stage = document.querySelector("[data-tilt]");
+      if (!stage) return;
+      var tilt = stage.querySelector(".doc-tilt");
+      stage.addEventListener("pointermove", function (e) {
+        var b = stage.getBoundingClientRect();
+        var x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
+        tilt.style.setProperty("--ry", (-12 + x * 28).toFixed(1) + "deg");
+        tilt.style.setProperty("--rx", (3 - y * 16).toFixed(1) + "deg");
+      });
+      stage.addEventListener("pointerleave", function () {
+        tilt.style.removeProperty("--ry"); tilt.style.removeProperty("--rx");
+      });
+    })();
+  </script>
+</BaseLayout>

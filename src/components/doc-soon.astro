@@ -1,0 +1,156 @@
+---
+import AcrisLayout from "../layouts/acrislayout.astro";
+import Columna from "./roma/Columna.astro";
+import Inscripcion from "./roma/Inscripcion.astro";
+
+interface Props { lang: "es" | "en"; }
+const { lang } = Astro.props;
+
+const T = {
+  es: {
+    title: "Documentación pública | ACRIS STEAMEX",
+    desc: "La documentación pública de ACRIS STEAMEX llegará pronto: procesos, ingeniería y aprendizajes del equipo, abiertos para toda la comunidad.",
+    soon: "Próximamente",
+    h1a: "Documentación",
+    h1b: "pública",
+    lead: "Estamos preparando un espacio abierto donde el equipo compartirá cómo trabaja. Todavía no hay fecha ni documentos publicados, pero queremos que cualquier persona de la comunidad pueda consultarlo cuando llegue.",
+    listLabel: "Lo que vamos a abrir",
+    items: [
+      ["Procesos", "Cómo nos organizamos como equipo durante la temporada."],
+      ["Ingeniería", "Cómo diseñamos, construimos y programamos el robot."],
+      ["Aprendizajes", "Lo que nos funcionó, lo que no, y lo que cambiaríamos."],
+    ],
+    back: "Volver al inicio",
+    contact: "Escríbenos",
+    home: "/acris",
+    contactHref: "/acris/contacto",
+    stage: "Ilustración de una puerta en arco cerrada con una lanza sobre un escudo, símbolos de ACRIS",
+    ticker: ["Procesos", "Ingeniería", "Aprendizajes de la temporada", "FTC 35735", "Abierta para toda la comunidad"],
+  },
+  en: {
+    title: "Public documentation | ACRIS STEAMEX",
+    desc: "ACRIS STEAMEX public documentation is coming soon: processes, engineering and lessons from the team, open to the whole community.",
+    soon: "Coming soon",
+    h1a: "Public",
+    h1b: "documentation",
+    lead: "We are preparing an open space where the team will share how it works. There is no date and no published documents yet, but we want anyone in the community to be able to read it when it arrives.",
+    listLabel: "What we will open",
+    items: [
+      ["Processes", "How we organize ourselves as a team during the season."],
+      ["Engineering", "How we design, build and program the robot."],
+      ["Lessons", "What worked, what did not, and what we would change."],
+    ],
+    back: "Back to home",
+    contact: "Write to us",
+    home: "/acris/en",
+    contactHref: "/acris/en/contact",
+    stage: "Illustration of a closed arched door with a spear over a shield, symbols of ACRIS",
+    ticker: ["Processes", "Engineering", "Lessons from the season", "FTC 35735", "Open to the whole community"],
+  },
+}[lang];
+const nums = ["I", "II", "III"];
+---
+
+<AcrisLayout title={T.title} description={T.desc} lang={lang}>
+  <main class="ds">
+    <div class="container-site ds-grid">
+      <div class="ds-copy">
+        <Inscripcion size="xs" class="ds-kick">{T.soon}</Inscripcion>
+        <h1 class="title ds-h1"><span>{T.h1a}</span> <span>{T.h1b}</span></h1>
+        <p class="ds-lead">{T.lead}</p>
+
+        <Inscripcion size="xs" class="ds-label">{T.listLabel}</Inscripcion>
+        <ol class="ds-list">
+          {T.items.map(([h, p], i) => (
+            <li>
+              <span class="ds-n" aria-hidden="true">{nums[i]}</span>
+              <strong>{h}</strong>
+              <span class="ds-d">{p}</span>
+            </li>
+          ))}
+        </ol>
+
+        <div class="ds-actions">
+          <a href={T.home} class="btn">{T.back} <span class="arrow" aria-hidden="true">→</span></a>
+          <a href={T.contactHref} class="btn btn--line">{T.contact}</a>
+        </div>
+      </div>
+
+      <div class="ds-stage" role="img" aria-label={T.stage}>
+        <div class="ds-lintel" aria-hidden="true">
+          <Inscripcion size="sm" align="center" engraved={false}>{T.soon}</Inscripcion>
+        </div>
+        <div class="ds-portal" aria-hidden="true">
+          <div class="ds-col"><Columna height={300} fill={0.14} /></div>
+          <div class="ds-door">
+            <span class="mark mark-acris-escudo ds-shield"></span>
+            <span class="mark mark-acris-lanza ds-spear"></span>
+            <span class="ds-leaves"><i></i><i></i></span>
+          </div>
+          <div class="ds-col"><Columna height={300} fill={0.14} /></div>
+        </div>
+        <div class="ds-step" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <ul class="ds-band">
+      {T.ticker.map((w) => <li><Inscripcion size="xs" as="span">{w}</Inscripcion></li>)}
+    </ul>
+  </main>
+</AcrisLayout>
+
+<style is:global>
+  .ds { position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); }
+  .ds-grid { flex: 1; display: grid; gap: var(--s-8); align-items: center; padding-block: clamp(4.5rem, 9vw, 8rem); }
+  @media (min-width: 1000px) { .ds-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-8); } }
+
+  .ds-kick { color: var(--accent-ink); }
+  .ds-h1 { font-size: clamp(2.4rem, 1.6rem + 2.8vw, 3.75rem); line-height: 1.02; margin: var(--s-4) 0 0; overflow-wrap: normal; }
+  .ds-h1 span { display: inline-block; }
+  .ds-lead { max-width: 54ch; margin: var(--s-5) 0 0; color: var(--ink-2); font-size: var(--t-lg); }
+  .ds .ds-label { margin: var(--s-7) 0 var(--s-3); color: var(--ink-2); }
+  .ds-list { list-style: none; margin: 0; padding: 0; max-width: 54ch; }
+  .ds-list li { display: grid; grid-template-columns: 2.8rem minmax(0, 1fr); column-gap: var(--s-3); padding: var(--s-3) 0; border-top: 1px solid var(--line); }
+  .ds-list li:first-child { border-top: 0; }
+  .ds-n { grid-row: 1 / span 2; font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.1rem; color: var(--accent-ink); line-height: 1.5; }
+  .ds-list strong { grid-column: 2; display: block; font-family: var(--font-head); font-weight: 400; font-size: 1.3rem; letter-spacing: .03em; text-transform: uppercase; line-height: 1.2; }
+  .ds-d { grid-column: 2; display: block; margin-top: 2px; color: var(--ink-2); font-size: var(--t-sm); }
+  .ds-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-7); }
+
+  /* Escena: portal de arco cerrado, sobre mármol */
+  .ds-stage {
+    width: min(100%, 440px); margin-inline: auto; padding: var(--s-6) var(--s-5) 0; color: #8a5a2c;
+    background-color: #F5F1EC;
+    background-image:
+      linear-gradient(118deg, transparent 0 22%, rgba(90, 21, 20, .045) 22.1%, transparent 22.5% 71%, rgba(165, 100, 36, .06) 71.1%, transparent 71.6%),
+      radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, .9), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(220, 205, 190, .5), transparent 60%);
+    box-shadow: inset 0 0 0 8px #F5F1EC, inset 0 0 0 9px rgba(165, 100, 36, .55), 0 30px 60px -30px rgba(0, 0, 0, .8);
+  }
+  .ds-lintel { padding: var(--s-3) 0; margin-bottom: var(--s-4); color: var(--stone-ink); border-block: 1px solid rgba(165, 100, 36, .6); }
+  .ds-portal { display: flex; align-items: flex-end; justify-content: center; gap: var(--s-3); }
+  .ds-col { flex: none; align-self: flex-end; }
+  .ds-door {
+    position: relative; flex: 1; max-width: 250px; aspect-ratio: 5 / 6.4; border-radius: 999px 999px 0 0; overflow: hidden;
+    background: var(--black-red); border: 3px double var(--decor); border-bottom: 0;
+  }
+  .ds-shield { position: absolute; width: 36%; left: 32%; top: 15%; background: var(--gold); }
+  .ds-spear { position: absolute; width: 17%; left: 41.5%; top: 6%; background: #E9D3A0; transform: rotate(14deg); }
+  .ds-leaves { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; border-top: 1px solid var(--decor); display: block; }
+  .ds-leaves::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--decor); }
+  .ds-leaves i { position: absolute; top: 40%; width: 12px; height: 12px; border: 1.5px solid var(--decor); border-radius: 50%; }
+  .ds-leaves i:first-child { left: calc(50% - 26px); }
+  .ds-leaves i:last-child { left: calc(50% + 14px); }
+  .ds-step { height: 16px; margin-inline: calc(var(--s-5) * -1 + 8px); border-top: 1px solid rgba(165, 100, 36, .7); background: repeating-linear-gradient(90deg, #d8cfc2 0 54px, #b9ac99 54px 55px); }
+
+  /* Cenefa y cinta inferior */
+  .ds-band { list-style: none; margin: 0; padding: var(--s-4) var(--gutter); background: var(--red-dark); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2) 0; color: var(--ink-2); }
+  .ds-band li { display: inline-flex; align-items: center; }
+  .ds-band li + li::before { content: ""; width: 7px; height: 7px; margin-inline: var(--s-4); background: var(--accent-ink); transform: rotate(45deg); }
+
+  @media (max-width: 560px) {
+    .ds-stage { padding-inline: var(--s-4); }
+    .ds-col :is(svg) { height: 230px !important; }
+    .ds-step { margin-inline: calc(var(--s-4) * -1 + 8px); }
+  }
+</style>

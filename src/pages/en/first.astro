@@ -1,294 +1,207 @@
 ---
 // src/pages/en/first.astro
-
 import BaseLayout from "../../layouts/baselayout.astro";
-import Navbar from "../../components/navbar.astro";
 ---
 
 <BaseLayout title="FIRST / FRC | ARIA STEAMEX" lang="en">
 
+  <main class="pg">
 
-
-  <main class="overflow-hidden">
-
-    <!-- HERO -->
-    <section class="container-site pt-28 pb-24 text-center relative overflow-hidden">
-
-      <div class="glow-orb w-56 h-56 bg-purple-400/20 top-10 right-20"></div>
-      <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
-
-      <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
-        FIRST Robotics Competition
-      </p>
-
-      <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
-        More than robots
-      </h1>
-
-      <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-10 reveal show">
-        FIRST combines engineering, strategy, business, and teamwork in one of the world's most prestigious student experiences.
-      </p>
-
-      <div class="flex flex-wrap justify-center gap-8 text-sm text-white/70 reveal show">
-
+    <section class="hero">
+      <div class="wrap hero-grid">
         <div>
-          <strong class="block text-white text-xl">Global</strong>
-          International community
+          <p class="kicker wide">FIRST Robotics Competition</p>
+          <h1 class="title">More than robots</h1>
+          <p class="lead">FIRST combines engineering, strategy, business, and teamwork in one of the world's most prestigious student experiences.</p>
         </div>
-
-        <div>
-          <strong class="block text-white text-xl">STEAM</strong>
-          Applied education
+        <div class="photo-corner photo-corner--alt ph ph--wide">
+          <img src="/assets/equipo/img-7248.jpg" alt="ARIA STEAMEX team members at work" loading="eager" />
         </div>
-
-        <div>
-          <strong class="block text-white text-xl">Impact</strong>
-          Youth leadership
-        </div>
-
-        <div>
-          <strong class="block text-white text-xl">FRC</strong>
-          Elite level
-        </div>
-
       </div>
-
     </section>
 
-    <!-- WHAT IS FIRST -->
-    <section class="container-site pb-28">
+    <div class="mq"><div class="mq-track"><div class="mq-copy"><span>Global community</span><span>Applied STEAM education</span><span>Youth leadership</span><span>Elite-level FRC</span><span>Global community</span><span>Applied STEAM education</span><span>Youth leadership</span><span>Elite-level FRC</span></div><div class="mq-copy" aria-hidden="true"><span>Global community</span><span>Applied STEAM education</span><span>Youth leadership</span><span>Elite-level FRC</span><span>Global community</span><span>Applied STEAM education</span><span>Youth leadership</span><span>Elite-level FRC</span></div></div></div>
 
-      <div class="mb-10 reveal">
-        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-          What is FIRST
-        </p>
-
-        <h2 class="text-5xl leading-none">
-          A platform for growth
-        </h2>
+    <section class="band">
+      <div class="wrap">
+        <div class="head">
+          <div class="idx" aria-hidden="true">01</div>
+          <div>
+            <span class="tag wide">What is FIRST</span>
+            <h2 class="title">A platform for growth</h2>
+          </div>
+        </div>
+        <p class="big-words">Mechanical, programming, electronics, business, leadership, operations, brand, and impact: FIRST has room for every talent.</p>
+        <dl class="defs">
+          <div><dt>Mechanical</dt><dd>Design, assembly, and physical robot systems.</dd></div>
+          <div><dt>Programming</dt><dd>Code, sensors, automation, and robot control.</dd></div>
+          <div><dt>Electronics</dt><dd>Wiring, power, integration, and electrical systems.</dd></div>
+          <div><dt>Business</dt><dd>Sponsors, budget, and financial strategy.</dd></div>
+          <div><dt>Leadership</dt><dd>Organization, communication, and team direction.</dd></div>
+          <div><dt>Operations</dt><dd>Planning, logistics, and overall coordination.</dd></div>
+          <div><dt>Brand</dt><dd>Branding, social media, content, and public presence.</dd></div>
+          <div><dt>Impact</dt><dd>Outreach, community, and STEM promotion.</dd></div>
+        </dl>
       </div>
-
-      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal">
-    <h3 class="text-2xl mb-4">Mechanical</h3>
-    <p class="text-white/65">
-      Design, assembly, and physical robot systems.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal delay-1">
-    <h3 class="text-2xl mb-4">Programming</h3>
-    <p class="text-white/65">
-      Code, sensors, automation, and robot control.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal delay-2">
-    <h3 class="text-2xl mb-4">Electronics</h3>
-    <p class="text-white/65">
-      Wiring, power, integration, and electrical systems.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal delay-3">
-    <h3 class="text-2xl mb-4">Business</h3>
-    <p class="text-white/65">
-      Sponsors, budget, and financial strategy.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal">
-    <h3 class="text-2xl mb-4">Leadership</h3>
-    <p class="text-white/65">
-      Organization, communication, and team direction.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal delay-1">
-    <h3 class="text-2xl mb-4">Operations</h3>
-    <p class="text-white/65">
-      Planning, logistics, and overall coordination.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal delay-2">
-    <h3 class="text-2xl mb-4">Brand</h3>
-    <p class="text-white/65">
-      Branding, social media, content, and public presence.
-    </p>
-  </div>
-
-  <div class="glass rounded-3xl p-6 min-h-[170px] reveal delay-3">
-    <h3 class="text-2xl mb-4">Impact</h3>
-    <p class="text-white/65">
-      Outreach, community, and STEM promotion.
-    </p>
-  </div>
-
-</div>
     </section>
 
-    <!-- WHAT IS FRC -->
-
-<section class="container-site pb-28 reveal">
-
-  <div class="rounded-3xl border border-white/10 glass p-10 md:p-14 relative overflow-hidden">
-
-    <div class="glow-orb w-44 h-44 bg-purple-400/10 top-0 right-10"></div>
-
-    <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-5">
-      What is FRC
-    </p>
-
-    <h2 class="text-5xl md:text-7xl leading-none mb-8 max-w-4xl">
-      The most intense student robotics experience
-    </h2>
-
-    <p class="text-white/72 text-lg max-w-3xl leading-relaxed mb-10">
-      FIRST Robotics Competition challenges students to design,
-      manufacture, and program high-performance robots to compete
-      every year in a new official game alongside thousands of teams worldwide.
-    </p>
-
-    <div class="flex flex-wrap gap-4 mb-10">
-
-  <div class="glass rounded-3xl px-6 py-4 w-[220px]">
-    <p class="text-4xl leading-none mb-1">6+</p>
-    <p class="text-white/60 text-sm">Weeks of build season</p>
-  </div>
-
-  <div class="glass rounded-3xl px-6 py-4 w-[220px]">
-    <p class="text-4xl leading-none mb-1">1</p>
-    <p class="text-white/60 text-sm">New game each year</p>
-  </div>
-
-  <div class="glass rounded-3xl px-6 py-4 w-[220px]">
-    <p class="text-4xl leading-none mb-1">Global</p>
-    <p class="text-white/60 text-sm">International community</p>
-  </div>
-
-  <div class="glass rounded-3xl px-6 py-4 w-[220px]">
-    <p class="text-4xl leading-none mb-1">Real</p>
-    <p class="text-white/60 text-sm">Applied engineering</p>
-  </div>
-
-  <div class="flex flex-wrap gap-4 ">
-
-      <a
-        href="https://www.firstinspires.org"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-primary my-4"
-      >
-        Official FIRST website
-      </a>
-
-      <a href="/en/join" class="btn-secondary my-4">
-        Experience it with ARIA
-      </a>
-
-    </div>
-
-</section>
-    <!-- WHAT YOU LEARN -->
-    <section class="container-site pb-28">
-
-      <div class="mb-10 reveal">
-        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-          What you learn
-        </p>
-
-        <h2 class="text-5xl leading-none">
-          More than competing
-        </h2>
+    <section class="band band--lav on-stone">
+      <span class="greca greca-top" aria-hidden="true"></span>
+      <div class="wrap frc">
+        <div>
+          <span class="wide" style="color: var(--stone-ink-2)">What is FRC</span>
+          <h2 class="title" style="margin-top: var(--s-4)">The most intense student robotics experience</h2>
+        </div>
+        <div>
+          <p>FIRST Robotics Competition challenges students to design, manufacture, and program high-performance robots to compete every year in a new official game alongside thousands of teams worldwide.</p>
+          <div class="actions">
+            <a href="https://www.firstinspires.org" target="_blank" rel="noopener noreferrer" class="btn-primary">Official FIRST website</a>
+            <a href="/en/join" class="btn-secondary">Experience it with ARIA</a>
+          </div>
+        </div>
       </div>
-
-      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-
-        <div class="glass rounded-3xl p-7 reveal">
-          <h3 class="text-3xl mb-4">CAD</h3>
-          <p class="text-white/65">Professional mechanical design.</p>
-        </div>
-
-        <div class="glass rounded-3xl p-7 reveal delay-1">
-          <h3 class="text-3xl mb-4">Manufacturing</h3>
-          <p class="text-white/65">Real processes and fabrication.</p>
-        </div>
-
-        <div class="glass rounded-3xl p-7 reveal delay-2">
-          <h3 class="text-3xl mb-4">Code</h3>
-          <p class="text-white/65">Software for physical systems.</p>
-        </div>
-
-        <div class="glass rounded-3xl p-7 reveal">
-          <h3 class="text-3xl mb-4">Marketing</h3>
-          <p class="text-white/65">Brand, social media, and narrative.</p>
-        </div>
-
-        <div class="glass rounded-3xl p-7 reveal delay-1">
-          <h3 class="text-3xl mb-4">Business</h3>
-          <p class="text-white/65">Relationships with partners and sponsors.</p>
-        </div>
-
-        <div class="glass rounded-3xl p-7 reveal delay-2">
-          <h3 class="text-3xl mb-4">Leadership</h3>
-          <p class="text-white/65">Organization and decision-making.</p>
-        </div>
-
+      <div class="wrap">
+        <dl class="stats">
+          <div><dt>6+</dt><dd>Weeks of build season</dd></div>
+          <div><dt>1</dt><dd>New game each year</dd></div>
+          <div><dt>Global</dt><dd>International community</dd></div>
+          <div><dt>Real</dt><dd>Applied engineering</dd></div>
+        </dl>
       </div>
-
+      <span class="greca greca-bot" aria-hidden="true"></span>
     </section>
 
-    <!-- CTA -->
-    <section class="container-site pb-32 reveal">
-
-      <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
-
-        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
-          Next step
-        </p>
-
-        <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
-          Want to experience it with ARIA?
-        </h2>
-
-        <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
-          Join a new generation of students who compete, learn, and build something big.
-        </p>
-
-        <div class="flex flex-wrap gap-4 reveal delay-4">
-
-          <a href="/en/join" class="btn-primary">
-            Apply
-          </a>
-
-          <a href="/en/contact" class="btn-secondary">
-            Contact
-          </a>
-
+    <section class="band">
+      <div class="wrap learn">
+        <div>
+          <div class="photo-corner ph">
+            <img src="/assets/equipo/img-7434.jpg" alt="ARIA STEAMEX team members at work" loading="lazy" />
+          </div>
         </div>
-
+        <div>
+          <div class="head" style="grid-template-columns: 1fr; margin-bottom: var(--s-6)">
+            <div>
+              <span class="tag wide">What you learn</span>
+              <h2 class="title">More than competing</h2>
+            </div>
+          </div>
+          <ol class="rows">
+            <li><span class="n">01</span><h3>CAD</h3><p>Professional mechanical design.</p></li>
+            <li><span class="n">02</span><h3>Manufacturing</h3><p>Real processes and fabrication.</p></li>
+            <li><span class="n">03</span><h3>Code</h3><p>Software for physical systems.</p></li>
+            <li><span class="n">04</span><h3>Marketing</h3><p>Brand, social media, and narrative.</p></li>
+            <li><span class="n">05</span><h3>Business</h3><p>Relationships with partners and sponsors.</p></li>
+            <li><span class="n">06</span><h3>Leadership</h3><p>Organization and decision-making.</p></li>
+          </ol>
+        </div>
       </div>
+    </section>
 
+    <section class="band band--lav on-stone">
+      <span class="greca greca-top" aria-hidden="true"></span>
+      <div class="wrap final">
+        <div>
+          <h2 class="title">Want to experience it with ARIA?</h2>
+          <p>Join a new generation of students who compete, learn, and build something big.</p>
+        </div>
+        <div class="actions" style="margin-top: 0">
+          <a href="/en/join" class="btn-primary">Apply</a>
+          <a href="/en/contact" class="btn-secondary">Contact</a>
+        </div>
+      </div>
     </section>
 
   </main>
 
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
+  <style>
+  .pg { overflow: clip; }
+  .hero { padding-block: var(--s-8) var(--s-9); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); align-items: end; }
+  .hero h1 { font-size: var(--t-3xl); line-height: 1.02; max-width: 14ch; }
+  .hero-solo h1 { max-width: 16ch; }
+  .kicker { display: flex; align-items: center; gap: var(--s-4); color: var(--ink-2); margin-bottom: var(--s-5); }
+  .kicker::before { content: ""; width: 48px; height: 1px; background: var(--accent-ink); }
+  .lead { font-size: var(--t-lg); color: var(--ink-2); max-width: 52ch; margin-top: var(--s-5); }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+  .band { position: relative; padding-block: var(--s-9); }
+  .band--lav { background: var(--stone); color: var(--stone-ink); }
+  .band--lav p { color: var(--stone-ink-2); }
+  .band--lav .greca { color: var(--brand); }
+  .band--lav .greca-top { position: absolute; top: 0; left: 0; }
+  .band--lav .greca-bot { position: absolute; bottom: 0; left: 0; }
+  .band--lav.band { padding-block: calc(var(--s-9) + 14px); }
+  .head { display: grid; grid-template-columns: minmax(110px, 1fr) minmax(0, 4fr); gap: var(--s-5); margin-bottom: var(--s-7); align-items: start; }
+  .idx { font-family: var(--font-title); font-size: clamp(4rem, 10vw, 8.5rem); line-height: .8; color: var(--decor); }
+  .band--lav .idx { color: var(--brand); }
+  .head h2 { font-size: var(--t-2xl); max-width: 18ch; }
+  .head .tag { display: block; margin-bottom: var(--s-3); color: var(--ink-2); }
+  .band--lav .head .tag { color: var(--stone-ink-2); }
+  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+  .rows li { display: grid; grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--s-5); align-items: baseline; padding-block: var(--s-5); border-bottom: 1px solid var(--line); }
+  .rows .n { font-family: var(--font-wide); font-size: .6875rem; letter-spacing: .14em; color: var(--accent-ink); transition: transform var(--dur) var(--ease); }
+  .rows li:hover .n { transform: translateX(8px); }
+  .rows h3 { font-family: var(--font-title); font-size: var(--t-xl); letter-spacing: 0; line-height: 1.1; }
+  .rows p { color: var(--ink-2); }
+  .band--lav .rows { border-color: rgba(0, 0, 0, .3); }
+  .band--lav .rows li { border-color: rgba(0, 0, 0, .15); }
+  .band--lav .rows .n { color: var(--brand); }
+  .band--lav .rows p { color: var(--stone-ink-2); }
+  .ph { width: 100%; aspect-ratio: 4 / 5; }
+  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mq { overflow: hidden; border-block: 1px solid var(--line-strong); padding-block: var(--s-4); }
+  .mq-track { display: flex; width: max-content; animation: mq-slide 42s linear infinite; }
+  .mq-copy { display: flex; flex-shrink: 0; }
+  .mq-copy span { font-family: var(--font-title); font-size: var(--t-2xl); line-height: 1.1; white-space: nowrap; display: inline-flex; align-items: center; gap: var(--s-6); padding-right: var(--s-6); }
+  .mq-copy span::after { content: ""; width: 12px; height: 12px; background: var(--accent-ink); transform: rotate(45deg); }
+  @keyframes mq-slide { to { transform: translateX(-50%); } }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: var(--s-6); }
+    .head { grid-template-columns: 1fr; gap: var(--s-3); }
+    .idx { font-size: 4rem; }
+    .rows li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--s-3) var(--s-4); }
+    .rows li p { grid-column: 2; }
+    .band { padding-block: var(--s-8); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mq-track { width: auto; flex-wrap: wrap; }
+    .mq-copy[aria-hidden="true"] { display: none; }
+    .mq-copy { flex-wrap: wrap; }
+  }
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          }
-        });
-      }, { threshold: 0.15 });
-
-      items.forEach((item) => observer.observe(item));
-    });
-  </script>
+  .big-words { font-family: var(--font-title); font-size: var(--t-2xl); line-height: 1.08; max-width: 22ch; margin-bottom: var(--s-8); }
+  .defs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); margin: 0; }
+  .defs > div { border-top: 1px solid var(--line-strong); padding-top: var(--s-3); }
+  .defs dt { font-family: var(--font-wide); font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--accent-ink); margin-bottom: var(--s-2); }
+  .defs dd { margin: 0; color: var(--ink-2); font-size: var(--t-sm); }
+  .frc { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--s-8); align-items: end; }
+  .frc h2 { font-size: var(--t-3xl); line-height: 1; }
+  .frc p { font-size: var(--t-lg); }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: var(--s-8) 0 0; border-top: 1px solid rgba(0, 0, 0, .3); }
+  .stats > div { padding: var(--s-5) var(--s-4) 0 0; }
+  .stats > div + div { padding-left: var(--s-4); border-left: 1px solid rgba(0, 0, 0, .18); }
+  .stats dt { font-family: var(--font-title); font-size: var(--t-3xl); line-height: 1; transform-origin: left bottom; animation: stat-pop 5s var(--ease) infinite; }
+  .stats > div:nth-child(2) dt { animation-delay: .4s; }
+  .stats > div:nth-child(3) dt { animation-delay: .8s; }
+  .stats > div:nth-child(4) dt { animation-delay: 1.2s; }
+  .stats dd { margin: var(--s-2) 0 0; font-size: var(--t-sm); color: var(--stone-ink-2); }
+  @keyframes stat-pop { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.08); } 90% { transform: scale(1); } }
+  .learn { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-8); align-items: start; }
+  .learn .ph { max-width: 440px; }
+  .ph--wide { aspect-ratio: 5 / 4; }
+  .learn .rows li { grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1.3fr); }
+  .final { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--s-6); }
+  .final h2 { font-size: var(--t-3xl); line-height: 1; max-width: 12ch; }
+  .final p { max-width: 40ch; margin-top: var(--s-4); font-size: var(--t-lg); }
+  @media (max-width: 960px) {
+    .defs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .frc, .learn { grid-template-columns: 1fr; gap: var(--s-6); }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stats > div:nth-child(3) { padding-left: 0; border-left: 0; }
+    .stats > div:nth-child(n+3) { border-top: 1px solid rgba(0,0,0,.18); margin-top: var(--s-5); }
+    .learn .ph { max-width: 320px; }
+  }
+  @media (max-width: 480px) { .defs { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .stats dt { animation: none; } }
+</style>
 
 </BaseLayout>

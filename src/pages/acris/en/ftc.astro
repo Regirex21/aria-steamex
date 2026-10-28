@@ -1,86 +1,152 @@
 ---
+// src/pages/acris/en/ftc.astro
 import AcrisLayout from "../../../layouts/acrislayout.astro";
+import Arcada from "../../../components/roma/Arcada.astro";
+import Inscripcion from "../../../components/roma/Inscripcion.astro";
+import Laurel from "../../../components/roma/Laurel.astro";
 import { acrisBrand } from "../../../config/acris-brand";
-
-const phases = [
-  { title: "Design", desc: "We analyze the season's challenge and design the robot in CAD." },
-  { title: "Build", desc: "We manufacture, assemble, and test each subsystem." },
-  { title: "Program", desc: "We develop the autonomous software and driver control." },
-  { title: "Compete", desc: "We take the robot to official FIRST Tech Challenge tournaments." },
-];
 ---
 
 <AcrisLayout title="FTC | ACRIS STEAMEX" lang="en">
-  <main class="overflow-hidden">
+  <main>
 
-    <section class="container-site pt-24 pb-20 relative overflow-hidden">
-      <div class="glow-orb w-64 h-64 top-8 right-10" style="background: rgba(178,19,24,.25)"></div>
-      <div class="relative z-10 max-w-4xl">
-        <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">FIRST Tech Challenge</p>
-        <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show">What is FTC?</h1>
-        <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl leading-relaxed reveal show">
-          FIRST's robotics program where teams of young people design, build, and program
-          a robot to compete each season.
-        </p>
-      </div>
-    </section>
-
-    <section class="container-site pb-24 reveal">
-      <div class="grid lg:grid-cols-2 gap-14 items-start">
+    <section class="fh">
+      <div class="wrap fh-in">
         <div>
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">The program</p>
-          <h2 class="serif text-4xl md:text-5xl leading-tight">Real engineering, as a team</h2>
+          <Inscripcion size="xs" class="k-gold">FIRST Tech Challenge</Inscripcion>
+          <h1 class="pg-h1">What is FTC?</h1>
+          <p class="pg-lede">FIRST's robotics program where teams of young people design, build, and program a robot to compete each season.</p>
         </div>
-        <div>
-          <p class="text-white/75 text-lg leading-relaxed mb-6">
-            FIRST Tech Challenge (FTC) challenges students ages 12 to 18 to solve a new
-            engineering problem every year. Teams build a robot, program it, and take it to
-            compete while developing technical skills, leadership, and teamwork.
-          </p>
-          <p class="text-white/60 leading-relaxed">
-            As team <strong>{acrisBrand.number}</strong>, ACRIS represents the Mexico City
-            community in this international program.
-          </p>
+        <div class="fh-flag" aria-hidden="true">
+          <Inscripcion size="xl" align="center" class="fh-num">FTC</Inscripcion>
+          <Inscripcion size="xs" align="center" class="fh-team">Team 35735</Inscripcion>
         </div>
       </div>
     </section>
 
-    <section class="container-site pb-24">
-      <div class="mb-10 reveal">
-        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">How we work</p>
-        <h2 class="serif text-4xl md:text-5xl">From idea to tournament</h2>
-      </div>
-      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-        {phases.map((f, i) => (
-          <div class={`glass rounded-3xl p-7 reveal delay-${i}`}>
-            <p class="text-sm text-white/40 mb-6">0{i + 1}</p>
-            <h3 class="text-3xl mb-4">{f.title}</h3>
-            <p class="text-white/65 leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+    <section class="fp on-stone marble" aria-labelledby="prog-title">
+      <div class="wrap fp-in">
+        <div class="fp-laurel" aria-hidden="true"><Laurel size={84} /></div>
+        <div class="fp-body">
+          <Inscripcion size="xs" class="k-stone">The program</Inscripcion>
+          <h2 id="prog-title" class="pg-title fp-title">Real engineering, as a team</h2>
+          <p class="fp-big">FIRST Tech Challenge (FTC) challenges students ages 12 to 18 to solve a new engineering problem every year. Teams build a robot, program it, and take it to compete while developing technical skills, leadership, and teamwork.</p>
+          <p>As team <strong>{acrisBrand.number}</strong>, ACRIS represents the Mexico City community in this international program.</p>
+          <p class="fp-facts">Since {acrisBrand.founded}, ACRIS has taken part in {acrisBrand.program} with young people ages 12 to 18 in Mexico City, GAM.</p>
+        </div>
       </div>
     </section>
 
-    <section class="container-site pb-32 reveal">
-      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
-        style="background: linear-gradient(120deg, #250505 0%, #3a0709 100%);">
-        <p class="text-sm uppercase tracking-[0.28em] mb-5" style="color: var(--accent)">Get in</p>
-        <h2 class="serif text-4xl md:text-6xl leading-tight max-w-4xl mb-8">
-          Live the FTC experience with us.
-        </h2>
-        <a href="/acris/en/join" class="btn-primary">I want to join</a>
+    <section class="fz" aria-labelledby="ph-title">
+      <div class="wrap fz-in">
+        <div class="fz-head">
+          <Inscripcion size="xs" class="k-gold">How we work</Inscripcion>
+          <h2 id="ph-title" class="pg-title">From idea to tournament</h2>
+        </div>
+        <ol class="fz-list">
+          <li>
+            <Inscripcion as="span" size="md" align="center" class="fz-mark">I</Inscripcion>
+            <div>
+              <h3>Design</h3>
+              <p>We analyze the season's challenge and design the robot in CAD.</p>
+            </div>
+          </li>
+          <li>
+            <Inscripcion as="span" size="md" align="center" class="fz-mark">II</Inscripcion>
+            <div>
+              <h3>Build</h3>
+              <p>We manufacture, assemble, and test each subsystem.</p>
+            </div>
+          </li>
+          <li>
+            <Inscripcion as="span" size="md" align="center" class="fz-mark">III</Inscripcion>
+            <div>
+              <h3>Program</h3>
+              <p>We develop the autonomous software and driver control.</p>
+            </div>
+          </li>
+          <li>
+            <Inscripcion as="span" size="md" align="center" class="fz-mark">IV</Inscripcion>
+            <div>
+              <h3>Compete</h3>
+              <p>We take the robot to official FIRST Tech Challenge tournaments.</p>
+            </div>
+          </li>
+        </ol>
       </div>
+    </section>
+
+    <section class="fc">
+      <div class="wrap fc-in">
+        <Inscripcion size="xs" align="center" class="fc-k">Join us</Inscripcion>
+        <h2 class="pg-title fc-title">Live the FTC experience with us.</h2>
+        <a href="/acris/en/join" class="btn">I want to join<svg class="arw arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg></a>
+      </div>
+      <div class="fc-arc fc-arc--d" aria-hidden="true"><Arcada levels={1} bays={22} /></div>
+      <div class="fc-arc fc-arc--m" aria-hidden="true"><Arcada levels={1} bays={8} /></div>
     </section>
 
   </main>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
-      }, { threshold: 0.15 });
-      items.forEach((i) => observer.observe(i));
-    });
-  </script>
 </AcrisLayout>
+
+<style>
+  .arw { width: 1em; height: 1em; flex: none; }
+  :global(.k-gold) { color: var(--accent-ink); }
+  :global(.k-stone) { color: var(--stone-ink-2); }
+  .pg-h1 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.02; font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem); margin: var(--s-4) 0 var(--s-5); }
+  .pg-title { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.04; font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.5rem); margin: var(--s-4) 0 var(--s-5); }
+  .pg-lede { font-family: var(--font-serif); font-size: clamp(1.15rem, 1.02rem + .55vw, 1.4rem); line-height: 1.5; color: var(--ink-2); max-width: 40ch; }
+  .band { background: var(--bg); color: var(--decor); padding-block: 9px; border-block: 1px solid rgba(165, 100, 36, .5); }
+  .band--gold { background: var(--black-red); color: var(--accent-ink); --mos-ink: var(--black-red); }
+  .marble {
+    background-color: #F5F1EC;
+    background-image:
+      linear-gradient(118deg, transparent 0 22%, rgba(90, 21, 20, .045) 22.1%, transparent 22.5% 71%, rgba(165, 100, 36, .06) 71.1%, transparent 71.6%),
+      radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, .9), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(220, 205, 190, .5), transparent 60%);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+  .fh { background: var(--bg); padding-block: clamp(4rem, 8vw, 7rem); }
+  .fh-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8); align-items: end; }
+  .fh-flag { display: grid; justify-items: center; gap: var(--s-3); margin-right: clamp(0rem, 6vw, 6rem); padding: var(--s-6) var(--s-8); border-block: 1px solid rgba(165, 100, 36, .6); }
+  :global(.fh-num) { color: var(--ink); }
+  :global(.fh-team) { color: var(--accent-ink); }
+
+  .fp { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .fp-in { display: grid; grid-template-columns: auto minmax(0, 46rem); gap: var(--s-8); justify-content: center; align-items: start; }
+  .fp-laurel { color: #8a5a2c; padding-top: var(--s-4); opacity: .7; }
+  .fp-title { color: var(--stone-ink); }
+  .fp-body p { color: var(--stone-ink-2); margin-bottom: var(--s-5); max-width: 58ch; }
+  .fp-body .fp-big { font-family: var(--font-serif); font-size: clamp(1.2rem, 1.05rem + .6vw, 1.5rem); line-height: 1.5; color: var(--stone-ink); }
+  .fp-body .fp-facts { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 3px double rgba(138, 90, 44, .6); color: var(--stone-ink); font-weight: 600; }
+
+  .fz { background: var(--black-red); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .fz-in { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s-9); align-items: start; }
+  .fz-head .pg-title { max-width: 14ch; }
+  .fz-list { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: var(--s-7); }
+  .fz-list::before { content: ""; position: absolute; left: 26px; top: 26px; bottom: 26px; width: 0; border-left: 2px dashed rgba(165, 100, 36, .65); }
+  .fz-list li { position: relative; display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: var(--s-5); align-items: start; }
+  :global(.fz-mark) { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--decor); background: var(--bg); color: var(--accent-ink); position: relative; letter-spacing: .04em; font-size: .95rem; }
+  .fz-list h3 { font-size: clamp(1.4rem, 1.15rem + .7vw, 1.8rem); text-transform: uppercase; margin: 0 0 var(--s-2); padding-top: 10px; }
+  .fz-list p { color: var(--ink-2); max-width: 44ch; }
+
+  .fc { background: var(--red-dark); padding-top: clamp(4.5rem, 9vw, 8rem); overflow: hidden; }
+  .fc-in { display: grid; justify-items: center; text-align: center; gap: var(--s-4); }
+  :global(.fc-k) { color: #fff; }
+  .fc-title { max-width: 20ch; margin-block: 0 var(--s-3); }
+  .fc .btn:not(.btn--line) { --btn-bg: var(--ink); --btn-ink: #0A0102; }
+  .fc-arc { margin-top: var(--s-9); color: var(--decor); opacity: .45; margin-bottom: -2px; }
+  .fc-arc--m { display: none; }
+
+  @media (max-width: 860px) {
+    .fh-in, .fz-in { grid-template-columns: 1fr; gap: var(--s-7); }
+    .fh-flag { justify-items: start; margin-right: 0; }
+    .fp-in { grid-template-columns: 1fr; }
+    .fp-laurel { display: none; }
+  }
+  @media (max-width: 720px) {
+    .fc-arc--d { display: none; }
+    .fc-arc--m { display: block; }
+  }
+</style>

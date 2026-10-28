@@ -1,0 +1,61 @@
+---
+/**
+ * Estandarte.astro  (motivo romano)
+ * Vexillum / signum legionario estilizado: lanza con corona, travesano, paño con la lanza de ACRIS
+ * y numeral romano, discos y travesano inferior. Forma generica y original.
+ *
+ * Props:
+ *  - numeral: string           (numeral romano sobre el paño, p. ej. "III"; default "")
+ *  - height:  number | string  (alto; numero = px; default 280)
+ *  - class:   string
+ * Variables CSS opcionales (en el padre):
+ *  --est-cloth (paño, default var(--brand))  --est-metal (metal, default var(--accent-ink))
+ *  --est-line (hilo del paño, default var(--decor))  --est-ink (numeral, default #fff)
+ */
+interface Props {
+  numeral?: string;
+  height?: number | string;
+  class?: string;
+}
+const { numeral = "", height = 280, class: cls = "" } = Astro.props;
+const h = typeof height === "number" ? `${height}px` : height;
+---
+
+<div class={`est ${cls}`} style={`height:${h}`}>
+  <svg viewBox="14 0 92 300" aria-hidden="true" focusable="false">
+    <g stroke="var(--est-metal, var(--accent-ink))" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="60" y1="40" x2="60" y2="296" />
+      <path d="M60 2 L66 17 L60 24 L54 17Z" fill="var(--est-metal, var(--accent-ink))" stroke-width="1" />
+      <circle cx="60" cy="33" r="7" />
+      <path d="M53 33 q-1 -4 2 -6 M67 33 q1 -4 -2 -6" stroke-width="1.2" />
+      <line x1="18" y1="52" x2="102" y2="52" stroke-width="3" />
+      <circle cx="18" cy="52" r="3.2" fill="var(--est-metal, var(--accent-ink))" />
+      <circle cx="102" cy="52" r="3.2" fill="var(--est-metal, var(--accent-ink))" />
+    </g>
+    <path d="M26 53 V57 M94 53 V57" stroke="var(--est-line, var(--decor))" stroke-width="1.4" />
+    <path d="M26 57 V180 L43 171 L60 182 L77 171 L94 180 V57 Z" fill="var(--est-cloth, var(--brand))" stroke="var(--est-line, var(--decor))" stroke-width="1.5" stroke-linejoin="round" />
+    <path d="M32 63 V173 L43 166 L60 175 L77 166 L88 173 V63 Z" fill="none" stroke="var(--est-line, var(--decor))" stroke-width=".9" stroke-opacity=".8" />
+    <g stroke="var(--est-metal, var(--accent-ink))" fill="var(--bg, #0A0102)" stroke-width="1.6">
+      <circle cx="60" cy="206" r="9" />
+      <circle cx="60" cy="206" r="4" fill="none" />
+      <circle cx="60" cy="230" r="9" />
+      <circle cx="60" cy="230" r="4" fill="none" />
+      <circle cx="60" cy="254" r="9" />
+      <circle cx="60" cy="254" r="4" fill="none" />
+    </g>
+    <path d="M56 296 L60 300 L64 296Z" fill="var(--est-metal, var(--accent-ink))" />
+  </svg>
+  <span class="est-mark mark mark-acris-lanza" aria-hidden="true"></span>
+  {numeral && <span class="est-num">{numeral}</span>}
+</div>
+
+<style>
+  .est { position: relative; aspect-ratio: 92 / 300; width: auto; container-type: inline-size; flex-shrink: 0; }
+  .est svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .est-mark { position: absolute; left: 50%; top: 24.5%; width: 26%; transform: translateX(-50%); color: var(--est-ink, #fff); opacity: .95; }
+  .est-num {
+    position: absolute; left: 50%; top: 40%; transform: translateX(-50%);
+    font-family: "Cinzel", Georgia, serif; font-weight: 700; font-size: 22cqw; letter-spacing: .08em; color: var(--est-ink, #fff);
+    line-height: 1; white-space: nowrap;
+  }
+</style>

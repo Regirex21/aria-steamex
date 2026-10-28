@@ -1,0 +1,409 @@
+---
+import BaseLayout from "../layouts/baselayout.astro";
+import DocStyles from "./doc-styles.astro";
+import DocColonnade from "./doc-colonnade.astro";
+import { docs, firstAid, cats, catOrder, numerals, ui, base, pathFor, type Lang, type CatId, type Doc } from "./doc-data";
+
+interface Props { lang: Lang; cat?: CatId; }
+const { lang, cat } = Astro.props;
+const u = ui[lang];
+const isSub = !!cat;
+const visible: CatId[] = cat ? [cat] : catOrder;
+const list = docs.filter((d) => visible.includes(d.cat));
+const ready = docs.filter((d) => d.kind === "pdf" || d.kind === "repo").length + 1; // +1: manual de primeros auxilios (destacado)
+const olympus = docs.find((d) => d.id === "olympus-pagina")!;
+const feats = isSub ? [] : [
+  { d: olympus, tag: u.featuredMag, cover: true },
+  { d: firstAid, tag: u.featuredDoc, cover: false },
+];
+const pending = docs.filter((d) => d.kind === "soon").length;
+
+const seoTitle = cat ? cats[cat].seoTitle[lang] : u.seoTitle;
+const seoDesc = cat ? cats[cat].intro[lang] : u.seoDesc;
+
+const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const rowN = (i: number) => String(i + 1).padStart(2, "0");
+const external = (d: Doc) => d.kind === "pdf" || d.kind === "repo";
+const showLang = (d: Doc) => d.kind !== "repo";
+---
+
+<BaseLayout title={seoTitle} description={seoDesc} lang={lang}>
+  <DocStyles />
+  <main>
+    <header class="doc-hero">
+      <div class="doc-wrap">
+        {
+          isSub && cat ? (
+            <>
+              <nav class="doc-crumb" aria-label={u.crumbLabel}>
+                <a href={base[lang]}>{u.crumbRoot}</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">{cats[cat].tab[lang]}</span>
+              </nav>
+              <div class="doc-sub-grid">
+                <p class="doc-sub-num" aria-hidden="true">{numerals[cat]}</p>
+                <h1 class="doc-sub-h1">{cats[cat].title[lang]}</h1>
+                <p class="doc-sub-intro">{cats[cat].intro[lang]}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <h1 class="doc-h1">
+                <span>{u.h1a}</span>
+                <span>{u.h1b}</span>
+              </h1>
+              <div class="doc-hero-row">
+                <p class="doc-lead">{u.lead}</p>
+                <dl class="doc-stats">
+                  <div><dt>{u.available}</dt><dd>{ready}</dd></div>
+                  <div><dt>{u.inProgress}</dt><dd>{pending}</dd></div>
+                </dl>
+              </div>
+            </>
+          )
+        }
+      </div>
+      {isSub ? <DocColonnade n={3} sub /> : <DocColonnade n={6} />}
+    </header>
+
+    <section class="doc-paper" data-doc data-count={u.count} data-total={list.length} aria-label={isSub && cat ? cats[cat].title[lang] : u.crumbRoot}>
+      <div class="doc-wrap">
+        <div class="doc-controls">
+          {
+            isSub && cat ? (
+              <nav class="doc-sibs" aria-label={u.sibsLabel}>
+                <a href={base[lang]}>{u.sibsAll}</a>
+                {catOrder.map((c) => (
+                  <a href={pathFor(lang, c)} aria-current={c === cat ? "page" : undefined}>
+                    <span class="doc-tn" aria-hidden="true">{numerals[c]}</span>
+                    {cats[c].tab[lang]}
+                  </a>
+                ))}
+              </nav>
+            ) : (
+              <div class="doc-tabs" role="tablist" aria-label={u.tabsLabel}>
+                <button type="button" role="tab" class="doc-tab" id="doc-tab-all" data-cat="all" aria-selected="true" aria-controls="doc-panel">
+                  {u.all}<sup>{list.length}</sup>
+                </button>
+                {catOrder.map((c) => (
+                  <button type="button" role="tab" class="doc-tab" id={`doc-tab-${c}`} data-cat={c} aria-selected="false" aria-controls="doc-panel" tabindex="-1">
+                    <span class="doc-tn" aria-hidden="true">{numerals[c]}</span>
+                    {cats[c].tab[lang]}<sup>{docs.filter((d) => d.cat === c).length}</sup>
+                  </button>
+                ))}
+              </div>
+            )
+          }
+          <label class="doc-search">
+            <span class="doc-sr">{u.searchLabel}</span>
+            <input type="search" placeholder={u.searchPh} autocomplete="off" />
+          </label>
+        </div>
+        <p class="doc-count" role="status" aria-live="polite"></p>
+
+        {
+          feats.length > 0 && (
+            <section class="doc-feats" aria-labelledby="doc-feats-h">
+              <h2 class="doc-label" id="doc-feats-h">{u.featured}</h2>
+              <div class="doc-feats-grid">
+                {feats.map((f, i) => (
+                  <article class={`doc-feat doc-feat--${i}`} data-s={norm(`${f.d.title[lang]} ${f.d.desc[lang]} ${f.tag}`)}>
+                    <div class="doc-stage" data-tilt>
+                      <div class="doc-tilt">
+                        {f.cover ? (
+                          <div class="doc-book">
+                            <span class="b-ed">{lang === "es" ? "Edición 01" : "Issue 01"}</span>
+                            <span class="b-title">Olympus</span>
+                            <span>
+                              <span class="greca" style="display:block"></span>
+                              <span class="b-foot" style="display:block">{lang === "es" ? "Octubre 2026" : "October 2026"}</span>
+                            </span>
+                          </div>
+                        ) : (
+                          <img class="doc-sheet" src={f.d.thumb!} alt="" width="640" height="480" loading="lazy" />
+                        )}
+                      </div>
+                    </div>
+                    <div class="doc-feat-txt">
+                      <p class="doc-pv-cat">{f.tag}</p>
+                      <h3 class="doc-pv-title">{f.d.title[lang]}</h3>
+                      <p class="doc-pv-desc">{f.d.desc[lang]}</p>
+                      <div class="doc-pv-cta">
+                        <a
+                          class="btn"
+                          href={f.d.href![lang]}
+                          target={f.d.kind === "pdf" ? "_blank" : undefined}
+                          rel={f.d.kind === "pdf" ? "noopener noreferrer" : undefined}
+                        >
+                          {u.cta[f.d.kind]} <span class="arrow" aria-hidden="true">→</span>
+                          {f.d.kind === "pdf" && <span class="doc-sr">{u.newTab}</span>}
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        <div class="doc-body">
+          <div id="doc-panel" role={isSub ? undefined : "tabpanel"} aria-labelledby={isSub ? undefined : "doc-tab-all"} tabindex={isSub ? undefined : 0}>
+            {
+              visible.map((c) => {
+                const items = list.filter((d) => d.cat === c);
+                return (
+                  <section class="doc-group" data-group={c}>
+                    {!isSub && (
+                      <header class="doc-ghead">
+                        <span class="doc-bignum" aria-hidden="true">{numerals[c]}</span>
+                        <div>
+                          <h2 class="doc-gtitle">{cats[c].title[lang]}</h2>
+                          <p class="doc-gintro">{cats[c].intro[lang]}</p>
+                        </div>
+                        <a class="doc-glink" href={pathFor(lang, c)}>{u.section}<span class="doc-arrow" aria-hidden="true">→</span></a>
+                      </header>
+                    )}
+                    <ul class="doc-rows">
+                      {items.map((d, i) => {
+                        const href = d.href ? d.href[lang] : null;
+                        const dl = d.docLang[lang];
+                        const search = norm(`${d.title[lang]} ${d.desc[lang]} ${cats[d.cat].tab[lang]} ${u.kind[d.kind]}`);
+                        return (
+                          <li
+                            class="doc-row"
+                            data-cat={d.cat}
+                            data-s={search}
+                            data-default={d.isDefault ? "1" : undefined}
+                            data-title={d.title[lang]}
+                            data-desc={d.desc[lang]}
+                            data-thumb={d.thumb ?? ""}
+                            data-cover={d.cover ? "1" : "0"}
+                            data-kind={d.kind}
+                            data-lang={showLang(d) ? u.langName[dl] : ""}
+                            data-catlabel={`${numerals[d.cat]} · ${cats[d.cat].tab[lang]}`}
+                            data-href={href ?? ""}
+                          >
+                            {href ? (
+                              <a
+                                class="doc-rowin"
+                                href={href}
+                                target={external(d) ? "_blank" : undefined}
+                                rel={external(d) ? "noopener noreferrer" : undefined}
+                              >
+                                <span class="doc-n" aria-hidden="true">{rowN(i)}</span>
+                                <span class="doc-t">
+                                  <span class="doc-title">{d.title[lang]}</span>
+                                  <span class="doc-d">{d.desc[lang]}</span>
+                                </span>
+                                <span class="doc-side">
+                                  <span class="doc-meta">{u.kind[d.kind]}{showLang(d) ? ` · ${dl}` : ""}</span>
+                                  <span class="doc-go">
+                                    {u.go[d.kind]}
+                                    <span class="doc-arrow" aria-hidden="true">→</span>
+                                    {external(d) && <span class="doc-sr">{u.newTab}</span>}
+                                  </span>
+                                </span>
+                              </a>
+                            ) : (
+                              <div class="doc-rowin is-soon">
+                                <span class="doc-n" aria-hidden="true">{rowN(i)}</span>
+                                <span class="doc-t">
+                                  <span class="doc-title">{d.title[lang]}</span>
+                                  <span class="doc-d">{d.desc[lang]}</span>
+                                </span>
+                                <span class="doc-side">
+                                  <span class="doc-meta">{u.kind.soon}</span>
+                                  <span class="doc-go">{u.go.soon}</span>
+                                </span>
+                              </div>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </section>
+                );
+              })
+            }
+            <p class="doc-empty" hidden>{u.empty}</p>
+          </div>
+
+          <aside class="doc-preview" aria-label={u.previewLabel}>
+            <div class="doc-stage" data-tilt>
+              <div class="doc-tilt">
+                <img class="doc-sheet" alt="" width="640" height="480" hidden />
+                <div class="doc-book" hidden>
+                  <span class="b-ed">{lang === "es" ? "Edición 01" : "Issue 01"}</span>
+                  <span class="b-title">Olympus</span>
+                  <span>
+                    <span class="greca" style="display:block"></span>
+                    <span class="b-foot" style="display:block">{lang === "es" ? "Revista de la comunidad FIRST en México" : "Magazine of the FIRST community in Mexico"}<br />{lang === "es" ? "Octubre 2026" : "October 2026"}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="doc-pv-cat"></p>
+            <h3 class="doc-pv-title"></h3>
+            <p class="doc-pv-desc"></p>
+            <dl class="doc-pv-meta">
+              <div><dt>{u.format}</dt><dd class="pv-kind"></dd></div>
+              <div class="pv-lang-wrap"><dt>{u.language}</dt><dd class="pv-lang"></dd></div>
+              <div><dt>{u.status}</dt><dd class="pv-status"></dd></div>
+            </dl>
+            <div class="doc-pv-cta"></div>
+            <p class="doc-pv-hint">{u.previewHint}</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script
+    is:inline
+    define:vars={{
+      cta: u.cta, kinds: u.kind, ready: u.statusReady, soon: u.statusSoon, newTab: u.newTab,
+    }}
+  >
+    (function () {
+      var root = document.querySelector("[data-doc]");
+      if (!root) return;
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+      var panel = root.querySelector("#doc-panel");
+      var groups = Array.prototype.slice.call(root.querySelectorAll(".doc-group"));
+      var rows = Array.prototype.slice.call(root.querySelectorAll(".doc-row"));
+      var feats = Array.prototype.slice.call(root.querySelectorAll(".doc-feat"));
+      var featBox = root.querySelector(".doc-feats");
+      var input = root.querySelector(".doc-search input");
+      var count = root.querySelector(".doc-count");
+      var empty = root.querySelector(".doc-empty");
+      var tpl = root.getAttribute("data-count") || "";
+      var norm = function (s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim(); };
+      var cat = "all", q = "", current = null;
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      var prev = root.querySelector(".doc-preview");
+      var pv = {
+        sheet: prev.querySelector(".doc-sheet"), book: prev.querySelector(".doc-book"),
+        cat: prev.querySelector(".doc-pv-cat"), title: prev.querySelector(".doc-pv-title"), desc: prev.querySelector(".doc-pv-desc"),
+        kind: prev.querySelector(".pv-kind"), lang: prev.querySelector(".pv-lang"), langWrap: prev.querySelector(".pv-lang-wrap"),
+        status: prev.querySelector(".pv-status"), cta: prev.querySelector(".doc-pv-cta"), stage: prev.querySelector(".doc-stage"),
+      };
+      var seen = {};
+
+      function show(row) {
+        if (!row || !pv.title) return;
+        if (current) current.classList.remove("is-on");
+        current = row;
+        row.classList.add("is-on");
+        var d = row.dataset;
+        var isCover = d.cover === "1";
+        pv.book.hidden = !isCover;
+        pv.sheet.hidden = isCover || !d.thumb;
+        if (!isCover && d.thumb && pv.sheet.getAttribute("src") !== d.thumb) pv.sheet.setAttribute("src", d.thumb);
+        pv.cat.textContent = d.catlabel;
+        pv.title.textContent = d.title;
+        pv.desc.textContent = d.desc;
+        pv.kind.textContent = kinds[d.kind];
+        pv.langWrap.hidden = !d.lang;
+        pv.lang.textContent = d.lang;
+        pv.status.textContent = d.kind === "soon" ? soon : ready;
+        pv.cta.textContent = "";
+        if (d.href) {
+          var a = document.createElement("a");
+          a.className = "btn";
+          a.href = d.href;
+          if (d.kind === "pdf" || d.kind === "repo") { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+          a.appendChild(document.createTextNode(cta[d.kind] + " "));
+          var ar = document.createElement("span");
+          ar.className = "arrow"; ar.setAttribute("aria-hidden", "true"); ar.textContent = "→";
+          a.appendChild(ar);
+          if (d.kind === "pdf" || d.kind === "repo") {
+            var sr = document.createElement("span");
+            sr.className = "doc-sr"; sr.textContent = newTab;
+            a.appendChild(sr);
+          }
+          pv.cta.appendChild(a);
+        }
+      }
+
+      function firstVisible() {
+        for (var i = 0; i < rows.length; i++) if (!rows[i].hidden) return rows[i];
+        return null;
+      }
+
+      function apply() {
+        var shown = 0;
+        rows.forEach(function (r) {
+          var ok = (cat === "all" || r.dataset.cat === cat) && (!q || r.dataset.s.indexOf(q) > -1);
+          r.hidden = !ok;
+          if (ok) shown++;
+        });
+        groups.forEach(function (g) { g.hidden = !g.querySelector(".doc-row:not([hidden])"); });
+        feats.forEach(function (f) {
+          var ok = cat === "all" && (!q || f.dataset.s.indexOf(q) > -1);
+          f.hidden = !ok;
+          if (ok) shown++;
+        });
+        if (featBox) featBox.hidden = !feats.some(function (f) { return !f.hidden; });
+        empty.hidden = shown > 0;
+        count.textContent = tpl.replace("{n}", shown).replace("{t}", rows.length + feats.length);
+        if (!current || current.hidden) show(firstVisible());
+      }
+
+      function select(id, focus) {
+        cat = id;
+        tabs.forEach(function (t) {
+          var on = t.dataset.cat === id;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.tabIndex = on ? 0 : -1;
+          if (on) { panel.setAttribute("aria-labelledby", t.id); if (focus) t.focus(); }
+        });
+        apply();
+        try { history.replaceState(null, "", id === "all" ? location.pathname + location.search : "#" + id); } catch (e) {}
+      }
+
+      tabs.forEach(function (t, i) {
+        t.addEventListener("click", function () { select(t.dataset.cat, false); });
+        t.addEventListener("keydown", function (e) {
+          var n = null;
+          if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
+          else if (e.key === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
+          else if (e.key === "Home") n = 0;
+          else if (e.key === "End") n = tabs.length - 1;
+          if (n !== null) { e.preventDefault(); select(tabs[n].dataset.cat, true); }
+        });
+      });
+
+      if (input) input.addEventListener("input", function () { q = norm(input.value); apply(); });
+
+      rows.forEach(function (r) {
+        r.addEventListener("mouseenter", function () { show(r); });
+        r.addEventListener("focusin", function () { show(r); });
+        r.addEventListener("click", function () { show(r); });
+      });
+
+      // Pieza 3D: inclinacion suave siguiendo el cursor
+      if (!reduce) {
+        Array.prototype.slice.call(root.querySelectorAll("[data-tilt]")).forEach(function (stage) {
+          var tilt = stage.querySelector(".doc-tilt");
+          stage.addEventListener("pointermove", function (e) {
+            var b = stage.getBoundingClientRect();
+            var x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
+            tilt.style.setProperty("--ry", (-12 + x * 26).toFixed(1) + "deg");
+            tilt.style.setProperty("--rx", (3 - y * 16).toFixed(1) + "deg");
+          });
+          stage.addEventListener("pointerleave", function () {
+            tilt.style.removeProperty("--ry"); tilt.style.removeProperty("--rx");
+          });
+        });
+      }
+
+      var start = (location.hash || "").replace("#", "");
+      var def = root.querySelector('.doc-row[data-default="1"]');
+      if (def) show(def); else show(rows[0]);
+      if (tabs.length && start && tabs.some(function (t) { return t.dataset.cat === start; })) select(start, false);
+      else apply();
+    })();
+  </script>
+</BaseLayout>

@@ -1,62 +1,135 @@
 ---
+// src/pages/acris/en/contact.astro
 import AcrisLayout from "../../../layouts/acrislayout.astro";
+import Laurel from "../../../components/roma/Laurel.astro";
+import Arcada from "../../../components/roma/Arcada.astro";
+import Inscripcion from "../../../components/roma/Inscripcion.astro";
 import { acrisBrand } from "../../../config/acris-brand";
+
+const t = {
+  kicker: "Contact",
+  h1: "Let's talk",
+  lede: "Want to join, collaborate, or support ACRIS? We're one message away.",
+  mailK: "Email",
+  mailNote: "Reach out for questions, partnerships, or press.",
+  chK: "Other ways in",
+  ch: [
+    { n: "I", k: "Instagram", v: acrisBrand.instagram, d: "Follow us to see the team's day to day.", href: acrisBrand.instagramUrl, ext: true },
+    { n: "II", k: "Recruitment", v: "I want to join", d: "Go straight to the applicant form.", href: "/acris/en/join", ext: false },
+  ],
+  loc: "Location",
+};
 ---
 
 <AcrisLayout title="Contact | ACRIS STEAMEX" lang="en">
-  <main class="overflow-hidden">
+  <main>
 
-    <section class="container-site pt-24 pb-20 relative overflow-hidden">
-      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
-      <div class="relative z-10 max-w-4xl">
-        <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">Contact</p>
-        <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show">Let's talk</h1>
-        <p class="serif text-xl md:text-2xl text-white/75 max-w-2xl leading-relaxed reveal show">
-          Want to join, collaborate, or support ACRIS? We're one message away.
-        </p>
+    <section class="hero" aria-labelledby="c-title">
+      <div class="wrap hero-in">
+        <div>
+          <Inscripcion size="xs" class="kick">{t.kicker}</Inscripcion>
+          <h1 id="c-title">{t.h1}</h1>
+          <p class="serif lede">{t.lede}</p>
+        </div>
+        <div class="hero-laurel" aria-hidden="true"><Laurel size={110} leaves={10} /></div>
       </div>
     </section>
 
-    <section class="container-site pb-32">
-      <div class="grid md:grid-cols-2 gap-6">
+    <section class="carta-sec marble">
+      <div class="wrap">
+        <article class="carta">
+          <Inscripcion size="xs" align="center" class="carta-k">{t.mailK}</Inscripcion>
+          <a class="mail" href={"mailto:" + acrisBrand.email}>{acrisBrand.email}</a>
+          <p class="mail-note">{t.mailNote}</p>
 
-        <a href={"mailto:" + acrisBrand.email} class="glass rounded-3xl p-8 reveal block hover:bg-white/10 transition">
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Email</p>
-          <h3 class="text-2xl mb-2 break-words">{acrisBrand.email}</h3>
-          <p class="text-white/60">Reach out for questions, partnerships, or press.</p>
-        </a>
+          <hr class="carta-rule" />
 
-        <a href={acrisBrand.instagramUrl} target="_blank" rel="noopener noreferrer" class="glass rounded-3xl p-8 reveal delay-1 block hover:bg-white/10 transition">
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Instagram</p>
-          <h3 class="text-2xl mb-2">{acrisBrand.instagram}</h3>
-          <p class="text-white/60">Follow us to see the team's day to day.</p>
-        </a>
+          <Inscripcion size="xs" align="center" class="carta-k">{t.chK}</Inscripcion>
+          <ul class="canales">
+            {t.ch.map((c) => (
+              <li>
+                <a class="canal" href={c.href} target={c.ext ? "_blank" : undefined} rel={c.ext ? "noopener noreferrer" : undefined}>
+                  <span class="canal-n">{c.n}</span>
+                  <span class="canal-t"><strong>{c.v}</strong><span>{c.d}</span></span>
+                  <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        <div class="glass rounded-3xl p-8 reveal delay-2">
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Location</p>
-          <h3 class="text-2xl mb-2">{acrisBrand.city}</h3>
-          <p class="text-white/60">{acrisBrand.country}</p>
-        </div>
-
-        <a href="/acris/en/join" class="rounded-3xl p-8 reveal delay-3 border edge-bronze block hover:opacity-90 transition"
-          style="background: linear-gradient(120deg, #250505 0%, #3a0709 100%);">
-          <p class="text-sm uppercase tracking-[0.28em] mb-4" style="color: var(--accent)">Recruitment</p>
-          <h3 class="text-2xl mb-2">I want to join</h3>
-          <p class="text-white/60">Go straight to the applicant form.</p>
-        </a>
-
+          <p class="carta-loc">{t.loc}: {acrisBrand.city}, {acrisBrand.country}</p>
+        </article>
       </div>
+    </section>
+
+    <section class="cierre" aria-hidden="true">
+      <Inscripcion size="sm" align="center" class="cierre-t">Piercing the Limits</Inscripcion>
+      <div class="cierre-arc cierre-arc--d"><Arcada levels={1} bays={22} /></div>
+      <div class="cierre-arc cierre-arc--m"><Arcada levels={1} bays={8} /></div>
     </section>
 
   </main>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
-      }, { threshold: 0.15 });
-      items.forEach((i) => observer.observe(i));
-    });
-  </script>
 </AcrisLayout>
+
+<style>
+  :global(.kick) { color: var(--accent-ink); }
+  .band { background: var(--bg); color: var(--decor); padding-block: 9px; border-block: 1px solid rgba(165, 100, 36, .5); }
+
+  .hero { background: var(--bg); padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .hero-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8); align-items: center; }
+  .hero h1 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); font-size: clamp(2.6rem, 1.8rem + 3vw, 4.5rem); line-height: 1; margin: var(--s-4) 0 var(--s-5); }
+  .lede { font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); color: var(--ink-2); max-width: 38ch; line-height: 1.45; }
+  .hero-laurel { color: var(--decor); opacity: .6; margin-right: var(--s-7); }
+
+  .marble {
+    background-color: #F5F1EC;
+    background-image:
+      linear-gradient(118deg, transparent 0 22%, rgba(90, 21, 20, .045) 22.1%, transparent 22.5% 71%, rgba(165, 100, 36, .06) 71.1%, transparent 71.6%),
+      radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, .9), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(220, 205, 190, .5), transparent 60%);
+  }
+  .carta-sec { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .carta {
+    position: relative; max-width: 42rem; margin-inline: auto; background: #FBF8F3; color: var(--stone-ink);
+    padding: var(--s-8) clamp(1.25rem, 5vw, 3.5rem) var(--s-6);
+    box-shadow: inset 0 0 0 9px #FBF8F3, inset 0 0 0 10px rgba(165, 100, 36, .55), 0 30px 50px -32px rgba(37, 5, 5, .55);
+    border: 1px solid rgba(165, 100, 36, .35);
+  }
+  :global(.carta-k) { color: var(--stone-ink-2); }
+  .mail {
+    display: block; text-align: center; margin: var(--s-4) auto var(--s-3); color: var(--stone-ink); text-decoration: none;
+    font-family: var(--font-serif); font-size: clamp(1.15rem, .6rem + 3.2vw, 2.1rem); line-height: 1.2; overflow-wrap: anywhere;
+    text-decoration: underline; text-decoration-color: var(--decor); text-underline-offset: .25em; text-decoration-thickness: 2px;
+  }
+  .mail:hover, .mail:focus-visible { color: var(--brand); }
+  .mail-note { text-align: center; color: var(--stone-ink-2); margin: 0; }
+  .carta-rule { border: 0; border-top: 3px double rgba(165, 100, 36, .55); margin-block: var(--s-7); }
+
+  .canales { list-style: none; margin: var(--s-4) 0 0; padding: 0; }
+  .canal { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: var(--s-3); align-items: center; padding: var(--s-4) var(--s-2); color: var(--stone-ink); text-decoration: none; border-top: 1px solid rgba(37, 5, 5, .12); }
+  .canales li:first-child .canal { border-top: 0; }
+  .canal-n { font-family: "Cinzel", Georgia, serif; font-weight: 600; font-size: 1.1rem; color: var(--stone-accent); }
+  .canal-t { display: grid; gap: 2px; }
+  .canal-t strong { font-family: var(--font-body); font-weight: 600; font-size: 1.1rem; overflow-wrap: anywhere; }
+  .canal-t span { color: var(--stone-ink-2); font-size: var(--t-sm); }
+  .arw { width: 1.25rem; height: 1.25rem; flex: none; transition: transform var(--dur) var(--ease); }
+  .canal:hover { color: var(--brand); }
+  .canal:hover .arw { transform: translateX(6px); }
+  .carta-loc { margin: var(--s-5) 0 0; text-align: center; color: var(--stone-ink-2); font-size: var(--t-sm); border-top: 1px solid rgba(37, 5, 5, .12); padding-top: var(--s-4); }
+
+  .cierre { background: var(--red-dark); padding-top: var(--s-9); overflow: hidden; }
+  :global(.cierre-t) { color: var(--accent-ink); }
+  .cierre-arc { margin-top: var(--s-7); color: var(--decor); opacity: .45; margin-bottom: -2px; }
+  .cierre-arc--m { display: none; }
+
+  @media (max-width: 860px) {
+    .hero-in { grid-template-columns: 1fr; }
+    .hero-laurel { display: none; }
+    .carta-sec { padding-block: var(--s-9); }
+    .canal { grid-template-columns: 2.2rem minmax(0, 1fr) auto; padding-inline: 0; }
+  }
+  @media (max-width: 720px) {
+    .cierre-arc--d { display: none; }
+    .cierre-arc--m { display: block; }
+  }
+</style>

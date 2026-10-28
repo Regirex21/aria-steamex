@@ -24,6 +24,7 @@ export const localePairs: [string, string][] = [
   ["/acris/unirse", "/acris/en/join"],
   ["/acris/liderazgo", "/acris/en/leadership"],
   ["/acris/contacto", "/acris/en/contact"],
+  ["/acris/documentacion", "/acris/en/documentation"],
 ];
 
 // Normaliza un pathname quitando el slash final (excepto la raíz "/").

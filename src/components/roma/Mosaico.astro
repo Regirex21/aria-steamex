@@ -1,0 +1,70 @@
+---
+/**
+ * Mosaico.astro  (motivo romano)
+ * Cenefa de mosaico romano repetible, por patron SVG. Usa currentColor para el motivo
+ * y --mos-ink (default #0A0102) para los centros oscuros de las estrellas.
+ *
+ * Props:
+ *  - variant:   "meandro" | "estrellas" | "rombos"   (default "estrellas"; estrellas de 8 puntas)
+ *  - direction: "h" | "v"      (horizontal o vertical; default "h")
+ *  - size:      number         (grosor de la cenefa en px; default 28)
+ *  - class:     string         (clase extra)
+ * En "h" ocupa el 100% del ancho del padre; en "v" el 100% del alto (el padre debe tener alto).
+ */
+interface Props {
+  variant?: "meandro" | "estrellas" | "rombos";
+  direction?: "h" | "v";
+  size?: number;
+  class?: string;
+}
+const { variant = "estrellas", direction = "h", size = 28, class: cls = "" } = Astro.props;
+const id = "mos-" + Math.random().toString(36).slice(2, 8);
+const k = size / 40;
+const tileW = variant === "rombos" ? 24 : variant === "meandro" ? 32 : 40;
+const star = Array.from({ length: 16 }, (_, i) => {
+  const a = (i * 22.5 - 90) * (Math.PI / 180);
+  const r = i % 2 === 0 ? 11.5 : 5.4;
+  return `${(20 + r * Math.cos(a)).toFixed(2)},${(20 + r * Math.sin(a)).toFixed(2)}`;
+}).join(" ");
+const vertical = direction === "v";
+const transform = vertical ? `translate(${size} 0) rotate(90) scale(${k})` : `scale(${k})`;
+---
+
+<svg class={`mosaico ${cls}`} width={vertical ? size : "100%"} height={vertical ? "100%" : size} style={vertical ? `width:${size}px;height:100%` : `width:100%;height:${size}px`} aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id={id} width={tileW} height="40" patternUnits="userSpaceOnUse" patternTransform={transform}>
+      {variant === "estrellas" && (
+        <g>
+          <line x1="0" y1="3" x2={tileW} y2="3" stroke="currentColor" stroke-width="1.5" />
+          <line x1="0" y1="37" x2={tileW} y2="37" stroke="currentColor" stroke-width="1.5" />
+          <polygon points={star} fill="currentColor" />
+          <circle cx="20" cy="20" r="2.8" fill="var(--mos-ink, #0A0102)" />
+          <path d="M0 14 L6 20 L0 26 L-6 20Z M40 14 L46 20 L40 26 L34 20Z" fill="currentColor" fill-opacity=".75" />
+          <circle cx="8" cy="9" r="1.4" fill="currentColor" fill-opacity=".6" />
+          <circle cx="32" cy="9" r="1.4" fill="currentColor" fill-opacity=".6" />
+          <circle cx="8" cy="31" r="1.4" fill="currentColor" fill-opacity=".6" />
+          <circle cx="32" cy="31" r="1.4" fill="currentColor" fill-opacity=".6" />
+        </g>
+      )}
+      {variant === "meandro" && (
+        <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="miter">
+          <path d="M0 32 H5 V7 H27 V32 H32" />
+          <path d="M13 32 V16 H20 V24" />
+        </g>
+      )}
+      {variant === "rombos" && (
+        <g>
+          <path d="M12 3 L22 20 L12 37 L2 20Z" fill="none" stroke="currentColor" stroke-width="1.8" />
+          <path d="M12 12 L17 20 L12 28 L7 20Z" fill="currentColor" />
+          <circle cx="0" cy="20" r="2" fill="currentColor" />
+          <circle cx="24" cy="20" r="2" fill="currentColor" />
+        </g>
+      )}
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill={`url(#${id})`} />
+</svg>
+
+<style>
+  .mosaico { display: block; }
+</style>

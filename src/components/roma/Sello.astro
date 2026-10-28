@@ -1,0 +1,54 @@
+---
+/**
+ * Sello.astro  (motivo romano)
+ * Medallon circular: doble anillo, leyenda en capitales Cinzel sobre el aro, corona de laurel
+ * y la lanza de ACRIS al centro. Usa currentColor para anillos, laurel y leyenda.
+ *
+ * Props:
+ *  - size:   number          (diametro en px; default 240)
+ *  - text:   string          (leyenda del aro; default "ACRIS STEAMEX · FTC 35735 · CIUDAD DE MÉXICO ·")
+ *  - spin:   boolean         (el aro gira muy lento con transform; se apaga con prefers-reduced-motion; default false)
+ *  - class:  string
+ * Variables CSS opcionales: --sello-bg (relleno del disco, default transparente), --sello-ink (lanza, default currentColor)
+ */
+import Laurel from "./Laurel.astro";
+import "@fontsource/cinzel/600.css";
+interface Props {
+  size?: number;
+  text?: string;
+  spin?: boolean;
+  class?: string;
+}
+const { size = 240, text = "ACRIS STEAMEX · FTC 35735 · CIUDAD DE MÉXICO ·", spin = false, class: cls = "" } = Astro.props;
+const pid = "sello-" + Math.random().toString(36).slice(2, 8);
+---
+
+<div class={`sello ${cls}`} style={`width:${size}px;height:${size}px`} role="img" aria-label="Sello de ACRIS">
+  <svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+    <circle cx="120" cy="120" r="116" fill="var(--sello-bg, transparent)" stroke="currentColor" stroke-width="2" />
+    <circle cx="120" cy="120" r="111" fill="none" stroke="currentColor" stroke-width=".8" />
+    <circle cx="120" cy="120" r="77" fill="none" stroke="currentColor" stroke-width=".8" />
+    <circle cx="120" cy="120" r="73" fill="none" stroke="currentColor" stroke-width="1.6" />
+    <g class={spin ? "sello-ring sello-ring--spin" : "sello-ring"}>
+      <defs>
+        <path id={pid} d="M120 120 m-93 0 a93 93 0 1 1 186 0 a93 93 0 1 1 -186 0" />
+      </defs>
+      <text font-family="Cinzel, Georgia, serif" font-weight="600" font-size="14" fill="currentColor" letter-spacing="3">
+        <textPath href={`#${pid}`} textLength="578" lengthAdjust="spacing">{text}</textPath>
+      </text>
+    </g>
+  </svg>
+  <div class="sello-laurel"><Laurel variant="corona" size={Math.round(size * 0.6)} /></div>
+  <span class="sello-mark mark mark-acris-lanza" aria-hidden="true" style={`width:${Math.round(size * 0.16)}px`}></span>
+</div>
+
+<style>
+  .sello { position: relative; flex-shrink: 0; }
+  .sello svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sello-ring { transform-origin: 120px 120px; }
+  .sello-ring--spin { animation: sello-spin 120s linear infinite; }
+  .sello-laurel { position: absolute; inset: 0; display: grid; place-items: center; }
+  .sello-mark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--sello-ink, currentColor); }
+  @keyframes sello-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .sello-ring--spin { animation: none; } }
+</style>

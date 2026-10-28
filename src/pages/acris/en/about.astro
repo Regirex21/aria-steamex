@@ -1,109 +1,184 @@
 ---
+// src/pages/acris/en/about.astro
 import AcrisLayout from "../../../layouts/acrislayout.astro";
+import Laurel from "../../../components/roma/Laurel.astro";
+import Mosaico from "../../../components/roma/Mosaico.astro";
+import Inscripcion from "../../../components/roma/Inscripcion.astro";
 import { acrisBrand } from "../../../config/acris-brand";
-
-const values = [
-  { title: "Precision", desc: "Like the tip of a spear, every action is calculated." },
-  { title: "Speed", desc: "Aerodynamic design: agile solutions and quick decisions." },
-  { title: "Innovation", desc: "We take ideas from the past and transform them with technology." },
-  { title: "Community", desc: "We grow together and open opportunities for more youth." },
-];
 ---
 
 <AcrisLayout title="About | ACRIS STEAMEX" lang="en">
-  <main class="overflow-hidden">
+  <main>
 
-    <section class="container-site pt-24 pb-20 relative overflow-hidden text-center">
-      <div class="glow-orb w-56 h-56 top-8 right-16" style="background: rgba(178,19,24,.25)"></div>
-      <p class="text-sm uppercase tracking-[0.28em] text-white/50 mb-5 reveal show">About</p>
-      <h1 class="text-6xl md:text-8xl leading-none mb-8 reveal show max-w-5xl mx-auto">
-        Precision, flow, impact
-      </h1>
-      <p class="serif text-xl md:text-2xl text-white/75 max-w-3xl mx-auto leading-relaxed reveal show">
-        ACRIS brings competitive robotics to youth ages {acrisBrand.ages.replace("años", "").trim()} regardless of their background.
-      </p>
-    </section>
-
-    <section class="container-site pb-24 reveal">
-      <div class="grid lg:grid-cols-2 gap-14 items-start">
-        <div>
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Our story</p>
-          <h2 class="serif text-4xl md:text-5xl leading-tight">Born to open paths</h2>
+    <section class="nh">
+      <div class="wrap nh-in">
+        <div class="nh-txt">
+          <Inscripcion size="xs" class="k-gold">About</Inscripcion>
+          <h1 class="pg-h1">Precision, flow, <span class="hot">impact</span>.</h1>
+          <p class="pg-lede">ACRIS brings competitive robotics to youth ages 12 to 18 regardless of their background.</p>
         </div>
-        <div>
-          <p class="text-white/75 text-lg leading-relaxed mb-6">
-            ACRIS is a community-based, independent, and free FIRST Tech Challenge team in
-            Mexico City. We bring together young people passionate about science, technology,
-            and engineering to build robots, compete, and grow together.
-          </p>
-          <p class="text-white/60 leading-relaxed">
-            We believe talent does not depend on educational background, but on opportunity.
-            That's why we open a space where curiosity becomes knowledge and knowledge
-            becomes impact.
-          </p>
+        <div class="nh-wreath" aria-hidden="true">
+          <Laurel variant="corona" size={200} />
+          <Inscripcion size="lg" align="center" class="nh-acris">ACRIS</Inscripcion>
         </div>
       </div>
     </section>
 
-    <section class="container-site pb-24">
-      <div class="grid lg:grid-cols-2 gap-6">
-        <div class="glass rounded-3xl p-8 reveal">
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Mission</p>
-          <h3 class="text-4xl mb-5">Shape the future</h3>
-          <p class="text-white/75 leading-relaxed">
-            To build a generation able to lead, innovate, and solve complex problems through
-            engineering, leaving an impact that reaches beyond the competition.
-          </p>
-        </div>
-        <div class="glass rounded-3xl p-8 reveal delay-2">
-          <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">Vision</p>
-          <h3 class="text-4xl mb-5">Leave a legacy</h3>
-          <p class="text-white/75 leading-relaxed">
-            To inspire more youth to lead in science, technology, and engineering, making
-            ACRIS a symbol of excellence, perseverance, and innovation.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="container-site pb-24">
-      <div class="mb-10 reveal">
-        <p class="text-sm uppercase tracking-[0.28em] text-white/45 mb-4">What defines us</p>
-        <h2 class="serif text-4xl md:text-5xl">Our values</h2>
-      </div>
-      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-        {values.map((v, i) => (
-          <div class={`glass rounded-3xl p-7 reveal delay-${i}`}>
-            <h3 class="text-3xl mb-4">{v.title}</h3>
-            <p class="text-white/65 leading-relaxed">{v.desc}</p>
+    <section class="ns on-stone marble" aria-labelledby="story-title">
+      <div class="wrap ns-in">
+        <div class="ns-head">
+          <div>
+            <Inscripcion size="xs" align="center" class="k-stone">Our story</Inscripcion>
+            <h2 id="story-title" class="pg-title ns-title">Born to open paths</h2>
           </div>
-        ))}
+        </div>
+        <div class="ns-body">
+          <p class="ns-big">ACRIS is a community-based, independent, and free FIRST Tech Challenge team in Mexico City. We bring together young people passionate about science, technology, and engineering to build robots, compete, and grow together.</p>
+          <p>We believe talent does not depend on educational background, but on opportunity. That's why we open a space where curiosity becomes knowledge and knowledge becomes impact.</p>
+        </div>
+        <Inscripcion as="p" size="md" align="center" class="ns-dist">The first and only free community FTC team in Mexico City</Inscripcion>
       </div>
     </section>
 
-    <section class="container-site pb-32 reveal">
-      <div class="rounded-3xl p-10 md:p-14 border edge-bronze"
-        style="background: linear-gradient(90deg, #250505 0%, #5a1514 100%);">
-        <h2 class="serif text-4xl md:text-5xl mb-6 leading-tight">Be part of ACRIS</h2>
-        <p class="text-white/75 max-w-2xl mb-8 text-lg">
-          If you want to learn, build, and compete, this is your next step.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/acris/en/join" class="btn-primary">Apply</a>
-          <a href="/acris/en/contact" class="btn-secondary">Contact</a>
+    <section class="nm" aria-label="Mission / Vision">
+      <div class="nm-a">
+        <Inscripcion size="xs" class="nm-k">Mission</Inscripcion>
+        <h2>Shape the future</h2>
+        <p>To build a generation able to lead, innovate, and solve complex problems through engineering, leaving an impact that reaches beyond the competition.</p>
+      </div>
+      <div class="nm-div nm-div--v" aria-hidden="true"><Mosaico variant="rombos" direction="v" size={22} /></div>
+      <div class="nm-div nm-div--h" aria-hidden="true"><Mosaico variant="rombos" size={22} /></div>
+      <div class="nm-b">
+        <Inscripcion size="xs" class="k-gold">Vision</Inscripcion>
+        <h2>Leave a legacy</h2>
+        <p>To inspire more youth to lead in science, technology, and engineering, making ACRIS a symbol of excellence, perseverance, and innovation.</p>
+      </div>
+    </section>
+
+    <section class="nv on-stone marble" aria-labelledby="vals-title">
+      <div class="wrap">
+        <div class="nv-head">
+          <Inscripcion size="xs" class="k-stone">What defines us</Inscripcion>
+          <h2 id="vals-title" class="pg-title nv-title">Our values</h2>
+        </div>
+        <ul class="nv-list">
+          <li>
+            <div class="nv-txt">
+              <Inscripcion size="sm" align="center" numeral="I" class="nv-num">Precision</Inscripcion>
+              <p>Like the tip of a spear, every action is calculated.</p>
+            </div>
+          </li>
+          <li>
+            <div class="nv-txt">
+              <Inscripcion size="sm" align="center" numeral="II" class="nv-num">Speed</Inscripcion>
+              <p>Aerodynamic design: agile solutions and quick decisions.</p>
+            </div>
+          </li>
+          <li>
+            <div class="nv-txt">
+              <Inscripcion size="sm" align="center" numeral="III" class="nv-num">Innovation</Inscripcion>
+              <p>We take ideas from the past and transform them with technology.</p>
+            </div>
+          </li>
+          <li>
+            <div class="nv-txt">
+              <Inscripcion size="sm" align="center" numeral="IV" class="nv-num">Community</Inscripcion>
+              <p>We grow together and open opportunities for more youth.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="band band--gold" aria-hidden="true"><Mosaico variant="estrellas" size={30} /></div>
+
+    <section class="nc">
+      <div class="wrap nc-in">
+        <div>
+          <h2 class="pg-title nc-title">Be part of ACRIS</h2>
+          <p class="nc-p">If you want to learn, build, and compete, this is your next step.</p>
+        </div>
+        <div class="actions">
+          <a href="/acris/en/join" class="btn">Apply<svg class="arw arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg></a>
+          <a href="/acris/en/contact" class="btn btn--line">Contact</a>
         </div>
       </div>
     </section>
 
   </main>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("show"); });
-      }, { threshold: 0.15 });
-      items.forEach((i) => observer.observe(i));
-    });
-  </script>
 </AcrisLayout>
+
+<style>
+  .arw { width: 1em; height: 1em; flex: none; }
+  :global(.k-gold) { color: var(--accent-ink); }
+  :global(.k-stone) { color: var(--stone-ink-2); }
+  .pg-h1 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.02; font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem); margin: var(--s-4) 0 var(--s-5); }
+  .pg-title { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.04; font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.5rem); margin: var(--s-4) 0 var(--s-5); }
+  .pg-lede { font-family: var(--font-serif); font-size: clamp(1.15rem, 1.02rem + .55vw, 1.4rem); line-height: 1.5; color: var(--ink-2); max-width: 40ch; }
+  .band { background: var(--bg); color: var(--decor); padding-block: 9px; border-block: 1px solid rgba(165, 100, 36, .5); }
+  .band--gold { background: var(--black-red); color: var(--accent-ink); --mos-ink: var(--black-red); }
+  .marble {
+    background-color: #F5F1EC;
+    background-image:
+      linear-gradient(118deg, transparent 0 22%, rgba(90, 21, 20, .045) 22.1%, transparent 22.5% 71%, rgba(165, 100, 36, .06) 71.1%, transparent 71.6%),
+      radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, .9), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(220, 205, 190, .5), transparent 60%);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+  .nh { background: var(--bg); padding-block: clamp(4rem, 8vw, 7rem); }
+  .nh-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8); align-items: center; }
+  .nh .hot { color: var(--primary-soft); }
+  .nh-wreath :global(.laurel) { opacity: .65; }
+  .nh-wreath { position: relative; display: grid; place-items: center; color: var(--decor); margin-right: clamp(0rem, 4vw, 4rem); }
+  .nh-wreath :global(.nh-acris) { position: absolute; color: var(--ink); }
+
+  .ns { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .ns-in { max-width: 52rem; }
+  .ns-head { text-align: center; margin-bottom: var(--s-6); }
+  .ns-title { color: var(--stone-ink); margin-bottom: 0; }
+  .ns-body { color: var(--stone-ink-2); max-width: 46rem; margin-inline: auto; }
+  .ns-body p { margin-bottom: var(--s-5); }
+  .ns-big { font-family: var(--font-serif); font-size: clamp(1.2rem, 1.05rem + .6vw, 1.5rem); line-height: 1.5; color: var(--stone-ink); }
+  :global(.ns-dist) { color: var(--brand); margin-top: var(--s-7); padding-top: var(--s-6); border-top: 3px double rgba(138, 90, 44, .6); max-width: 40rem; margin-inline: auto; }
+
+  .nm { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+  .nm-a, .nm-b { padding: clamp(4rem, 8vw, 6.5rem) clamp(1.5rem, 5vw, 4.5rem); }
+  .nm-a { background: var(--red-dark); display: flex; flex-direction: column; align-items: flex-start; }
+  .nm-b { background: var(--bg); }
+  .nm-a > *, .nm-b > * { max-width: 34rem; }
+  :global(.nm-k) { color: #fff; }
+  .nm h2 { font-family: var(--font-title); font-weight: 400; text-transform: var(--title-transform); letter-spacing: var(--title-tracking); line-height: 1.04; font-size: clamp(2rem, 1.5rem + 1.8vw, 3rem); margin: var(--s-4) 0 var(--s-4); }
+  .nm p { color: var(--ink-2); }
+  .nm-div { background: var(--black-red); color: var(--accent-ink); --mos-ink: var(--black-red); }
+  .nm-div--v { width: 22px; }
+  .nm-div--h { display: none; }
+
+  .nv { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .nv-title { color: var(--stone-ink); margin-bottom: var(--s-8); }
+  .nv-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-7); }
+  .nv-list li { border-top: 3px double rgba(138, 90, 44, .55); padding-top: var(--s-5); }
+  .nv-txt { text-align: center; }
+  :global(.nv-num) { color: var(--stone-ink); margin-bottom: var(--s-3); }
+  :global(.nv-num .insc-num) { color: var(--brand); }
+  .nv-txt p { color: var(--stone-ink-2); font-size: var(--t-sm); max-width: 26ch; margin-inline: auto; }
+
+  .nc { background: var(--black-red); padding-block: clamp(4rem, 8vw, 6.5rem); }
+  .nc-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-7); align-items: center; }
+  .nc-title { margin-block: 0 var(--s-3); }
+  .nc-p { color: var(--ink-2); font-size: var(--t-lg); max-width: 40ch; }
+
+  @media (max-width: 860px) {
+    .nh-in { grid-template-columns: 1fr; gap: var(--s-6); }
+    .nh-wreath { justify-self: start; margin-right: 0; }
+    .nh-wreath :global(.laurel) { width: 160px !important; }
+    .nm { grid-template-columns: 1fr; }
+    .nm-div--v { display: none; }
+    .nm-div--h { display: block; }
+    .nv-list { grid-template-columns: 1fr; gap: var(--s-5); }
+    .nv-txt { text-align: left; }
+    :global(.nv-num) { text-align: left !important; }
+    .nv-txt p { margin-inline: 0; }
+    .nc-in { grid-template-columns: 1fr; gap: var(--s-6); }
+  }
+</style>

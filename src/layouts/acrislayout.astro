@@ -1,5 +1,6 @@
 ---
 import AcrisNavbar from "../components/acris-navbar.astro";
+import AcrisFooter from "../components/acris-footer.astro";
 import SEO from "../components/seo.astro";
 import "../styles/global.css";
 
@@ -16,6 +17,10 @@ const {
   lang = "es",
   image = "/assets/logos/acris.png",
 } = Astro.props;
+
+// Las portadas (con hero propio) ya reservan el espacio de la navbar fija
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const hasOwnHero = path === "/acris" || path === "/acris/en";
 ---
 
 <!DOCTYPE html>
@@ -26,6 +31,7 @@ const {
 
 <body class="overflow-x-hidden">
   <AcrisNavbar />
-  <slot />
+  <div class={hasOwnHero ? "" : "nav-offset"}><slot /></div>
+  <AcrisFooter />
 </body>
 </html>

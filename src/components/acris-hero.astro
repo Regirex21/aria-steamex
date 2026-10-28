@@ -1,0 +1,551 @@
+---
+/**
+ * Heroe ACRIS STEAMEX (v5, sobrio): una pieza protagonista (la lanza 3D) con una sola
+ * referencia romana discreta (arcada del Coliseo en linea fina y luz roja suave, en un
+ * anillo inclinado). Primer pantallazo: titulo ACRIS + escena + una linea de inscripcion.
+ * El titular, el texto y los CTA van debajo como bloque aparte.
+ * Solo se animan transform y opacity. prefers-reduced-motion: escena estatica.
+ *
+ * Props:
+ *   lang       "es" | "en"
+ *   joinHref   destino del CTA principal (por defecto "#unirse")
+ *   moreHref   destino del CTA secundario (por defecto "#ftc")
+ *
+ * Montaje: <AcrisHero lang={lang} />  (en la portada de ACRIS, justo bajo la navbar)
+ */
+interface Props {
+  lang?: "es" | "en";
+  joinHref?: string;
+  moreHref?: string;
+}
+const { lang = "es", joinHref = "#unirse", moreHref = "#ftc" } = Astro.props;
+
+// Inscripcion de una linea bajo la escena. Lema de ACRIS: Piercing the Limits (no se traduce).
+const inscription = "PIERCING THE LIMITS · FTC 35735 · MMXXV";
+
+const copy = {
+  es: {
+    aria: "Lanza de ACRIS STEAMEX, equipo FTC 35735, dentro de una arcada del Coliseo",
+    title: "Robótica gratuita para jóvenes de 12 a 18 años.",
+    lead: "ACRIS STEAMEX es el equipo FIRST Tech Challenge #35735, el primer y único equipo FTC comunitario y gratuito de la Ciudad de México. Somos un equipo mixto: aquí aprende quien quiera construir.",
+    motto: "Piercing the Limits",
+    join: "Únete gratis",
+    more: "Qué es FTC",
+    metaProgram: "Programa",
+    metaProgramV: "FIRST Tech Challenge",
+    metaTeam: "Equipo",
+    metaTeamV: "FTC 35735",
+    metaAge: "Edades",
+    metaAgeV: "12 a 18 años",
+  },
+  en: {
+    aria: "ACRIS STEAMEX spear, FTC team 35735, inside a Colosseum arcade",
+    title: "Free robotics for young people ages 12 to 18.",
+    lead: "ACRIS STEAMEX is FIRST Tech Challenge team #35735, the first and only free community FTC team in Mexico City. We are a mixed team: here anyone who wants to build can learn.",
+    motto: "Piercing the Limits",
+    join: "Join for free",
+    more: "What is FTC",
+    metaProgram: "Program",
+    metaProgramV: "FIRST Tech Challenge",
+    metaTeam: "Team",
+    metaTeamV: "FTC 35735",
+    metaAge: "Ages",
+    metaAgeV: "12 to 18",
+  },
+}[lang === "en" ? "en" : "es"];
+
+const layers = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+/* ---- Arcada del Coliseo: N paneles de fachada en linea fina (2 niveles) ---- */
+const RW = 380; // radio del muro (px de diseno)
+const N = 28;
+const PW = +(2 * RW * Math.tan(Math.PI / N)).toFixed(1);
+const panels = Array.from({ length: N }, (_, i) => ({ a: ((i * 360) / N).toFixed(3), i }));
+const arch1 = [9, 49].map((x) => `M${x} 78V60a13 13 0 0 1 26 0V78`).join("");
+const arch2 = [11, 51].map((x) => `M${x} 38V28a11 11 0 0 1 22 0V38`).join("");
+const fill1 = [9, 49].map((x) => `M${x} 78V60a13 13 0 0 1 26 0V78Z`).join("");
+const fill2 = [11, 51].map((x) => `M${x} 38V28a11 11 0 0 1 22 0V38Z`).join("");
+---
+
+<section class="acrisHero" data-acrishero aria-labelledby="acrisHero-title" lang={lang}>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" />
+
+  <svg class="acrisHero-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="acrisHero-glowv" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff5a46" stop-opacity=".55"/><stop offset="1" stop-color="#b21318" stop-opacity=".12"/></linearGradient>
+      <linearGradient id="acrisHero-line" x1="0" x2="1"><stop offset="0" stop-color="#7b4410"/><stop offset="1" stop-color="#e0b25a"/></linearGradient>
+      <g id="acrisHero-facade">
+        <path d={fill1 + fill2} fill="url(#acrisHero-glowv)"/>
+        <path d={arch1 + arch2} fill="none" stroke="#c98d3f" stroke-opacity=".8" stroke-width="1.1"/>
+        <path d="M0 80H84M0 42H84M0 6H84" fill="none" stroke="#a56424" stroke-opacity=".7" stroke-width="1.1"/>
+      </g>
+    </defs>
+  </svg>
+
+  <div class="acrisHero-head" aria-hidden="true">
+    <div class="acrisHero-side acrisHero-side--l"><i class="acrisHero-dia"></i><i class="acrisHero-rule"></i><i class="acrisHero-dia acrisHero-dia--s"></i></div>
+    <p class="acrisHero-word">ACRIS</p>
+    <div class="acrisHero-side acrisHero-side--r"><i class="acrisHero-dia"></i><i class="acrisHero-rule"></i><i class="acrisHero-dia acrisHero-dia--s"></i></div>
+  </div>
+
+  <div class="acrisHero-stage">
+    <div class="acrisHero-back" aria-hidden="true">
+      <div class="acrisHero-glow"></div>
+      <div class="acrisHero-shield"></div>
+    </div>
+
+    <div class="acrisHero-world" role="img" aria-label={copy.aria}>
+      <div class="acrisHero-rig">
+        <!-- Arcada del Coliseo en anillo inclinado -->
+        <div class="acrisHero-ring" aria-hidden="true">
+          <div class="acrisHero-plane" style={`--s:${RW + 10}`}>
+            <svg class="acrisHero-pl" style="--z:0px" viewBox={`-${RW + 10} -${RW + 10} ${2 * (RW + 10)} ${2 * (RW + 10)}`}>
+              <circle r={RW} fill="none" stroke="#a56424" stroke-opacity=".75" stroke-width="1.2"/>
+              <circle r={RW + 7} fill="none" stroke="#a56424" stroke-opacity=".35" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="acrisHero-plane" style={`--s:${RW + 10};--lift:80`}>
+            <svg class="acrisHero-pl" style="--z:0px" viewBox={`-${RW + 10} -${RW + 10} ${2 * (RW + 10)} ${2 * (RW + 10)}`}>
+              <circle r={RW} fill="none" stroke="#e0b25a" stroke-opacity=".75" stroke-width="1.4"/>
+            </svg>
+          </div>
+          <div class="acrisHero-wallSpin">
+            {panels.map((p) => (
+              <div class="acrisHero-pan" style={`--a:${p.a}deg`}>
+                <svg viewBox="0 0 84 86" preserveAspectRatio="none"><use href="#acrisHero-facade"></use></svg>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Lanza 3D: de pie sobre el centro de la arena -->
+        <div class="acrisHero-stand">
+          <div class="acrisHero-spearPos">
+            <div class="acrisHero-tilt">
+              <div class="acrisHero-obj">
+                {layers.map((i) => <div class="acrisHero-layer" style={`--i:${i}`}></div>)}
+                <div class="acrisHero-front"></div>
+                <div class="acrisHero-bevel"></div>
+                <div class="acrisHero-edge acrisHero-edge--gold"></div>
+                <div class="acrisHero-edge acrisHero-edge--hi"></div>
+                <div class="acrisHero-sheen"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="acrisHero-inscr">{inscription}</p>
+
+  <div class="acrisHero-wrap acrisHero-copy">
+    <div>
+      <h1 id="acrisHero-title" class="acrisHero-title">{copy.title}</h1>
+      <p class="acrisHero-lead">{copy.lead}</p>
+      <p class="acrisHero-motto">{copy.motto}</p>
+      <div class="acrisHero-actions">
+        <a class="acrisHero-btn" href={joinHref}>{copy.join}<span aria-hidden="true">&rarr;</span></a>
+        <a class="acrisHero-btn acrisHero-btn--line" href={moreHref}>{copy.more}</a>
+      </div>
+    </div>
+    <dl class="acrisHero-meta">
+      <dt>{copy.metaProgram}</dt><dd>{copy.metaProgramV}</dd>
+      <dt>{copy.metaTeam}</dt><dd>{copy.metaTeamV}</dd>
+      <dt>{copy.metaAge}</dt><dd>{copy.metaAgeV}</dd>
+    </dl>
+  </div>
+</section>
+
+<script>
+  // Parallax del mouse (solo desktop, sin haz de luz).
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+  document.querySelectorAll<HTMLElement>("[data-acrishero]").forEach((root) => {
+    const stage = root.querySelector<HTMLElement>(".acrisHero-stage");
+    if (!stage) return;
+    stage.addEventListener("pointermove", (e) => {
+      if (mq.matches || !fine.matches) return;
+      const r = stage.getBoundingClientRect();
+      root.style.setProperty("--mx", (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3));
+      root.style.setProperty("--my", (((e.clientY - r.top) / r.height - 0.5) * 2).toFixed(3));
+    });
+    stage.addEventListener("pointerleave", () => {
+      root.style.setProperty("--mx", "0");
+      root.style.setProperty("--my", "0");
+    });
+  });
+</script>
+
+<style is:global>
+  .acrisHero {
+    --acrisHero-bg: #090102;
+    --acrisHero-ink: #f6eeec;
+    --acrisHero-ink2: #d8c6c3;
+    --acrisHero-red: #b21318;
+    --acrisHero-gold: #e0b25a;
+    --acrisHero-gold-grad: linear-gradient(100deg, #7b4410 0%, #a56424 40%, #e0b25a 100%);
+    --acrisHero-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --acrisHero-mask: url("/assets/brand/acris-lanza.svg");
+    --acrisHero-shield: url("/assets/brand/acris-escudo.svg");
+
+    --tf: min(15.5vw, 19vh);
+    --headH: calc(var(--tf) * 0.86 + 22px);
+    /* 1 px de diseno. La escena se mide en u. */
+    --u: min(calc((100svh - var(--hero-top, 96px) - var(--headH) - 74px) / 660), calc(100vw / 860), 1.2px);
+    --TH: 24deg;
+    --sinT: 0.407;
+    --nRw: 380;
+    --oy: calc(490 * var(--u) + 6px);
+    --pd: calc(1900 * var(--u));
+    --spH: calc(450 * var(--u));
+    --spW: calc(var(--spH) / 1.3015);
+    --ed: calc(var(--spW) * 0.017);
+    --mx: 0;
+    --my: 0;
+
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--hero-top, 96px);
+    color: var(--acrisHero-ink);
+    background: radial-gradient(100% 60% at 50% 42%, #1c0304 0%, var(--acrisHero-bg) 68%);
+    font-family: var(--font-body, "Poppins", system-ui, sans-serif);
+  }
+  .acrisHero *,
+  .acrisHero *::before,
+  .acrisHero *::after { box-sizing: border-box; }
+  .acrisHero-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  /* ---------- Titulo ---------- */
+  .acrisHero-head {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(0.75rem, 2.5vw, 2.5rem);
+  }
+  .acrisHero-word {
+    margin: 0;
+    padding-left: 0.14em;
+    text-align: center;
+    font-family: var(--font-hero, "Anton", Impact, sans-serif);
+    font-size: var(--tf);
+    line-height: 0.86;
+    letter-spacing: 0.14em;
+    color: var(--acrisHero-ink);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .acrisHero-side { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+  .acrisHero-side--l { flex-direction: row-reverse; }
+  .acrisHero-rule { flex: 1; height: 1px; opacity: 0.75; animation: acrisHero-draw 1.4s var(--acrisHero-ease) 0.2s both; }
+  .acrisHero-side--l .acrisHero-rule { transform-origin: 100% 50%; background: linear-gradient(to left, #e0b25a, rgba(165, 100, 36, 0)); }
+  .acrisHero-side--r .acrisHero-rule { transform-origin: 0 50%; background: linear-gradient(to right, #e0b25a, rgba(165, 100, 36, 0)); }
+  .acrisHero-dia { flex: none; width: 8px; height: 8px; background: #e0b25a; transform: rotate(45deg); }
+  .acrisHero-dia--s { order: 3; width: 5px; height: 5px; background: #a56424; }
+
+  /* ---------- Escenario ---------- */
+  .acrisHero-stage {
+    position: relative;
+    isolation: isolate;
+    height: calc(var(--oy) + var(--nRw) * var(--sinT) * var(--u) + 14px);
+  }
+  .acrisHero-back { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .acrisHero-glow {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--oy) - 200 * var(--u));
+    width: calc(900 * var(--u));
+    height: calc(760 * var(--u));
+    translate: -50% -50%;
+    background: radial-gradient(closest-side, rgba(190, 22, 28, 0.34), rgba(120, 12, 16, 0.12) 60%, transparent 100%);
+    animation: acrisHero-pulse 6s ease-in-out infinite;
+  }
+  .acrisHero-shield {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--oy) - 500 * var(--u));
+    height: calc(560 * var(--u));
+    aspect-ratio: 1338 / 1686;
+    translate: -50% 0;
+    transform: translate3d(calc(var(--mx) * -8px), calc(var(--my) * -5px), 0);
+    transition: transform 0.6s var(--acrisHero-ease);
+    background: linear-gradient(180deg, #2a0507 0%, #150304 100%);
+    -webkit-mask: var(--acrisHero-shield) center / contain no-repeat;
+    mask: var(--acrisHero-shield) center / contain no-repeat;
+  }
+
+  /* ---------- Escena 3D ---------- */
+  .acrisHero-world {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    perspective: var(--pd);
+    perspective-origin: 50% var(--oy);
+  }
+  .acrisHero-rig {
+    position: absolute;
+    left: 50%;
+    top: var(--oy);
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--mx) * 8deg)) rotateX(calc(var(--my) * -4deg));
+    transition: transform 0.6s var(--acrisHero-ease);
+  }
+  .acrisHero-stand {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+  }
+
+  /* ---------- Lanza 3D ---------- */
+  .acrisHero-spearPos {
+    position: absolute;
+    left: calc(var(--spW) / -2);
+    top: calc(var(--spH) * -1 - 10 * var(--u));
+    width: var(--spW);
+    height: var(--spH);
+    transform-style: preserve-3d;
+    animation:
+      acrisHero-enter 0.9s var(--acrisHero-ease) both,
+      acrisHero-float 6s ease-in-out 0.9s infinite;
+  }
+  .acrisHero-tilt {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--mx) * 14deg));
+    transition: transform 0.4s var(--acrisHero-ease);
+  }
+  .acrisHero-obj {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: acrisHero-swing 10s ease-in-out infinite alternate;
+  }
+  .acrisHero-obj > :where(div) {
+    position: absolute;
+    inset: 0;
+    -webkit-mask: var(--acrisHero-mask) center / contain no-repeat;
+    mask: var(--acrisHero-mask) center / contain no-repeat;
+  }
+  .acrisHero-layer {
+    background: color-mix(in srgb, #5a1514, #190110 calc(var(--i) * 8%));
+    transform: translateZ(calc(var(--i) * -4 * var(--u)));
+  }
+  .acrisHero-front {
+    background: linear-gradient(170deg, #e23a35 0%, #b21318 34%, #5a1514 78%, #250505 100%);
+    transform: translateZ(0);
+  }
+  .acrisHero-bevel {
+    transform: translateZ(0.5px);
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.24) 0%, transparent 24%, transparent 55%, rgba(0, 0, 0, 0.35) 56%, rgba(0, 0, 0, 0.5) 100%);
+  }
+  .acrisHero-edge {
+    transform: translateZ(1px);
+    -webkit-mask: var(--acrisHero-mask) center / contain no-repeat, var(--acrisHero-mask) calc(50% + var(--ed)) calc(50% + var(--ed)) / contain no-repeat;
+    -webkit-mask-composite: source-out;
+    mask: var(--acrisHero-mask) center / contain no-repeat subtract, var(--acrisHero-mask) calc(50% + var(--ed)) calc(50% + var(--ed)) / contain no-repeat;
+  }
+  .acrisHero-edge--hi { background: #ff6a5c; }
+  .acrisHero-edge--gold {
+    -webkit-mask: var(--acrisHero-mask) center / contain no-repeat, var(--acrisHero-mask) calc(50% - var(--ed)) calc(50% - var(--ed)) / contain no-repeat;
+    -webkit-mask-composite: source-out;
+    mask: var(--acrisHero-mask) center / contain no-repeat subtract, var(--acrisHero-mask) calc(50% - var(--ed)) calc(50% - var(--ed)) / contain no-repeat;
+    background: var(--acrisHero-gold-grad);
+  }
+  .acrisHero-sheen { overflow: hidden; transform: translateZ(2px); }
+  .acrisHero-sheen::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    bottom: -20%;
+    left: -40%;
+    width: 30%;
+    background: linear-gradient(100deg, transparent, rgba(255, 220, 150, 0.8), transparent);
+    animation: acrisHero-sheen 5.5s var(--acrisHero-ease) infinite;
+  }
+
+  /* ---------- Arcada (anillo inclinado) ---------- */
+  .acrisHero-ring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--TH) * -1));
+    pointer-events: none;
+  }
+  .acrisHero-plane {
+    --S: calc(var(--s) * var(--u));
+    position: absolute;
+    left: calc(var(--S) * -1);
+    top: calc(var(--S) * -1);
+    width: calc(var(--S) * 2);
+    height: calc(var(--S) * 2);
+    transform-style: preserve-3d;
+    transform: translateY(calc(var(--lift, 0) * var(--u) * -1)) rotateX(90deg);
+  }
+  .acrisHero-pl {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .acrisHero-wallSpin {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    animation: acrisHero-wall 160s linear infinite;
+  }
+  .acrisHero-pan {
+    position: absolute;
+    left: calc(86 * var(--u) * -0.5);
+    top: calc(80 * var(--u) * -1);
+    width: calc(86 * var(--u));
+    height: calc(80 * var(--u));
+    transform: rotateY(var(--a)) translateZ(calc(var(--nRw) * var(--u)));
+  }
+  .acrisHero-pan svg { display: block; width: calc(100% + 1.5px); height: 100%; margin-left: -0.75px; overflow: visible; }
+
+  /* ---------- Inscripcion (una linea) ---------- */
+  .acrisHero-inscr {
+    position: relative;
+    z-index: 2;
+    margin: 16px 0 0;
+    text-align: center;
+    font-family: "Cinzel", var(--font-serif, "Merriweather", Georgia, serif);
+    font-weight: 500;
+    font-size: clamp(0.66rem, 1.05vw, 0.85rem);
+    letter-spacing: 0.34em;
+    padding-left: 0.34em;
+    color: rgba(224, 178, 90, 0.85);
+  }
+
+  /* ---------- Animaciones ---------- */
+  @keyframes acrisHero-enter { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes acrisHero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(calc(var(--u) * -14)); } }
+  @keyframes acrisHero-swing { from { transform: rotateY(-20deg) rotateX(3deg); } to { transform: rotateY(20deg) rotateX(-2deg); } }
+  @keyframes acrisHero-sheen { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(480%); } }
+  @keyframes acrisHero-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes acrisHero-pulse { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+  @keyframes acrisHero-wall { to { transform: rotateY(360deg); } }
+
+  /* ---------- Contenido (bloque aparte, con aire) ---------- */
+  .acrisHero-wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 16px; }
+  .acrisHero-copy {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: end;
+    padding-block: 6rem 5rem;
+  }
+  .acrisHero-title {
+    margin: 0;
+    max-width: 15ch;
+    font-family: var(--font-title, "Anton", Impact, sans-serif);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+  .acrisHero-lead {
+    margin: 1.5rem 0 0;
+    max-width: 58ch;
+    font-family: var(--font-serif, "Merriweather", Georgia, serif);
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    line-height: 1.7;
+    color: var(--acrisHero-ink2);
+  }
+  .acrisHero-motto {
+    margin: 1.25rem 0 0;
+    font-family: var(--font-wide, "Syncopate", "Arial Black", sans-serif);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--acrisHero-gold);
+  }
+  .acrisHero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+  .acrisHero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.7rem;
+    border: 1.5px solid var(--acrisHero-red);
+    border-radius: 2px;
+    background: var(--acrisHero-red);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s var(--acrisHero-ease);
+  }
+  .acrisHero-btn--line { background: transparent; color: var(--acrisHero-ink); border-color: #a56424; }
+  .acrisHero-btn:hover { transform: translateX(3px); }
+  .acrisHero-btn:focus-visible { outline: 3px solid var(--acrisHero-gold); outline-offset: 3px; }
+  .acrisHero-meta {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    border-top: 1px solid rgba(246, 238, 236, 0.3);
+  }
+  .acrisHero-meta dt,
+  .acrisHero-meta dd { margin: 0; padding: 0.75rem 0; border-bottom: 1px solid rgba(246, 238, 236, 0.13); }
+  .acrisHero-meta dt {
+    padding-right: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--acrisHero-ink2);
+    font-family: var(--font-wide, "Syncopate", "Arial Black", sans-serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .acrisHero-meta dd { text-align: right; font-weight: 500; }
+
+  @media (max-width: 860px) {
+    .acrisHero-copy { grid-template-columns: 1fr; gap: 2rem; padding-block: 4rem 3.5rem; }
+  }
+  @media (max-width: 700px) {
+    .acrisHero {
+      --tf: min(29vw, 15vh);
+      --u: min(calc((100svh - var(--hero-top, 96px) - var(--headH) - 80px) / 740), calc(100vw / 820));
+      --TH: 36deg;
+      --sinT: 0.588;
+    }
+    .acrisHero-word { letter-spacing: 0.1em; padding-left: 0.1em; }
+    .acrisHero-side { gap: 0.4rem; }
+    .acrisHero-dia--s { display: none; }
+    .acrisHero-inscr { letter-spacing: 0.2em; padding-left: 0.2em; font-size: 0.62rem; }
+    .acrisHero-title { font-size: 2.2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .acrisHero *,
+    .acrisHero *::before { animation: none !important; }
+    .acrisHero-sheen { display: none; }
+    .acrisHero-obj { transform: rotateY(-14deg) rotateX(2deg); }
+    .acrisHero-rig, .acrisHero-tilt, .acrisHero-shield { transition: none; transform: none; }
+  }
+</style>

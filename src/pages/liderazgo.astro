@@ -1,272 +1,222 @@
 ---
 // src/pages/liderazgo.astro
-
 import BaseLayout from "../layouts/baselayout.astro";
-
- const coaches = [
-  {
-    role: "Director Nacional · Project STEAMEX",
-    name: "Abraham Martínez",
-    description:
-      "Dirige la visión institucional de Project STEAMEX y apoya el crecimiento estratégico de iniciativas STEM de alto impacto.",
-    image: "/assets/mentoras/abraham.png",
-  },
-
-  {
-    role: "Head Coach",
-    name: "Regina Servín",
-    description:
-      "Lidera las áreas técnicas del equipo incluyendo mecánica, programación y documentación. Supervisa procesos de desarrollo, estrategia competitiva y formación técnica interna.",
-    image: "/assets/mentoras/rex.png",
-  },
-
-  {
-    role: "Coach",
-    name: "Isis Reyes ",
-    description:
-      "Encargada de patrocinio, impacto e imagen del equipo. Coordina alianzas, outreach, branding y estrategias de comunicación institucional.",
-    image: "/assets/mentoras/mei.jpeg",
-  },
-];
-
-const mentors = [
-  {
-    name: "Gemma Navarrete",
-    area: "Impacto",
-    description: "Outreach y comunidad.",
-    image: "/assets/mentoras/gemma.jpeg",
-  },
-
-  {
-    name: "Paulina Peña",
-    area: "Impacto",
-    description: "Outreach y comunidad.",
-    image: "/assets/mentoras/pau.png",
-  },
-
-  {
-    name: "Britany Valadez",
-    area: "Mecánica y Programación",
-    description: "Formación y desarrollo de contenidos técnicos.",
-    image: "/assets/mentoras/bri.jpeg",
-  },
-
-  {
-    name: "Renata Servín",
-    area: "Mecánica",
-    description: "Diseño, ensamble y manufactura.",
-    image: "/assets/mentoras/renata.jpeg",
-  },
-
-  {
-    name: "Katheryn Azano",
-    area: "Programación",
-    description: "Desarrollo de software y automatización.",
-    image: "/assets/mentoras/katy.png",
-  },
-];
 ---
-
-
 
 <BaseLayout title="Liderazgo | ARIA STEAMEX">
 
+  <main class="pg">
 
-  <main class="overflow-hidden">
-
-    <!-- HERO -->
-    <section class="container-site pt-28 pb-24 text-center relative overflow-hidden">
-
-      <div class="glow-orb w-56 h-56 bg-purple-400/20 top-10 right-20"></div>
-      <div class="glow-orb w-40 h-40 bg-pink-300/10 bottom-0 left-10"></div>
-
-      <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-6 reveal show">
-        Conoce al liderazgo
-      </p>
-
-      <h1 class="text-6xl md:text-8xl max-w-5xl mx-auto leading-none mb-8 reveal show">
-        Personas que construyen oportunidades
-      </h1>
-
-      <p class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed reveal show">
-        ARIA STEAMEX crece gracias a coaches, mentoras y aliados comprometidos
-        con formar una nueva generación de mujeres líderes en STEM.
-      </p>
-
-    </section>
-
-    <!-- LEADERSHIP INTRO -->
-    <section class="container-site pb-24 reveal">
-
-      <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
-
-        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-5">
-          Nuestra filosofía
-        </p>
-
-        <h2 class="text-5xl md:text-6xl leading-none mb-8 max-w-5xl">
-          Liderar es servir, enseñar y elevar estándares.
-        </h2>
-
-        <p class="text-white/72 text-lg max-w-3xl leading-relaxed">
-          No buscamos figuras decorativas. Buscamos liderazgo activo:
-          personas que enseñan, acompañan, exigen excelencia y abren camino.
-        </p>
-
+    <section class="hero hero-solo">
+      <div class="wrap">
+        <p class="kicker wide">Conoce al liderazgo</p>
+        <h1 class="title">Personas que construyen oportunidades</h1>
+        <p class="lead">ARIA STEAMEX crece gracias a coaches, mentoras y aliados comprometidos con formar una nueva generación de mujeres líderes en STEM.</p>
       </div>
-
     </section>
 
-<!-- COACHES -->
-<section class="container-site pb-28">
+    <section class="band band--lav on-stone">
+      <span class="greca greca-top" aria-hidden="true"></span>
+      <div class="wrap">
+        <span class="wide" style="color: var(--stone-ink-2)">Nuestra filosofía</span>
+        <h2 class="title quote" style="margin-top: var(--s-4)">Liderar es servir, enseñar y elevar estándares.</h2>
+        <p class="quote-p">No buscamos figuras decorativas. Buscamos liderazgo activo: personas que enseñan, acompañan, exigen excelencia y abren camino.</p>
+      </div>
+      <span class="greca greca-bot" aria-hidden="true"></span>
+    </section>
 
-  <div class="mb-10 reveal">
-    <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-      Coaches
-    </p>
-
-<h2 class="text-5xl leading-none">
-  Dirección & liderazgo institucional
-</h2>
-  </div>
-
-  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-
-    {
-      coaches.map((coach, index) => (
-        <div class={`glass rounded-3xl p-8 reveal delay-${index}`}>
-          
-          <div class="w-full h-[320px] rounded-2xl border border-white/10 mb-6 overflow-hidden">
-            <img
-              src={coach.image}
-              alt={coach.name}
-              class="w-full h-full max-h-full max-w-full object-cover"
-            />
+    <section class="band">
+      <div class="wrap">
+        <div class="head">
+          <div class="idx" aria-hidden="true">01</div>
+          <div>
+            <span class="tag wide">Coaches</span>
+            <h2 class="title">Dirección y liderazgo institucional</h2>
           </div>
-
-          <p class="text-sm uppercase tracking-[0.2em] text-white/45 mb-3">
-            {coach.role}
-          </p>
-
-          <h3 class="text-4xl mb-4">
-            {coach.name}
-          </h3>
-
-          <p class="text-white/65 leading-relaxed">
-            {coach.description}
-          </p>
-
         </div>
-      ))
-    }
-
-  </div>
-
-</section>
-
-<!-- LEADERSHIP TEAM -->
-<section class="container-site pb-28">
-
-  <div class="mb-10 reveal">
-    <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4">
-      Mentoras & Mentores
-    </p>
-
-    <h2 class="text-5xl leading-none">
-      Personas que impulsan áreas clave
-    </h2>
-  </div>
-
-  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-
-  {
-    mentors.map((mentor, index) => (
-      <div class="glass rounded-3xl p-6 reveal">
-
-        <div class="w-full h-[260px] rounded-2xl border border-white/10 mb-6 overflow-hidden">
-          <img
-            src={mentor.image}
-            alt={mentor.name}
-            class="w-full h-full max-h-full max-w-full object-cover"
-          />
+        <div class="people">
+          <article class="person">
+            <div class="photo-corner ph person-ph">
+              <img src="/assets/mentoras/abraham.png" alt="Abraham Martínez" loading="lazy" />
+            </div>
+            <div>
+              <span class="role wide">Director Nacional · Project STEAMEX</span>
+              <h3>Abraham Martínez</h3>
+              <p>Dirige la visión institucional de Project STEAMEX y apoya el crecimiento estratégico de iniciativas STEM de alto impacto.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div class="photo-corner photo-corner--alt ph person-ph">
+              <img src="/assets/mentoras/rex.png" alt="Regina Servín" loading="lazy" />
+            </div>
+            <div>
+              <span class="role wide">Head Coach</span>
+              <h3>Regina Servín</h3>
+              <p>Lidera las áreas técnicas del equipo, incluyendo mecánica, programación y documentación. Supervisa los procesos de desarrollo, la estrategia competitiva y la formación técnica interna.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div class="photo-corner ph person-ph">
+              <img src="/assets/mentoras/mei.jpeg" alt="Isis Reyes" loading="lazy" />
+            </div>
+            <div>
+              <span class="role wide">Coach</span>
+              <h3>Isis Reyes</h3>
+              <p>Encargada de patrocinio, impacto e imagen del equipo. Coordina alianzas, vinculación con la comunidad, identidad de marca y estrategias de comunicación institucional.</p>
+            </div>
+          </article>
         </div>
-
-        <div class="text-center">
-
-          <p class="text-xs uppercase tracking-[0.22em] text-white/45 mb-3">
-            {mentor.area}
-          </p>
-
-          <h3 class="text-2xl mb-3 leading-none">
-            {mentor.name}
-          </h3>
-
-          <p class="text-white/65 text-sm leading-relaxed">
-            {mentor.description}
-          </p>
-
-        </div>
-
       </div>
-    ))
-  }
+    </section>
 
-</div>
+    <div class="mq"><div class="mq-track"><div class="mq-copy"><span>Mentoras</span><span>Coaches</span><span>Aliados</span><span>Liderazgo STEM</span><span>Mentoras</span><span>Coaches</span><span>Aliados</span><span>Liderazgo STEM</span></div><div class="mq-copy" aria-hidden="true"><span>Mentoras</span><span>Coaches</span><span>Aliados</span><span>Liderazgo STEM</span><span>Mentoras</span><span>Coaches</span><span>Aliados</span><span>Liderazgo STEM</span></div></div></div>
 
-</section>
-
-
-    <!-- CTA -->
-    <section class="container-site pb-32 reveal">
-
-      <div class="rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#2c1f35] to-[#3d2b4a] border border-white/10">
-
-        <p class="text-sm uppercase tracking-[0.25em] text-white/45 mb-4 reveal delay-1">
-          Próximo paso
-        </p>
-
-        <h2 class="text-5xl md:text-6xl mb-6 leading-none reveal delay-2">
-          ¿Quieres apoyar esta misión?
-        </h2>
-
-        <p class="text-white/70 max-w-2xl mb-8 text-lg reveal delay-3">
-          Buscamos nuevas mentoras, aliados y personas listas para construir futuro.
-        </p>
-
-        <div class="flex flex-wrap gap-4 reveal delay-4">
-
-          <a href="/unirse" class="btn-primary">
-            Aplicar como mentor(a)
-          </a>
-
-          <a href="/contacto" class="btn-secondary">
-            Contactar
-          </a>
-
+    <section class="band">
+      <div class="wrap">
+        <div class="head">
+          <div class="idx" aria-hidden="true">02</div>
+          <div>
+            <span class="tag wide">Mentoras</span>
+            <h2 class="title">Personas que impulsan áreas clave</h2>
+          </div>
         </div>
-
+        <ul class="roster">
+          <li>
+            <div class="face"><img src="/assets/mentoras/gemma.jpeg" alt="Gemma Navarrete" loading="lazy" /></div>
+            <h3>Gemma Navarrete</h3>
+            <span class="area wide">Impacto</span>
+            <p>Difusión y comunidad.</p>
+          </li>
+          <li>
+            <div class="face"><img src="/assets/mentoras/pau.png" alt="Paulina Peña" loading="lazy" /></div>
+            <h3>Paulina Peña</h3>
+            <span class="area wide">Impacto</span>
+            <p>Difusión y comunidad.</p>
+          </li>
+          <li>
+            <div class="face"><img src="/assets/mentoras/bri.jpeg" alt="Britany Valadez" loading="lazy" /></div>
+            <h3>Britany Valadez</h3>
+            <span class="area wide">Mecánica y programación</span>
+            <p>Formación y desarrollo de contenidos técnicos.</p>
+          </li>
+          <li>
+            <div class="face"><img src="/assets/mentoras/renata.jpeg" alt="Renata Servín" loading="lazy" /></div>
+            <h3>Renata Servín</h3>
+            <span class="area wide">Mecánica</span>
+            <p>Diseño, ensamblaje y manufactura.</p>
+          </li>
+          <li>
+            <div class="face"><img src="/assets/mentoras/katy.png" alt="Katheryn Azano" loading="lazy" /></div>
+            <h3>Katheryn Azano</h3>
+            <span class="area wide">Programación</span>
+            <p>Desarrollo de software y automatización.</p>
+          </li>
+        </ul>
       </div>
+    </section>
 
+    <section class="band band--lav on-stone">
+      <span class="greca greca-top" aria-hidden="true"></span>
+      <div class="wrap final">
+        <div>
+          <h2 class="title">¿Quieres apoyar esta misión?</h2>
+          <p>Buscamos nuevas mentoras, aliados y personas listas para construir futuro.</p>
+        </div>
+        <div class="actions" style="margin-top: 0">
+          <a href="/unirse" class="btn-primary">Aplicar como mentora</a>
+          <a href="/contacto" class="btn-secondary">Contactar</a>
+        </div>
+      </div>
     </section>
 
   </main>
 
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const items = document.querySelectorAll(".reveal");
+  <style>
+  .pg { overflow: clip; }
+  .hero { padding-block: var(--s-8) var(--s-9); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); align-items: end; }
+  .hero h1 { font-size: var(--t-3xl); line-height: 1.02; max-width: 14ch; }
+  .hero-solo h1 { max-width: 16ch; }
+  .kicker { display: flex; align-items: center; gap: var(--s-4); color: var(--ink-2); margin-bottom: var(--s-5); }
+  .kicker::before { content: ""; width: 48px; height: 1px; background: var(--accent-ink); }
+  .lead { font-size: var(--t-lg); color: var(--ink-2); max-width: 52ch; margin-top: var(--s-5); }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+  .band { position: relative; padding-block: var(--s-9); }
+  .band--lav { background: var(--stone); color: var(--stone-ink); }
+  .band--lav p { color: var(--stone-ink-2); }
+  .band--lav .greca { color: var(--brand); }
+  .band--lav .greca-top { position: absolute; top: 0; left: 0; }
+  .band--lav .greca-bot { position: absolute; bottom: 0; left: 0; }
+  .band--lav.band { padding-block: calc(var(--s-9) + 14px); }
+  .head { display: grid; grid-template-columns: minmax(110px, 1fr) minmax(0, 4fr); gap: var(--s-5); margin-bottom: var(--s-7); align-items: start; }
+  .idx { font-family: var(--font-title); font-size: clamp(4rem, 10vw, 8.5rem); line-height: .8; color: var(--decor); }
+  .band--lav .idx { color: var(--brand); }
+  .head h2 { font-size: var(--t-2xl); max-width: 18ch; }
+  .head .tag { display: block; margin-bottom: var(--s-3); color: var(--ink-2); }
+  .band--lav .head .tag { color: var(--stone-ink-2); }
+  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+  .rows li { display: grid; grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--s-5); align-items: baseline; padding-block: var(--s-5); border-bottom: 1px solid var(--line); }
+  .rows .n { font-family: var(--font-wide); font-size: .6875rem; letter-spacing: .14em; color: var(--accent-ink); transition: transform var(--dur) var(--ease); }
+  .rows li:hover .n { transform: translateX(8px); }
+  .rows h3 { font-family: var(--font-title); font-size: var(--t-xl); letter-spacing: 0; line-height: 1.1; }
+  .rows p { color: var(--ink-2); }
+  .band--lav .rows { border-color: rgba(0, 0, 0, .3); }
+  .band--lav .rows li { border-color: rgba(0, 0, 0, .15); }
+  .band--lav .rows .n { color: var(--brand); }
+  .band--lav .rows p { color: var(--stone-ink-2); }
+  .ph { width: 100%; aspect-ratio: 4 / 5; }
+  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mq { overflow: hidden; border-block: 1px solid var(--line-strong); padding-block: var(--s-4); }
+  .mq-track { display: flex; width: max-content; animation: mq-slide 42s linear infinite; }
+  .mq-copy { display: flex; flex-shrink: 0; }
+  .mq-copy span { font-family: var(--font-title); font-size: var(--t-2xl); line-height: 1.1; white-space: nowrap; display: inline-flex; align-items: center; gap: var(--s-6); padding-right: var(--s-6); }
+  .mq-copy span::after { content: ""; width: 12px; height: 12px; background: var(--accent-ink); transform: rotate(45deg); }
+  @keyframes mq-slide { to { transform: translateX(-50%); } }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: var(--s-6); }
+    .head { grid-template-columns: 1fr; gap: var(--s-3); }
+    .idx { font-size: 4rem; }
+    .rows li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--s-3) var(--s-4); }
+    .rows li p { grid-column: 2; }
+    .band { padding-block: var(--s-8); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mq-track { width: auto; flex-wrap: wrap; }
+    .mq-copy[aria-hidden="true"] { display: none; }
+    .mq-copy { flex-wrap: wrap; }
+  }
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          }
-        });
-      }, { threshold: 0.15 });
-
-      items.forEach((item) => observer.observe(item));
-    });
-  </script>
-
- 
+  .quote { max-width: 24ch; font-size: var(--t-3xl); line-height: 1.02; }
+  .quote-p { max-width: 48ch; margin-top: var(--s-6); font-size: var(--t-lg); }
+  .people { display: grid; gap: var(--s-9); }
+  .person { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s-8); align-items: center; }
+  .person:nth-child(even) { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+  .person:nth-child(even) .person-ph { order: 2; }
+  .person-ph { max-width: 440px; width: 100%; }
+  .person:nth-child(even) .person-ph { justify-self: end; }
+  .person .role { color: var(--accent-ink); display: block; margin-bottom: var(--s-3); }
+  .person h3 { font-family: var(--font-title); font-size: var(--t-2xl); letter-spacing: 0; line-height: 1.02; margin-bottom: var(--s-4); }
+  .person p { color: var(--ink-2); max-width: 46ch; }
+  .roster { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+  .roster li { display: grid; grid-template-columns: 96px minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr); gap: var(--s-5); align-items: center; padding-block: var(--s-4); border-bottom: 1px solid var(--line); }
+  .roster .face { width: 96px; height: 96px; border-radius: 48px 48px 10px 10px; overflow: hidden; }
+  .roster .face img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-slow) var(--ease); }
+  .roster li:hover .face img { transform: scale(1.08); }
+  .roster h3 { font-family: var(--font-title); font-size: var(--t-xl); letter-spacing: 0; line-height: 1.1; }
+  .roster .area { color: var(--accent-ink); }
+  .roster p { color: var(--ink-2); }
+  .final { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--s-6); }
+  .final h2 { font-size: var(--t-3xl); line-height: 1; max-width: 12ch; }
+  .final p { max-width: 40ch; margin-top: var(--s-4); font-size: var(--t-lg); }
+  @media (max-width: 960px) {
+    .person, .person:nth-child(even) { grid-template-columns: 1fr; gap: var(--s-5); }
+    .person:nth-child(even) .person-ph { order: 0; justify-self: start; }
+    .person-ph { max-width: 320px; }
+    .people { gap: var(--s-8); }
+    .roster li { grid-template-columns: 72px minmax(0, 1fr); gap: var(--s-2) var(--s-4); }
+    .roster .face { width: 72px; height: 72px; border-radius: 36px 36px 8px 8px; grid-row: span 3; }
+    .roster li > :not(.face) { grid-column: 2; }
+  }
+</style>
 
 </BaseLayout>

@@ -1,0 +1,70 @@
+---
+/**
+ * Arcada.astro  (motivo romano)
+ * Friso de arcos tipo Coliseo en linea fina. Usa currentColor (pasale color bronce desde el padre).
+ *
+ * Props:
+ *  - levels: 1 | 2 | 3   (pisos; los dos de abajo son arcos, el tercero es atico con ventanas; default 2)
+ *  - bays:   number      (cantidad de arcos por piso; default 14)
+ *  - width:  string      (ancho CSS del friso; default "100%")
+ *  - class:  string      (clase extra)
+ * El alto sale solo de la proporcion.
+ */
+interface Props {
+  levels?: 1 | 2 | 3;
+  bays?: number;
+  width?: string;
+  class?: string;
+}
+const { levels = 2, bays = 14, width = "100%", class: cls = "" } = Astro.props;
+const B = 60, LH = 64;
+const W = bays * B;
+const H = levels * LH + 8;
+
+const rows = Array.from({ length: levels }, (_, L) => {
+  const y0 = H - (L + 1) * LH;
+  const attic = L === 2;
+  const cols = Array.from({ length: bays }, (_, i) => {
+    const x = i * B;
+    return attic
+      ? { type: "win", x }
+      : { type: "arch", x };
+  });
+  return { y0, attic, cols, L };
+});
+---
+
+<svg class={`arcada ${cls}`} viewBox={`0 0 ${W} ${H}`} style={`width:${width};height:auto`} fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" aria-hidden="true" focusable="false">
+  <line x1="0" y1="1" x2={W} y2="1" />
+  <line x1="0" y1="5" x2={W} y2="5" stroke-opacity=".6" />
+  {rows.map((r) => (
+    <g>
+      <line x1="0" y1={r.y0 + 8} x2={W} y2={r.y0 + 8} stroke-opacity=".6" />
+      <line x1="0" y1={r.y0 + LH} x2={W} y2={r.y0 + LH} />
+      {Array.from({ length: bays + 1 }, (_, i) => (
+        <g>
+          <line x1={i * B - 3} y1={r.y0 + 8} x2={i * B - 3} y2={r.y0 + LH} stroke-opacity=".55" />
+          <line x1={i * B + 3} y1={r.y0 + 8} x2={i * B + 3} y2={r.y0 + LH} stroke-opacity=".55" />
+        </g>
+      ))}
+      {r.cols.map((c) =>
+        c.type === "arch" ? (
+          <g>
+            <path d={`M${c.x + 11} ${r.y0 + LH} V${r.y0 + 30} A19 19 0 0 1 ${c.x + 49} ${r.y0 + 30} V${r.y0 + LH}`} />
+            <path d={`M${c.x + 7} ${r.y0 + 30} H${c.x + 11} M${c.x + 49} ${r.y0 + 30} H${c.x + 53}`} />
+          </g>
+        ) : (
+          <g>
+            <rect x={c.x + 22} y={r.y0 + 22} width="16" height="28" />
+            <line x1={c.x + 19} y1={r.y0 + 22} x2={c.x + 41} y2={r.y0 + 22} />
+          </g>
+        )
+      )}
+    </g>
+  ))}
+</svg>
+
+<style>
+  .arcada { display: block; overflow: visible; }
+  .arcada :global(*) { vector-effect: non-scaling-stroke; }
+</style>

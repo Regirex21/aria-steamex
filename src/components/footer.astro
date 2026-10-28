@@ -1,0 +1,87 @@
+---
+import { brand } from "../config/brand";
+
+const isEnglish = Astro.url.pathname.startsWith("/en");
+
+const t = isEnglish
+  ? {
+      home: "/en",
+      note: "Women-led FIRST Robotics Competition team from Mexico City. Engineering, leadership and STEM impact.",
+      team: "Team",
+      team_links: [
+        { href: "/en/about_us", label: "About Us" },
+        { href: "/en/leadership", label: "Leadership" },
+        { href: "/en/join", label: "Join" },
+      ],
+      res: "Resources",
+      res_links: [
+        { href: "/en/first", label: "FIRST" },
+        { href: "/en/impact", label: "Public documentation" },
+        { href: "/en/sponsors", label: "Sponsors" },
+      ],
+      contact: "Contact",
+      contact_page: "Contact page",
+      other: "Our sister team ACRIS STEAMEX",
+      otherHref: "/acris/en",
+      rights: "All rights reserved.",
+      contactHref: "/en/contact",
+    }
+  : {
+      home: "/",
+      note: "Equipo femenil de FIRST Robotics Competition en Ciudad de México. Ingeniería, liderazgo e impacto STEM.",
+      team: "Equipo",
+      team_links: [
+        { href: "/nosotras", label: "Nosotras" },
+        { href: "/liderazgo", label: "Liderazgo" },
+        { href: "/unirse", label: "Unirse" },
+      ],
+      res: "Recursos",
+      res_links: [
+        { href: "/first", label: "FIRST" },
+        { href: "/impacto", label: "Documentación pública" },
+        { href: "/sponsors", label: "Sponsors" },
+      ],
+      contact: "Contacto",
+      contact_page: "Página de contacto",
+      other: "Nuestro equipo hermano ACRIS STEAMEX",
+      otherHref: "/acris",
+      rights: "Todos los derechos reservados.",
+      contactHref: "/contacto",
+    };
+---
+
+<footer class="footer">
+  <div class="greca" aria-hidden="true"></div>
+  <div class="container-site footer-inner">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-logo" href={t.home} aria-label="ARIA STEAMEX">
+          <span class="mark mark-aria-iso iso" aria-hidden="true"></span>
+          <span class="mark mark-aria-wm wm" aria-hidden="true"></span>
+        </a>
+        <p class="foot-note">{t.note}</p>
+      </div>
+      <div>
+        <h3>{t.team}</h3>
+        <ul>{t.team_links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>{t.res}</h3>
+        <ul>{t.res_links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>{t.contact}</h3>
+        <ul>
+          <li><a href={t.contactHref}>{t.contact_page}</a></li>
+          <li><a href="mailto:ariasteamex@gmail.com">ariasteamex@gmail.com</a></li>
+          <li><a href="https://www.instagram.com/aria.steamex/" target="_blank" rel="noopener noreferrer">{brand.instagram}</a></li>
+          <li><a href={t.otherHref}>{t.other}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>{brand.name} · {brand.number}</span>
+      <span>© {new Date().getFullYear()} ARIA STEAMEX. {t.rights}</span>
+    </div>
+  </div>
+</footer>
