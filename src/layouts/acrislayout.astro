@@ -9,13 +9,17 @@ interface Props {
   description?: string;
   lang?: string;
   image?: string;
+  noindex?: boolean;
+  breadcrumbs?: { name: string; path: string }[];
 }
 
 const {
   title = "ACRIS STEAMEX",
   description = "Equipo comunitario y mixto de FIRST Tech Challenge (FTC 35735) en Ciudad de México. Robótica gratuita para jóvenes de 12 a 18 años.",
   lang = "es",
-  image = "/assets/logos/acris.png",
+  image = "/assets/og/acris-og.png",
+  noindex = false,
+  breadcrumbs,
 } = Astro.props;
 
 // Las portadas (con hero propio) ya reservan el espacio de la navbar fija
@@ -26,7 +30,7 @@ const hasOwnHero = path === "/acris" || path === "/acris/en";
 <!DOCTYPE html>
 <html lang={lang} data-theme="acris">
 <head>
-  <SEO title={title} description={description} lang={lang} image={image} team="acris" />
+  <SEO title={title} description={description} lang={lang} image={image} team="acris" noindex={noindex} breadcrumbs={breadcrumbs} />
 </head>
 
 <body class="overflow-x-hidden">

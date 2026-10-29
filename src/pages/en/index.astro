@@ -25,7 +25,11 @@ const sponsors = [
 ];
 ---
 
-<BaseLayout title="ARIA STEAMEX | Official" lang="en">
+<BaseLayout
+  title="ARIA STEAMEX | All-Female FRC Robotics Team 11040"
+  description="Community all-female FIRST Robotics Competition team in Mexico City. Engineering, leadership and free access for future engineers."
+  lang="en"
+>
   <main>
     <AriaHero lang="en" joinHref="/en/join" moreHref="#artemis" />
 
@@ -53,8 +57,8 @@ const sponsors = [
             <a class="btn" href="/en/about_us">Meet the team <span class="arrow" aria-hidden="true">&rarr;</span></a>
           </div>
           <div class="hm-photos">
-            <div class="photo-corner hm-ph1"><img src="/assets/equipo/img-7434.jpg" alt="ARIA STEAMEX members" loading="lazy" /></div>
-            <div class="photo-corner photo-corner--alt hm-ph2"><img src="/assets/equipo/img-7248.jpg" alt="ARIA STEAMEX team at work" loading="lazy" /></div>
+            <div class="photo-corner hm-ph1"><img src="/assets/equipo/img-7434.jpg" alt="ARIA STEAMEX members" loading="lazy" decoding="async" /></div>
+            <div class="photo-corner photo-corner--alt hm-ph2"><img src="/assets/equipo/img-7248.jpg" alt="ARIA STEAMEX team at work" loading="lazy" decoding="async" /></div>
           </div>
         </div>
       </div>
@@ -90,7 +94,7 @@ const sponsors = [
           <h2 id="spons-title" class="title">With the support of</h2>
         </div>
         <ul class="hm-logos">
-          {sponsors.map((s) => <li><img src={s.src} alt={s.alt} loading="lazy" /></li>)}
+          {sponsors.map((s) => <li><img src={s.src} alt={s.alt} loading="lazy" decoding="async" /></li>)}
         </ul>
         <a class="btn" href="/en/sponsors">View sponsors <span class="arrow" aria-hidden="true">&rarr;</span></a>
       </div>

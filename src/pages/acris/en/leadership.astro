@@ -26,7 +26,11 @@ const t = {
 };
 ---
 
-<AcrisLayout title="Leadership | ACRIS STEAMEX" lang="en">
+<AcrisLayout
+  title="Leadership | Director and Mentors at ACRIS STEAMEX"
+  description="Meet who leads ACRIS STEAMEX and the mentors who support FTC team 35735 in Mexico City."
+  lang="en"
+>
   <main>
 
     <section class="hero" aria-labelledby="l-title">
@@ -58,7 +62,7 @@ const t = {
             {i === 1 && <div class="col" aria-hidden="true"><Columna height={320} /></div>}
             <article class="coach">
               <div class="arco-wrap arco-wrap--s">
-                <div class="arco"><img src={c.img} alt={c.name} loading="eager" decoding="async" /></div>
+                <div class="arco"><img src={c.img} alt={c.name} loading="lazy" decoding="async" /></div>
               </div>
               <Inscripcion size="xs" numeral={c.n} class="kick">{c.role}</Inscripcion>
               <h3>{c.name}</h3>

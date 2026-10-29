@@ -51,7 +51,15 @@ const T = {
 const nums = ["I", "II", "III"];
 ---
 
-<AcrisLayout title={T.title} description={T.desc} lang={lang}>
+<AcrisLayout
+  title={T.title}
+  description={T.desc}
+  lang={lang}
+  breadcrumbs={[
+    { name: lang === "en" ? "Home" : "Inicio", path: T.home },
+    { name: lang === "en" ? "Public documentation" : "Documentación pública", path: lang === "en" ? "/acris/en/documentation" : "/acris/documentacion" },
+  ]}
+>
   <main class="ds">
     <div class="container-site ds-grid">
       <div class="ds-copy">

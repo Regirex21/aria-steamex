@@ -9,13 +9,17 @@ interface Props {
   description?: string;
   lang?: string;
   image?: string;
+  noindex?: boolean;
+  breadcrumbs?: { name: string; path: string }[];
 }
 
 const {
   title = "ARIA STEAMEX",
   description = "Equipo femenil de FIRST Robotics Competition (FRC 11040) en Ciudad de México. Ingeniería, liderazgo e impacto STEM para futuras ingenieras.",
   lang = "es",
-  image = "/assets/logos/aria-horizontal.png",
+  image = "/assets/og/aria-og.png",
+  noindex = false,
+  breadcrumbs,
 } = Astro.props;
 
 // Las portadas (con hero propio) ya reservan el espacio de la navbar fija
@@ -26,7 +30,7 @@ const hasOwnHero = path === "/" || path === "/en";
 <!DOCTYPE html>
 <html lang={lang} data-theme="aria">
 <head>
-  <SEO title={title} description={description} lang={lang} image={image} team="aria" />
+  <SEO title={title} description={description} lang={lang} image={image} team="aria" noindex={noindex} breadcrumbs={breadcrumbs} />
 </head>
 
 <body class="overflow-x-hidden">

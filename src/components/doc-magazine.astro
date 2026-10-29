@@ -71,7 +71,16 @@ const T = {
 }[lang];
 ---
 
-<BaseLayout title={T.title} description={T.desc} lang={lang}>
+<BaseLayout
+  title={T.title}
+  description={T.desc}
+  lang={lang}
+  breadcrumbs={[
+    { name: lang === "en" ? "Home" : "Inicio", path: lang === "en" ? "/en" : "/" },
+    { name: u.crumbRoot, path: base[lang] },
+    { name: "Olympus", path: lang === "en" ? "/en/impact/magazine" : "/impacto/revista" },
+  ]}
+>
   <DocStyles />
   <main>
     <header class="doc-hero">

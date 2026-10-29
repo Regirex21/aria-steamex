@@ -25,9 +25,15 @@ const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCa
 const rowN = (i: number) => String(i + 1).padStart(2, "0");
 const external = (d: Doc) => d.kind === "pdf" || d.kind === "repo";
 const showLang = (d: Doc) => d.kind !== "repo";
+
+const crumbs = [
+  { name: lang === "en" ? "Home" : "Inicio", path: lang === "en" ? "/en" : "/" },
+  { name: u.crumbRoot, path: base[lang] },
+  ...(cat ? [{ name: cats[cat].tab[lang], path: pathFor(lang, cat) }] : []),
+];
 ---
 
-<BaseLayout title={seoTitle} description={seoDesc} lang={lang}>
+<BaseLayout title={seoTitle} description={seoDesc} lang={lang} breadcrumbs={crumbs}>
   <DocStyles />
   <main>
     <header class="doc-hero">

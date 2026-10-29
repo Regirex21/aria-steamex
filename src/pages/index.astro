@@ -25,7 +25,10 @@ const sponsors = [
 ];
 ---
 
-<BaseLayout title="ARIA STEAMEX | Oficial">
+<BaseLayout
+  title="ARIA STEAMEX | Equipo femenil de robótica FRC 11040"
+  description="Equipo femenil y comunitario de FIRST Robotics Competition en la Ciudad de México. Ingeniería, liderazgo y acceso gratuito para futuras ingenieras."
+>
   <main>
     <AriaHero lang="es" joinHref="/unirse" moreHref="#artemis" />
 
@@ -53,8 +56,8 @@ const sponsors = [
             <a class="btn" href="/nosotras">Conoce al equipo <span class="arrow" aria-hidden="true">&rarr;</span></a>
           </div>
           <div class="hm-photos">
-            <div class="photo-corner hm-ph1"><img src="/assets/equipo/img-7434.jpg" alt="Integrantes de ARIA STEAMEX" loading="lazy" /></div>
-            <div class="photo-corner photo-corner--alt hm-ph2"><img src="/assets/equipo/img-7248.jpg" alt="Equipo ARIA STEAMEX en actividad" loading="lazy" /></div>
+            <div class="photo-corner hm-ph1"><img src="/assets/equipo/img-7434.jpg" alt="Integrantes de ARIA STEAMEX" loading="lazy" decoding="async" /></div>
+            <div class="photo-corner photo-corner--alt hm-ph2"><img src="/assets/equipo/img-7248.jpg" alt="Equipo ARIA STEAMEX en actividad" loading="lazy" decoding="async" /></div>
           </div>
         </div>
       </div>
@@ -90,7 +93,7 @@ const sponsors = [
           <h2 id="spons-title" class="title">Con el apoyo de</h2>
         </div>
         <ul class="hm-logos">
-          {sponsors.map((s) => <li><img src={s.src} alt={s.alt} loading="lazy" /></li>)}
+          {sponsors.map((s) => <li><img src={s.src} alt={s.alt} loading="lazy" decoding="async" /></li>)}
         </ul>
         <a class="btn" href="/sponsors">Ver patrocinadores <span class="arrow" aria-hidden="true">&rarr;</span></a>
       </div>

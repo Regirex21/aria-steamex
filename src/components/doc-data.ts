@@ -24,7 +24,7 @@ export const cats: Record<
     slug: t("procesos", "processes"),
     tab: t("Procesos", "Processes"),
     title: t("Manuales de Proceso", "Process Manuals"),
-    seoTitle: t("Procesos | ARIA STEAMEX", "Processes | ARIA STEAMEX"),
+    seoTitle: t("Manuales de proceso | ARIA STEAMEX", "Process manuals | ARIA STEAMEX"),
     intro: t(
       "Cómo trabajamos de principio a fin: del análisis del reto al taller, el software, la imagen y el impacto social. MDP significa manual de proceso.",
       "How we work from start to finish: from game analysis to the shop, software, media and social impact. PM stands for process manual.",
@@ -34,7 +34,7 @@ export const cats: Record<
     slug: t("ingenieria", "engineering"),
     tab: t("Ingeniería", "Engineering"),
     title: t("Ingeniería", "Engineering"),
-    seoTitle: t("Ingeniería | ARIA STEAMEX", "Engineering | ARIA STEAMEX"),
+    seoTitle: t("Documentación de ingeniería | ARIA STEAMEX", "Engineering documentation | ARIA STEAMEX"),
     intro: t(
       "La documentación técnica del robot: arquitectura, programación, subsistemas, pruebas e iteraciones.",
       "The technical documentation of the robot: architecture, programming, subsystems, testing and iterations.",
@@ -44,7 +44,7 @@ export const cats: Record<
     slug: t("negocios", "business"),
     tab: t("Negocios", "Business"),
     title: t("Negocios e Impacto", "Business and Impact"),
-    seoTitle: t("Negocios | ARIA STEAMEX", "Business | ARIA STEAMEX"),
+    seoTitle: t("Negocios e impacto | ARIA STEAMEX", "Business and impact | ARIA STEAMEX"),
     intro: t(
       "Estrategia, sostenibilidad e impacto: los documentos con los que el equipo planea su crecimiento.",
       "Strategy, sustainability and impact: the documents the team uses to plan its growth.",
@@ -54,7 +54,7 @@ export const cats: Record<
     slug: t("cads", "cads"),
     tab: t("CAD", "CAD"),
     title: t("CADs", "CADs"),
-    seoTitle: t("CADs | ARIA STEAMEX", "CADs | ARIA STEAMEX"),
+    seoTitle: t("Diseños CAD | ARIA STEAMEX", "CAD designs | ARIA STEAMEX"),
     intro: t(
       "Diseños mecánicos, ensamblajes y documentación CAD desarrollados durante la temporada.",
       "Mechanical designs, assemblies and CAD documentation developed during the season.",
@@ -64,7 +64,7 @@ export const cats: Record<
     slug: t("branding", "visual-identity"),
     tab: t("Identidad visual", "Visual identity"),
     title: t("Identidad Visual", "Visual Identity"),
-    seoTitle: t("Identidad Visual | ARIA STEAMEX", "Visual Identity | ARIA STEAMEX"),
+    seoTitle: t("Identidad visual | ARIA STEAMEX", "Visual identity | ARIA STEAMEX"),
     intro: t(
       "Marca, lineamientos gráficos y recursos visuales de ARIA STEAMEX.",
       "Branding, graphic guidelines and visual resources of ARIA STEAMEX.",

@@ -1,46 +1,176 @@
 ---
 // src/components/seo.astro
 // Componente central de SEO. Lo usan baselayout y acrislayout.
-import { getLocalePair } from "../config/routes";
+import { getLocalePair, normalizePath } from "../config/routes";
+import { acrisBrand } from "../config/acris-brand";
+
+interface Crumb {
+  name: string;
+  path: string; // ruta desde la raiz, ej: /impacto
+}
 
 interface Props {
   title: string;
   description: string;
   lang?: string;        // "es" | "en"
-  image?: string;       // ruta desde la raíz, ej: /assets/logos/aria-horizontal.png
+  image?: string;       // ruta desde la raiz, ej: /assets/og/aria-og.png
   team?: string;        // "aria" | "acris"
+  noindex?: boolean;    // paginas que no deben indexarse
+  breadcrumbs?: Crumb[]; // si no se pasa, se genera Inicio > pagina
 }
 
 const {
   title,
   description,
   lang = "es",
-  image = "/assets/logos/aria-horizontal.png",
+  image,
   team = "aria",
+  noindex = false,
+  breadcrumbs,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(image, Astro.site);
+const isAcris = team === "acris";
+const site = (Astro.site ?? new URL("https://www.aria-steamex.com")).origin;
+const abs = (p: string) => new URL(p, site).href;
 
-const favicon = team === "acris" ? "/favicon-acris.png" : "/favicon-aria.png";
-const siteName = team === "acris" ? "ACRIS STEAMEX" : "ARIA STEAMEX";
+const currentPath = normalizePath(Astro.url.pathname);
+const canonicalURL = abs(currentPath);
+
+// Imagen OG: 1200x630 por equipo (public/assets/og)
+const defaultOg = isAcris ? "/assets/og/acris-og.png" : "/assets/og/aria-og.png";
+const usesDefaultOg = !image || image === defaultOg;
+const ogImage = abs(image ?? defaultOg);
+const ogAlt = isAcris
+  ? (lang === "en" ? "ACRIS STEAMEX, FIRST Tech Challenge team 35735" : "ACRIS STEAMEX, equipo 35735 de FIRST Tech Challenge")
+  : (lang === "en" ? "ARIA STEAMEX, FIRST Robotics Competition team 11040" : "ARIA STEAMEX, equipo 11040 de FIRST Robotics Competition");
+
+const favicon = isAcris ? "/favicon-acris.png" : "/favicon-aria.png";
+const siteName = isAcris ? "ACRIS STEAMEX" : "ARIA STEAMEX";
+const themeColor = isAcris ? "#0A0102" : "#301F3A";
 const ogLocale = lang === "en" ? "en_US" : "es_MX";
+const ogLocaleAlt = lang === "en" ? "es_MX" : "en_US";
 
-// hreflang: buscar el par ES/EN de la página actual
+// hreflang: buscar el par ES/EN de la pagina actual
 const localePair = getLocalePair(Astro.url.pathname);
-const esURL = localePair ? new URL(localePair.es, Astro.site) : null;
-const enURL = localePair ? new URL(localePair.en, Astro.site) : null;
+const esURL = localePair ? abs(localePair.es) : null;
+const enURL = localePair ? abs(localePair.en) : null;
+
+// ---------- Datos estructurados (JSON-LD) ----------
+const homePath = isAcris ? (lang === "en" ? "/acris/en" : "/acris") : (lang === "en" ? "/en" : "/");
+const isHome = currentPath === normalizePath(homePath);
+const teamRoot = isAcris ? abs("/acris") : abs("/");
+
+const orgId = isAcris ? `${abs("/acris")}#organization` : `${abs("/")}#organization`;
+const webId = isAcris ? `${abs("/acris")}#website` : `${abs("/")}#website`;
+
+const aboutText = isAcris
+  ? (lang === "en"
+      ? "Free, community-based, mixed FIRST Tech Challenge team (FTC 35735) in Mexico City, for young people aged 12 to 18."
+      : "Equipo comunitario, mixto y gratuito de FIRST Tech Challenge (FTC 35735) en la Ciudad de México, para jóvenes de 12 a 18 años.")
+  : (lang === "en"
+      ? "Community all-female FIRST Robotics Competition team (FRC 11040) in Mexico City."
+      : "Equipo femenil y comunitario de FIRST Robotics Competition (FRC 11040) en la Ciudad de México.");
+
+const organization: Record<string, unknown> = isAcris
+  ? {
+      "@type": "Organization",
+      "@id": orgId,
+      name: "ACRIS STEAMEX",
+      alternateName: ["ACRIS", "FTC 35735"],
+      url: teamRoot,
+      logo: { "@type": "ImageObject", url: abs("/assets/og/acris-logo.png"), width: 512, height: 512 },
+      image: abs("/assets/og/acris-og.png"),
+      description: aboutText,
+      slogan: acrisBrand.tagline,
+      identifier: "FTC 35735",
+      foundingDate: "2025",
+      email: acrisBrand.email,
+      contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: acrisBrand.email, availableLanguage: ["es", "en"] }],
+      sameAs: [acrisBrand.instagramUrl],
+      address: { "@type": "PostalAddress", addressLocality: "Ciudad de México", addressCountry: "MX" },
+      areaServed: [
+        { "@type": "City", name: "Ciudad de México" },
+        { "@type": "Country", name: "México" },
+      ],
+    }
+  : {
+      "@type": "Organization",
+      "@id": orgId,
+      name: "ARIA STEAMEX",
+      alternateName: ["ARIA", "FRC 11040"],
+      url: teamRoot,
+      logo: { "@type": "ImageObject", url: abs("/assets/og/aria-logo.png"), width: 512, height: 512 },
+      image: abs("/assets/og/aria-og.png"),
+      description: aboutText,
+      identifier: "FRC 11040",
+      foundingDate: "2025",
+      email: "ariasteamex@gmail.com",
+      contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: "ariasteamex@gmail.com", availableLanguage: ["es", "en"] }],
+      sameAs: ["https://www.instagram.com/aria.steamex/"],
+      address: { "@type": "PostalAddress", addressLocality: "Ciudad de México", addressCountry: "MX" },
+      areaServed: [
+        { "@type": "City", name: "Ciudad de México" },
+        { "@type": "Country", name: "México" },
+      ],
+    };
+
+const graph: Record<string, unknown>[] = [organization];
+
+if (isHome) {
+  graph.push({
+    "@type": "WebSite",
+    "@id": webId,
+    url: teamRoot,
+    name: siteName,
+    inLanguage: ["es-MX", "en"],
+    publisher: { "@id": orgId },
+  });
+}
+
+graph.push({
+  "@type": "WebPage",
+  "@id": `${canonicalURL}#webpage`,
+  url: canonicalURL,
+  name: title,
+  description,
+  inLanguage: lang === "en" ? "en" : "es-MX",
+  isPartOf: { "@id": webId },
+  about: { "@id": orgId },
+  primaryImageOfPage: { "@type": "ImageObject", url: ogImage },
+});
+
+// Migas de pan: personalizadas o Inicio > pagina (solo subpaginas)
+const crumbs: Crumb[] | null = breadcrumbs
+  ?? (isHome ? null : [
+    { name: lang === "en" ? "Home" : "Inicio", path: homePath },
+    { name: title.split(" | ")[0], path: currentPath },
+  ]);
+if (crumbs && crumbs.length > 1) {
+  graph.push({
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: abs(c.path),
+    })),
+  });
+}
+
+const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
 ---
 
-<!-- Básicos -->
+<!-- Basicos -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/png" href={favicon} />
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="theme-color" content={themeColor} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={canonicalURL} />
 
-<!-- hreflang: versiones por idioma (solo si la página existe en ambos) -->
+<!-- hreflang: versiones por idioma (solo si la pagina existe en ambos) -->
 {esURL && enURL && (
   <>
     <link rel="alternate" hreflang="es" href={esURL} />
@@ -56,10 +186,18 @@ const enURL = localePair ? new URL(localePair.en, Astro.site) : null;
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:image" content={ogImage} />
+{usesDefaultOg && <meta property="og:image:width" content="1200" />}
+{usesDefaultOg && <meta property="og:image:height" content="630" />}
+<meta property="og:image:alt" content={ogAlt} />
 <meta property="og:locale" content={ogLocale} />
+{localePair && <meta property="og:locale:alternate" content={ogLocaleAlt} />}
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogAlt} />
+
+<!-- Datos estructurados -->
+<script type="application/ld+json" is:inline set:html={jsonLd} />
