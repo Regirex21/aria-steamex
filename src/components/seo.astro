@@ -44,7 +44,8 @@ const ogAlt = isAcris
   ? (lang === "en" ? "ACRIS STEAMEX, FIRST Tech Challenge team 35735" : "ACRIS STEAMEX, equipo 35735 de FIRST Tech Challenge")
   : (lang === "en" ? "ARIA STEAMEX, FIRST Robotics Competition team 11040" : "ARIA STEAMEX, equipo 11040 de FIRST Robotics Competition");
 
-const favicon = isAcris ? "/favicon-acris.png" : "/favicon-aria.png";
+const iconBase = isAcris ? "/favicon-acris" : "/favicon-aria";
+const touchIcon = isAcris ? "/apple-touch-icon-acris.png" : "/apple-touch-icon-aria.png";
 const siteName = isAcris ? "ACRIS STEAMEX" : "ARIA STEAMEX";
 const themeColor = isAcris ? "#0A0102" : "#301F3A";
 const ogLocale = lang === "en" ? "en_US" : "es_MX";
@@ -163,7 +164,10 @@ const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": grap
 <!-- Basicos -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/png" href={favicon} />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" sizes="48x48" href={`${iconBase}-48.png`} />
+<link rel="icon" type="image/png" sizes="192x192" href={`${iconBase}-192.png`} />
+<link rel="apple-touch-icon" href={touchIcon} />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="theme-color" content={themeColor} />
