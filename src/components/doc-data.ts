@@ -85,7 +85,7 @@ export const cats: Record<
 export const base: L = t("/impacto", "/en/impact");
 export const pathFor = (lang: Lang, cat: CatId) => `${base[lang]}/${cats[cat].slug[lang]}`;
 
-export type Kind = "pdf" | "repo" | "page" | "soon";
+export type Kind = "pdf" | "repo" | "page" | "zip" | "soon";
 export interface Doc {
   id: string;
   cat: CatId;
@@ -109,35 +109,43 @@ const soon = (id: string, cat: CatId, thumb: string, title: L, desc: L): Doc => 
 
 export const docs: Doc[] = [
   // I. Procesos
-  pdf("mdp-kickoff", "procesos", "/assets/impacto/manual-taller.png",
+  pdf("mdp-kickoff", "procesos", "/assets/impacto/covers/mdp-kickoff.webp",
     t("MDP: kickoff y análisis del reto", "PM: Kickoff and game analysis"),
     t("Proceso de análisis del reto, generación de ideas y planificación inicial.", "Game analysis process, idea generation, and initial planning."),
     "/docs/MDP-Kickoff-y-Analisis-del-Reto.pdf", "/docs/EN-MDP-Kickoff-and-Game-Analysis.pdf", "EN"),
-  pdf("mdp-cad", "procesos", "/assets/impacto/buildseason.png",
+  pdf("mdp-cad", "procesos", "/assets/impacto/covers/mdp-cad.webp",
     t("MDP: modelado y CAD", "PM: Modeling and CAD"),
     t("Workflow de modelado, diseño CAD y desarrollo de prototipos digitales.", "Modeling workflow, CAD design, and development of digital prototypes."),
     "/docs/MDP-Modelado-y-CAD.pdf", "/docs/EN-MDP-Modeling-and-CAD.pdf", "EN"),
-  pdf("mdp-fab", "procesos", "/assets/impacto/documentacion.png",
+  pdf("mdp-fab", "procesos", "/assets/impacto/covers/mdp-fab.webp",
     t("MDP: fabricación y ensamblaje", "PM: Fabrication and assembly"),
     t("Procesos de manufactura, técnicas de ensamblaje y organización del taller.", "Manufacturing processes, assembly techniques, and shop organization."),
     "/docs/MDP-Fabricacion-y-Ensamblaje.pdf", "/docs/EN-MDP-Fabrication-and-Assembly.pdf", "EN"),
-  pdf("mdp-prog", "procesos", "/assets/impacto/scouting.png",
+  pdf("mdp-prog", "procesos", "/assets/impacto/covers/mdp-prog.webp",
     t("MDP: programación y electrónica", "PM: Programming and electronics"),
     t("Desarrollo de software, integración de sistemas y procesos de testing.", "Software development, systems integration, and testing processes."),
     "/docs/MDP-Programacion-y-Electronica.pdf", "/docs/EN-MDP-Programming-and-Electronics.pdf", "EN"),
-  pdf("mdp-imagen", "procesos", "/assets/impacto/sponsors-doc.png",
+  pdf("mdp-imagen", "procesos", "/assets/impacto/covers/mdp-imagen.webp",
     t("MDP: imagen y medios", "PM: Image and media"),
     t("Lineamientos de comunicación, redes, contenido y manejo de imagen del equipo.", "Communication guidelines, social media, content, and management of the team's image."),
     "/docs/Manual-Proceso-Imagen.pdf", "/docs/Manual-Proceso-Imagen.pdf"),
-  pdf("mdp-impacto", "procesos", "/assets/impacto/sostenibilidad.png",
+  pdf("mdp-impacto", "procesos", "/assets/impacto/covers/mdp-impacto.webp",
     t("MDP: impacto social", "PM: Social impact"),
     t("Metodología de outreach, actividades STEM y proyectos de impacto en la comunidad.", "Outreach methodology, STEM activities, and community impact projects."),
     "/docs/Manual-Proceso-Impacto-Social.pdf", "/docs/Manual-Proceso-Impacto-Social.pdf"),
+  pdf("mdp-marketing", "procesos", "/assets/impacto/covers/mdp-marketing.webp",
+    t("MDP: marketing", "PM: Marketing"),
+    t("Estrategias, métricas, KPI y embudos para comunicar y medir el impacto del equipo.", "Strategies, metrics, KPIs and funnels to communicate and measure the team's impact."),
+    "/docs/Manual-Proceso-Marketing.pdf", "/docs/Manual-Proceso-Marketing.pdf"),
+  pdf("handbook", "procesos", "/assets/impacto/covers/handbook.webp",
+    t("Handbook del equipo", "Team Handbook"),
+    t("Organización, misión, valores, áreas de trabajo y lineamientos de participación del equipo.", "Organization, mission, values, work areas and participation guidelines of the team."),
+    "/docs/Handbook-ARIA-11040.pdf", "/docs/EN-Team-Handbook-ARIA-11040.pdf", "EN"),
   // II. Ingenieria
-  pdf("libro-ing", "ingenieria", "/assets/impacto/libro-ingenieria.png",
+  pdf("libro-ing", "ingenieria", "/assets/impacto/covers/libro-ing.webp",
     t("Libro de Ingeniería 2026", "Engineering Notebook 2026"),
     t("Arquitectura del robot, estrategia, subsistemas y programación.", "Robot architecture, strategy, subsystems, and programming."),
-    "/docs/Libro-de-Ingenieria-25-26.pdf", "/docs/Libro-de-Ingenieria-25-26.pdf"),
+    "/docs/Libro-de-Ingenieria-25-26.pdf", "/docs/EN-Engineering-Notebook-25-26.pdf", "EN"),
   {
     id: "codigo", cat: "ingenieria", kind: "repo", thumb: "/assets/impacto/programacion-doc.png",
     title: t("Código 2026", "Code 2026"),
@@ -147,9 +155,14 @@ export const docs: Doc[] = [
   },
 
   // III. Negocios
-  soon("plan-negocios", "negocios", "/assets/impacto/manual-taller.png",
-    t("Plan de Negocios 2026", "Business Plan 2026"),
-    t("Estrategia, sostenibilidad, crecimiento e impacto del equipo.", "Strategy, sustainability, growth, and impact of the team.")),
+  pdf("plan-negocios", "negocios", "/assets/impacto/covers/plan-negocios.webp",
+    t("Plan de Negocios 2025-26", "Business Plan 2025-26"),
+    t("Identidad, organización, marca y estrategias del equipo para la temporada.", "Identity, organization, brand and strategies of the team for the season."),
+    "/docs/Plan-de-Negocios-25-26.pdf", "/docs/Plan-de-Negocios-25-26.pdf"),
+  pdf("reporte-desempeno", "negocios", "/assets/impacto/covers/reporte-desempeno.webp",
+    t("Reporte de desempeño 2026", "Performance Report 2026"),
+    t("Resultados del robot en el regional, fallas detectadas y plan de mejora para la siguiente temporada.", "Robot results at the regional, issues found and improvement plan for the next season."),
+    "/docs/Reporte-de-Desempeno-REBUILT-25-26.pdf", "/docs/Reporte-de-Desempeno-REBUILT-25-26.pdf"),
   soon("patrocinios", "negocios", "/assets/impacto/sponsors-doc.png",
     t("Patrocinios", "Sponsorships"),
     t("Estructura de patrocinio, beneficios y relación con aliados.", "Sponsorship structure, benefits, and relationship with partners.")),
@@ -159,9 +172,6 @@ export const docs: Doc[] = [
   soon("sostenibilidad", "negocios", "/assets/impacto/sostenibilidad.png",
     t("Sostenibilidad", "Sustainability"),
     t("Planeación financiera, continuidad y crecimiento a largo plazo.", "Financial planning, continuity, and long-term growth.")),
-  soon("crecimiento", "negocios", "/assets/impacto/buildseason.png",
-    t("Estrategia de Crecimiento", "Growth Strategy"),
-    t("Objetivos, expansión y visión futura de ARIA STEAMEX.", "Goals, expansion, and future vision of ARIA STEAMEX.")),
   soon("pitch", "negocios", "/assets/impacto/brand-guidelines.png",
     t("Pitch Deck", "Pitch Deck"),
     t("Presentación institucional del equipo y su propuesta de valor.", "Institutional presentation of the team and its value proposition.")),
@@ -172,13 +182,17 @@ export const docs: Doc[] = [
     t("CAD completo del robot 2026 desarrollado por ARIA STEAMEX.", "Full CAD of the 2026 robot developed by ARIA STEAMEX.")),
 
   // V. Identidad visual
-  pdf("manual-marca", "identidad", "/assets/impacto/identidad-visual.png",
+  pdf("manual-marca", "identidad", "/assets/impacto/covers/manual-marca.webp",
     t("Manual de Marca", "Brand Manual"),
     t("Lineamientos visuales, tipografía, colores y uso correcto de la identidad de ARIA STEAMEX.", "Visual guidelines, typography, colors, and correct use of the ARIA STEAMEX identity."),
     "/docs/Manual-de-Marca-ARIA-11040.pdf", "/docs/Manual-de-Marca-ARIA-11040.pdf"),
-  soon("logos", "identidad", "/assets/impacto/brand-guidelines.png",
-    t("Logos Oficiales", "Official Logos"),
-    t("Versiones oficiales del logo, variaciones y aplicaciones permitidas.", "Official logo versions, variations, and approved applications.")),
+  {
+    id: "logos", cat: "identidad", kind: "zip", thumb: "/assets/impacto/covers/logos.webp",
+    title: t("Logos Oficiales", "Official Logos"),
+    desc: t("Versiones oficiales del logo de ARIA STEAMEX en PNG y SVG, en todas sus variantes de color.", "Official ARIA STEAMEX logo versions in PNG and SVG, in all color variants."),
+    href: t("/docs/ARIA-Logos-Oficiales.zip", "/docs/ARIA-Logos-Oficiales.zip"),
+    docLang: t("ES", "EN"),
+  },
   soon("media-kit", "identidad", "/assets/impacto/sponsors-doc.png",
     t("Media Kit", "Media Kit"),
     t("Recursos gráficos y materiales institucionales para sponsors y difusión.", "Graphic resources and institutional materials for sponsors and outreach.")),
@@ -188,9 +202,10 @@ export const docs: Doc[] = [
   soon("presentaciones", "identidad", "/assets/impacto/business-plan.png",
     t("Presentaciones", "Presentations"),
     t("Templates y lineamientos para pitch decks y presentaciones oficiales.", "Templates and guidelines for pitch decks and official presentations.")),
-  soon("filosofia", "identidad", "/assets/impacto/portada-ingenieria.png",
-    t("Filosofía Visual", "Visual Philosophy"),
-    t("Conceptos visuales, inspiración y dirección creativa de la identidad ARIA.", "Visual concepts, inspiration, and creative direction of the ARIA identity.")),
+  pdf("creacion-marca", "identidad", "/assets/impacto/covers/creacion-marca.webp",
+    t("Manual de Creación de Marca", "Brand Creation Manual"),
+    t("Cómo construir una marca: ADN, posicionamiento, logotipo, tipografía, color y aplicaciones.", "How to build a brand: DNA, positioning, logo, typography, color and applications."),
+    "/docs/Manual-de-Creacion-de-Marca.pdf", "/docs/Manual-de-Creacion-de-Marca.pdf"),
 
   // VI. Revista
   {
@@ -213,7 +228,7 @@ export const docs: Doc[] = [
 
 // Destacados del indice (fuera del catalogo por categorias, no cuentan en las pestañas)
 export const firstAid: Doc = {
-  id: "primeros-auxilios", cat: "procesos", kind: "pdf", thumb: "/assets/impacto/primeros-auxilios.png",
+  id: "primeros-auxilios", cat: "procesos", kind: "pdf", thumb: "/assets/impacto/covers/primeros-auxilios.webp",
   title: t("Manual de primeros auxilios", "First aid manual"),
   desc: t("Un recurso esencial para la seguridad del equipo, con protocolos claros para emergencias médicas durante talleres, eventos y actividades de campo.",
     "An essential resource for team safety, with clear protocols for medical emergencies during workshops, events, and field activities."),
@@ -249,9 +264,9 @@ export const ui = {
     statusReady: "Disponible",
     statusSoon: "Próximamente",
     langName: { ES: "Español", EN: "Inglés" } as Record<string, string>,
-    kind: { pdf: "PDF", repo: "Repositorio", page: "Página", soon: "En preparación" } as Record<string, string>,
-    go: { pdf: "Abrir", repo: "Ver repositorio", page: "Entrar", soon: "Próximamente" } as Record<string, string>,
-    cta: { pdf: "Abrir documento", repo: "Ver repositorio", page: "Entrar a la sección" } as Record<string, string>,
+    kind: { pdf: "PDF", repo: "Repositorio", page: "Página", zip: "ZIP (PNG y SVG)", soon: "En preparación" } as Record<string, string>,
+    go: { pdf: "Abrir", repo: "Ver repositorio", page: "Entrar", zip: "Descargar", soon: "Próximamente" } as Record<string, string>,
+    cta: { pdf: "Abrir documento", repo: "Ver repositorio", page: "Entrar a la sección", zip: "Descargar logos" } as Record<string, string>,
     newTab: "(se abre en una pestaña nueva)",
     crumbRoot: "Documentación pública",
     crumbLabel: "Ruta de navegación",
@@ -288,9 +303,9 @@ export const ui = {
     statusReady: "Available",
     statusSoon: "Coming soon",
     langName: { ES: "Spanish", EN: "English" } as Record<string, string>,
-    kind: { pdf: "PDF", repo: "Repository", page: "Page", soon: "In progress" } as Record<string, string>,
-    go: { pdf: "Open", repo: "View repository", page: "Enter", soon: "Coming soon" } as Record<string, string>,
-    cta: { pdf: "Open document", repo: "View repository", page: "Go to the section" } as Record<string, string>,
+    kind: { pdf: "PDF", repo: "Repository", page: "Page", zip: "ZIP (PNG and SVG)", soon: "In progress" } as Record<string, string>,
+    go: { pdf: "Open", repo: "View repository", page: "Enter", zip: "Download", soon: "Coming soon" } as Record<string, string>,
+    cta: { pdf: "Open document", repo: "View repository", page: "Go to the section", zip: "Download logos" } as Record<string, string>,
     newTab: "(opens in a new tab)",
     crumbRoot: "Public documentation",
     crumbLabel: "Breadcrumb",

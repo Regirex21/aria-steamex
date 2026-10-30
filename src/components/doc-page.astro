@@ -10,7 +10,7 @@ const u = ui[lang];
 const isSub = !!cat;
 const visible: CatId[] = cat ? [cat] : catOrder;
 const list = docs.filter((d) => visible.includes(d.cat));
-const ready = docs.filter((d) => d.kind === "pdf" || d.kind === "repo").length + 1; // +1: manual de primeros auxilios (destacado)
+const ready = docs.filter((d) => d.kind === "pdf" || d.kind === "repo" || d.kind === "zip").length + 1; // +1: manual de primeros auxilios (destacado)
 const olympus = docs.find((d) => d.id === "olympus-pagina")!;
 const feats = isSub ? [] : [
   { d: olympus, tag: u.featuredMag, cover: true },
