@@ -13,7 +13,7 @@ const list = docs.filter((d) => visible.includes(d.cat));
 const ready = docs.filter((d) => d.kind === "pdf" || d.kind === "repo" || d.kind === "zip").length + 1; // +1: manual de primeros auxilios (destacado)
 const olympus = docs.find((d) => d.id === "olympus-pagina")!;
 const feats = isSub ? [] : [
-  { d: olympus, tag: u.featuredMag, cover: true },
+  { d: olympus, tag: u.featuredMag, cover: false },
   { d: firstAid, tag: u.featuredDoc, cover: false },
 ];
 const pending = docs.filter((d) => d.kind === "soon").length;

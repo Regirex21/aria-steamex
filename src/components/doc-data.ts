@@ -209,7 +209,7 @@ export const docs: Doc[] = [
 
   // VI. Revista
   {
-    id: "olympus-pagina", cat: "revista", kind: "page", thumb: null, cover: true,
+    id: "olympus-pagina", cat: "revista", kind: "page", thumb: "/assets/impacto/covers/olympus-01.webp",
     title: t("Olympus, la revista", "Olympus, the magazine"),
     desc: t("Una revista mensual hecha por y para la comunidad FIRST en México. Equipos y personas comparten sus proyectos y experiencias, y tu equipo puede aparecer en la siguiente.",
       "A monthly magazine made by and for the FIRST community in Mexico. Teams and people share their projects and experiences, and your team can be featured in the next one."),
@@ -217,7 +217,7 @@ export const docs: Doc[] = [
     docLang: t("ES", "EN"),
   },
   {
-    id: "olympus-01", cat: "revista", kind: "pdf", thumb: null, cover: true, isDefault: true,
+    id: "olympus-01", cat: "revista", kind: "pdf", thumb: "/assets/impacto/covers/olympus-01.webp", isDefault: true,
     title: t("Olympus, edición 01", "Olympus, issue 01"),
     desc: t("Primera edición, octubre 2026. 54 páginas.", "First issue, October 2026. 54 pages, in Spanish."),
     href: t("/docs/Olympus-Edicion-01-Octubre-2026.pdf", "/docs/Olympus-Edicion-01-Octubre-2026.pdf"),
