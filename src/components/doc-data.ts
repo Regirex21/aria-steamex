@@ -193,6 +193,10 @@ export const docs: Doc[] = [
     href: t("/docs/ARIA-Logos-Oficiales.zip", "/docs/ARIA-Logos-Oficiales.zip"),
     docLang: t("ES", "EN"),
   },
+  pdf("creacion-marca", "identidad", "/assets/impacto/covers/creacion-marca.webp",
+    t("Manual de Creación de Marca", "Brand Creation Manual"),
+    t("Cómo construir una marca: ADN, posicionamiento, logotipo, tipografía, color y aplicaciones.", "How to build a brand: DNA, positioning, logo, typography, color and applications."),
+    "/docs/Manual-de-Creacion-de-Marca.pdf", "/docs/Manual-de-Creacion-de-Marca.pdf"),
   soon("media-kit", "identidad", "/assets/impacto/sponsors-doc.png",
     t("Media Kit", "Media Kit"),
     t("Recursos gráficos y materiales institucionales para sponsors y difusión.", "Graphic resources and institutional materials for sponsors and outreach.")),
@@ -202,10 +206,6 @@ export const docs: Doc[] = [
   soon("presentaciones", "identidad", "/assets/impacto/business-plan.png",
     t("Presentaciones", "Presentations"),
     t("Templates y lineamientos para pitch decks y presentaciones oficiales.", "Templates and guidelines for pitch decks and official presentations.")),
-  pdf("creacion-marca", "identidad", "/assets/impacto/covers/creacion-marca.webp",
-    t("Manual de Creación de Marca", "Brand Creation Manual"),
-    t("Cómo construir una marca: ADN, posicionamiento, logotipo, tipografía, color y aplicaciones.", "How to build a brand: DNA, positioning, logo, typography, color and applications."),
-    "/docs/Manual-de-Creacion-de-Marca.pdf", "/docs/Manual-de-Creacion-de-Marca.pdf"),
 
   // VI. Revista
   {
