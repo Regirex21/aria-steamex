@@ -39,6 +39,7 @@ const T = {
     edition: "Edición 01",
     tag: "Revista de la comunidad FIRST en México",
     date: "Octubre 2026",
+    coverAlt: "Portada de The Olympus, primera edición",
   },
   en: {
     title: "Olympus | ARIA STEAMEX Magazine",
@@ -67,6 +68,7 @@ const T = {
     edition: "Issue 01",
     tag: "Magazine of the FIRST community in Mexico",
     date: "October 2026",
+    coverAlt: "Cover of The Olympus, first issue",
   },
 }[lang];
 ---
@@ -112,14 +114,7 @@ const T = {
         <div class="doc-mag">
           <div class="doc-stage" data-tilt>
             <div class="doc-tilt">
-              <div class="doc-book doc-book--lg">
-                <span class="b-ed">{T.edition}</span>
-                <span class="b-title">Olympus</span>
-                <span>
-                  <span class="greca" style="display:block"></span>
-                  <span class="b-foot" style="display:block">{T.tag}<br />{T.date}</span>
-                </span>
-              </div>
+              <img class="doc-sheet" src="/assets/impacto/covers/olympus-01.webp" alt={T.coverAlt} width="640" height="906" />
             </div>
           </div>
           <div>
